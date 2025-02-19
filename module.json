@@ -1,0 +1,54 @@
+{
+  "id": "vjp-macros",
+  "title": "Von Junzt's SWADE Macros",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12"
+  },
+  "description": "A collection of premade content and homebrew items for SWADE",
+  "authors": [
+    {
+      "name": "Von Junzt",
+      "discord": "von_junzt",
+      "flags": {}
+    }
+  ],
+  "packs": [
+    {
+      "name": "von-junzt-premade-items",
+      "label": "Von Junzt Premade Items",
+      "path": "packs/von-junzt-premades-items",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "swade",
+      "flags": {}
+    },
+    {
+      "name": "von-junzt-premade-macros",
+      "label": "Von Junzt Premade macros",
+      "path": "packs/von-junzt-premades-macros",
+      "type": "Macro",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "swade",
+      "flags": {}
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Von Junzt's SWADE Macros",
+      "sorting": "m",
+      "color": "#3f8230",
+      "packs": [
+        "von-junzt-premades-items",
+        "von-junzt-premades-macros"
+      ]
+    }
+  ]
+}

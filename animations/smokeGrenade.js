@@ -2,6 +2,8 @@ const sourceToken = args[1].sourceToken;
 const lastTemplate = canvas.templates.placeables[canvas.templates.placeables.length - 1];
 
 await new Sequence()
+    .sound()
+    .file('assets/sounds/sfx/equipment/grenade_use.wav')
     .effect()
     .file('jb2a.throwable.throw.grenade.03.blackblue')
     .atLocation(sourceToken)
