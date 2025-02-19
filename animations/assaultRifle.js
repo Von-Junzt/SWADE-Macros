@@ -16,7 +16,7 @@ const latestMessage = game.messages
     .sort((a, b) => b.timestamp - a.timestamp)[0] || null;
 
 if (latestMessage) {
-    messageData = new game.brsw.BrCommonCard(latestMessage);
+    messageData = await new game.brsw.BrCommonCard(latestMessage);
     usedShots = messageData.render_data?.used_shots;
     console.log(messageData);
 } else {
