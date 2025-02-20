@@ -1,18 +1,27 @@
+// the arguments for the macro
 const sourceToken = args[1].sourceToken; // the token that rolled the item
 const targets = args[1].allTargets; // the targets of the roll
 const itemData = args[1].item; // the rolled item
 const currentShots = itemData.system?.currentShots; // the current shots in the magazine
-const rateOfFire = itemData.system?.rof; // the rate of fire for the rolled item
-const calculatedRepeatsDelay = rateOfFire > 3 ? Math.max(50, 200 - (rateOfFire * 25)) : 100;
-let messageData = {}; // the message data for the latest message
-let diceRolls = []; // the roll data for the latest message
-let originalShots = 0; // the original shots count
-let usedShots = 0; // the shots used in the roll, initialized to 0
 
-// Return if magazine is empty
+// early exit, return if magazine is empty
 if(currentShots === 0) {
     return;
 }
+
+const rateOfFire = itemData.system?.rof; // the rate of fire for the rolled item
+const calculatedRepeatsDelay = rateOfFire > 3 ? Math.max(50, 300 - (rateOfFire * 25)) : 100;
+let messageData = {}; // the message data for the latest message
+let diceRolls = []; // the roll data for the latest message
+const originalShots = await itemData.getFlag('vjp-macros', 'originalShots'); // the original shots count
+let usedShots = 0; // the shots used in the roll, initialized to 0
+
+// if we are set now, we can set the animation and sfx data
+const animationToPlay = "jb2a.bullet.02.orange"
+const bulletSize = itemData.name.toLowerCase().includes("shotgun") ? 0.4 : 0.2;
+const sfxData = itemData.getFlag('swim', 'config');
+const sfxToPlay = sfxData?.isSilenced ? (sfxData.silencedFireSFX || sfxData.fireSFX || "assets/weapons/ak105_fire_01.wav") : (sfxData.fireSFX || "assets/weapons/ak105_fire_01.wav");
+const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
 
 // Get the latest message for this item
 const latestMessage = game.messages
@@ -21,7 +30,6 @@ const latestMessage = game.messages
 if (latestMessage) {
     messageData = await new game.brsw.BrCommonCard(latestMessage);
     usedShots = messageData.render_data?.used_shots;
-    originalShots = messageData.render_data?.original_shots;
     diceRolls = messageData.trait_roll?.rolls[0]?.dice;
     console.log(messageData);
     console.log(args[1]);
@@ -30,16 +38,23 @@ if (latestMessage) {
     return;
 }
 
-// check if the weapon has enough shots to fire
-// if using swim ammo management, there is a timing problem, because swim will edit the chat card and reduce the shots
-// before we can grab them. So we need to add a check for the shots in the magazine before we get the message
-if (currentShots < usedShots) {
+// check if the weapon has enough shots to fire. if using swim ammo management, there is a timing problem, because swim
+// will edit the chat card and reduce the shots before we can grab them. So we need to add hook on the item roll to get
+// for the shots in the magazine before the message is altered. It feels a bit hacky, but it works.
+if (originalShots < usedShots) {
     console.error("Not enough shots left in the magazine.");
     return;
 }
-/// First create the hit array as before
-const hitArray = diceRolls.filter(die => die.result_text !== "")
+
+// Create hit array from dice rolls
+let hitArray = diceRolls.filter(die => die.result_text !== "")
     .map(die => die.result_text !== "Failure");
+
+// If we have fewer dice than shots (e.g. Burst Fire), use the first result for all shots
+if (diceRolls.length < usedShots) {
+    const singleResult = hitArray[0];
+    hitArray = new Array(usedShots).fill(singleResult);
+}
 
 // Calculate shots per target
 const shotsPerTarget = Math.floor(usedShots / targets.length);
@@ -53,8 +68,8 @@ const targetHitArrays = targets.map((_, index) => {
     return hitArray.slice(start, end);
 });
 
-// Then in your animation loop, use it like this:
-// Wrap the entire macro in an async function
+// If there are as many usedShots as the hitArray length, play the animation for each target and update the source
+// token rotation, if there are less dice, repeat it for usedShots
 async function playAutoWeaponAnimation() {
     for(let i = 0; i < targets.length; i++) {
         const target = targets[i];
@@ -68,12 +83,15 @@ async function playAutoWeaponAnimation() {
         // Create sequence for each shot at this target
         for (const isHit of targetHits) {
             new Sequence()
+                .sound()
+                .file(sfxToPlay)
+                .forUsers(activeUserIds)
                 .effect()
                 .atLocation(sourceToken)
                 .stretchTo(target)
-                .file("jb2a.bullet.02.orange")
+                .file(animationToPlay)
                 .playbackRate(4)
-                .scale({x: 1, y: 0.2})
+                .scale({x: 1, y: bulletSize})
                 .missed(!isHit)
                 .play();
 
@@ -86,8 +104,7 @@ async function playAutoWeaponAnimation() {
 
 // Execute the function
 playAutoWeaponAnimation();
-// TODO: Check for hit and use .missed(true)
-// TODO: Add bullet casings
+
 
 
 
