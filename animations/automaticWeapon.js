@@ -1,9 +1,11 @@
-const itemData = args[1].item;
-const sourceToken = args[1].sourceToken;
-const targets = args[1].allTargets;
-const currentShots = itemData.system?.currentShots;
-let messageData = {};
-let usedShots = 0;
+const itemData = args[1].item; // the rolled item
+const sourceToken = args[1].sourceToken; // the token that rolled the item
+const targets = args[1].allTargets; // the targets of the roll
+const currentShots = itemData.system?.currentShots; // the current shots in the magazine
+const rateOfFire = itemData.system?.rof; // the rate of fire for the rolled item
+const calculatedRepeatsDelay = rateOfFire > 3 ? Math.max(50, 200 - (rateOfFire * 25)) : 100;
+let messageData = {}; // the message data for the latest message
+let usedShots = 0; // the shots used in the roll, initialized to 0
 
 // Return if magazine is empty
 if(currentShots === 0) {
@@ -37,20 +39,22 @@ for (const target of targets) {
     const rotation = (ray.angle * 180 / Math.PI) - 90;
     await sourceToken.document.update({ rotation: rotation }, { animate: false });
 
-    new Sequence().effect()
+    new Sequence()
+        .effect()
         .atLocation(sourceToken)
         .stretchTo(target)
         .file("jb2a.bullet.02.orange")
         .playbackRate(4)
         .scale({ x: 1, y: 0.2 })
-        .repeats(usedShots, 100, 100)
+        .repeats(usedShots, calculatedRepeatsDelay, calculatedRepeatsDelay)
         .play();
 
     // wait betweeen targets
     await new Promise(resolve => setTimeout(resolve, 500)); // Waits 500ms after all effects
 }
 
-// TODO: Check for hit and use .missed()
+// TODO: Check for hit and use .missed(true)
+// TODO: Add bullet casings
 
 
 
