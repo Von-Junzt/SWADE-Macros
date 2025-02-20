@@ -50,5 +50,8 @@
         "von-junzt-premades-macros"
       ]
     }
+  ],
+  "scripts": [
+    "main.js"
   ]
 }
