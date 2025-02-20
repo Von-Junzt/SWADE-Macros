@@ -6,19 +6,31 @@ const currentShots = itemData.system?.currentShots; // the current shots in the 
 
 // early exit, return if magazine is empty
 if(currentShots === 0) {
-    return;
+    return false;
 }
 
+// let's get the correct rate of fire for the weapon. This creates a clear timing hierarchy:
+// Combat Shotguns: 400ms delay (faster, representing semi-auto combat shotguns)
+// Regular Shotguns: 800ms delay (slower, representing pump/break action)
+// High ROF weapons (>3): Dynamic delay based on ROF
+// Standard weapons: 100ms delay
 const rateOfFire = itemData.system?.rof; // the rate of fire for the rolled item
-const calculatedRepeatsDelay = rateOfFire > 3 ? Math.max(50, 300 - (rateOfFire * 25)) : 100;
+const weaponName = itemData.name.toLowerCase();
+const calculatedRepeatsDelay = weaponName.includes("shotgun")
+    ? (weaponName.includes("combat") ? 300 : 800)
+    : (rateOfFire > 3 ? Math.max(50, 300 - (rateOfFire * 25)) : 100)
+
+// now we need to know, how many shots we are using. Since we are sing swim ammo management, there is a timing problem,
+// because swim will edit the chat card and reduce the shots before we can grab them. So we need to add hook on the
+// item roll to get for the shots in the magazine before the message is altered. It feels a bit hacky, but it works.
 let messageData = {}; // the message data for the latest message
 let diceRolls = []; // the roll data for the latest message
 const originalShots = await itemData.getFlag('vjp-macros', 'originalShots'); // the original shots count
 let usedShots = 0; // the shots used in the roll, initialized to 0
 
 // if we are set now, we can set the animation and sfx data
-const animationToPlay = "jb2a.bullet.02.orange"
-const bulletSize = itemData.name.toLowerCase().includes("shotgun") ? 0.4 : 0.2;
+const animationToPlay = "jb2a.bullet.02.orange" // TODO: add animation for other ammo types (e.g. shotgun slug)
+const bulletSize = itemData.name.toLowerCase().includes("shotgun") ? 0.5 : 0.2;
 const sfxData = itemData.getFlag('swim', 'config');
 const sfxToPlay = sfxData?.isSilenced ? (sfxData.silencedFireSFX || sfxData.fireSFX || "assets/weapons/ak105_fire_01.wav") : (sfxData.fireSFX || "assets/weapons/ak105_fire_01.wav");
 const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
@@ -35,15 +47,20 @@ if (latestMessage) {
     console.log(args[1]);
 } else {
     console.error('No message found for item:', itemData.id);
-    return;
+    return false;
 }
 
-// check if the weapon has enough shots to fire. if using swim ammo management, there is a timing problem, because swim
-// will edit the chat card and reduce the shots before we can grab them. So we need to add hook on the item roll to get
-// for the shots in the magazine before the message is altered. It feels a bit hacky, but it works.
+// check if the weapon has enough shots to fire.
 if (originalShots < usedShots) {
     console.error("Not enough shots left in the magazine.");
-    return;
+    return false;
+}
+
+// check if we have more targets than shots. If so we return
+if (targets.length > usedShots) {
+    ui.notifications.error("Not enough shots left to hit all targets.");
+    console.error("Not enough shots left to hit all targets.");
+    return false;
 }
 
 // Create hit array from dice rolls
@@ -82,6 +99,8 @@ async function playAutoWeaponAnimation() {
 
         // Create sequence for each shot at this target
         for (const isHit of targetHits) {
+            const sequence = new Sequence();
+
             new Sequence()
                 .sound()
                 .file(sfxToPlay)
