@@ -111,7 +111,7 @@ async function playAutoWeaponAnimation() {
         };
 
         // Adjust this value to change the distance of the eject point from the token's center
-        const offsetDistance = 75;
+        const offsetDistance = 100;
 
         // Calculate the perpendicular angle (ray.angle + π/2)
         const perpRay = ray.angle + Math.PI / 2;
