@@ -3,7 +3,7 @@ const lastTemplate = canvas.templates.placeables[canvas.templates.placeables.len
 
 await new Sequence()
     .sound()
-    .file('modules/vjp-macros/assets/sfx/equipment/grenade_use.wav')
+    .file('modules/vjpmacros/assets/sfx/equipment/grenade_use.wav')
     .effect()
     .file('jb2a.throwable.throw.grenade.02.blackyellow')
     .atLocation(sourceToken)

@@ -1,11 +1,19 @@
+import {animationData} from "/modules/vjpmacros/lib/animationData.js";
+
 Hooks.once('init', function() {
     console.warn('VON JUNZT SWADE MACROS LOADED');
+});
+
+Hooks.once('ready', () => {
+    game.vjpmacros = {
+        animationData,
+    };
 });
 
 Hooks.on('BRSW-RollItem', async (br_message, html) => {
     const item = br_message.item;
     if (item.type === 'weapon') {
-        await item.setFlag('vjp-macros', 'originalShots', item.system.currentShots);
+        await item.setFlag('vjpmacros', 'originalShots', item.system.currentShots);
     }
 });
 

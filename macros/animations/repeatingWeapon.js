@@ -1,5 +1,3 @@
-import {animationData} from "../../lib/animationData.js";
-
 // the arguments for the macro
 const sourceToken = args[1].sourceToken; // the token that rolled the item
 const targets = args[1].allTargets; // the targets of the roll
@@ -18,7 +16,7 @@ if(targets.length === 0) {
 
 // determine weapon type by name
 const weaponName = itemData.name.toLowerCase();
-const weaponType = Object.keys(animationData)
+const weaponType = Object.keys(game.vjpmacros.animationData)
     .sort((a, b) => b.length - a.length)  // Sort by length descending
     .find(type => weaponName.includes(type)) || "default";
 
@@ -28,23 +26,23 @@ const weaponType = Object.keys(animationData)
 // High ROF weapons (>3): Dynamic delay based on ROF
 // Standard weapons: 100ms delay
 const rateOfFire = itemData.system?.rof; // the rate of fire for the rolled item
-const fireRateDelay = animationData[weaponType].fireRateDelay(rateOfFire);
+const fireRateDelay = game.vjpmacros.animationData[weaponType].fireRateDelay(rateOfFire);
 
 // now we need to know, how many shots we are using. Since we are sing swim ammo management, there is a timing problem,
 // because swim will edit the chat card and reduce the shots before we can grab them. So we need to add hook on the
 // item roll to get for the shots in the magazine before the message is altered. It feels a bit hacky, but it works.
 let messageData = {}; // the message data for the latest message
 let diceRolls = []; // the roll data for the latest message
-const originalShots = await itemData.getFlag('vjp-macros', 'originalShots'); // the original shots count
+const originalShots = await itemData.getFlag('vjpmacros', 'originalShots'); // the original shots count
 let usedShots = 0; // the shots used in the roll, initialized to 0
 
 // if we are set now, we can set the animation and sfx data
-const animationToPlay = animationData[weaponType].animation;
-const projectileSize = animationData[weaponType].projectileSize;
-const casingDelay = animationData[weaponType].casingDelay;
-const casingImage = animationData[weaponType].casingImage;
+const animationToPlay = game.vjpmacros.animationData[weaponType].animation;
+const projectileSize = game.vjpmacros.animationData[weaponType].projectileSize;
+const casingDelay = game.vjpmacros.animationData[weaponType].casingDelay;
+const casingImage = game.vjpmacros.animationData[weaponType].casingImage;
 const sfxData = itemData.getFlag('swim', 'config');
-const sfxToPlay = sfxData?.isSilenced ? (sfxData.silencedFireSFX || sfxData.fireSFX || "modules/vjp-macros/assets/sfx/weapons/ak105_fire_01.wav") : (sfxData.fireSFX || "modules/vjp-macros/assets/sfx/weapons/ak105_fire_01.wav");
+const sfxToPlay = sfxData?.isSilenced ? (sfxData.silencedFireSFX || sfxData.fireSFX || "modules/vjpmacros/assets/sfx/weapons/ak105_fire_01.wav") : (sfxData.fireSFX || "modules/vjpmacros/assets/sfx/weapons/ak105_fire_01.wav");
 const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
 
 // Get the latest message for this item
@@ -167,8 +165,3 @@ async function playAutoWeaponAnimation() {
 
 // Execute the function
 playAutoWeaponAnimation();
-
-
-
-
-

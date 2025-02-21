@@ -1,7 +1,8 @@
 {
-  "id": "vjp-macros",
+  "id": "vjpmacros",
   "title": "Von Junzt's SWADE Macros",
   "version": "1.0.0",
+  "url": "https://github.com/Von-Junzt/critical-hits-revisited",
   "compatibility": {
     "minimum": "12",
     "verified": "12"
@@ -18,7 +19,7 @@
     {
       "name": "von-junzt-premade-items",
       "label": "Von Junzt Premade Items",
-      "path": "packs/von-junzt-premades-items",
+      "path": "packs/von-junzt-premade-items",
       "type": "Item",
       "ownership": {
         "PLAYER": "OBSERVER",
@@ -30,7 +31,7 @@
     {
       "name": "von-junzt-premade-macros",
       "label": "Von Junzt Premade macros",
-      "path": "packs/von-junzt-premades-macros",
+      "path": "packs/von-junzt-premade-macros",
       "type": "Macro",
       "ownership": {
         "PLAYER": "OBSERVER",
@@ -46,12 +47,13 @@
       "sorting": "m",
       "color": "#3f8230",
       "packs": [
-        "von-junzt-premades-items",
-        "von-junzt-premades-macros"
+        "von-junzt-premade-items",
+        "von-junzt-premade-macros"
       ]
     }
   ],
-  "scripts": [
+  "socket" : true,
+  "esmodules": [
     "main.js"
   ]
 }
