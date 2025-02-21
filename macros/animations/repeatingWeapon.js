@@ -1,3 +1,5 @@
+import {animationData} from "../../lib/animationData.js";
+
 // the arguments for the macro
 const sourceToken = args[1].sourceToken; // the token that rolled the item
 const targets = args[1].allTargets; // the targets of the roll
@@ -16,7 +18,9 @@ if(targets.length === 0) {
 
 // determine weapon type by name
 const weaponName = itemData.name.toLowerCase();
-const weaponType = weaponName.includes("shotgun") ? (weaponName.includes("combat") ? "combatshotgun": "shotgun") : "standard";
+const weaponType = Object.keys(animationData)
+    .sort((a, b) => b.length - a.length)  // Sort by length descending
+    .find(type => weaponName.includes(type)) || "default";
 
 // let's get the correct rate of fire for the weapon. This creates a clear timing hierarchy:
 // Combat Shotguns: 400ms delay (faster, representing semi-auto combat shotguns)
@@ -24,7 +28,7 @@ const weaponType = weaponName.includes("shotgun") ? (weaponName.includes("combat
 // High ROF weapons (>3): Dynamic delay based on ROF
 // Standard weapons: 100ms delay
 const rateOfFire = itemData.system?.rof; // the rate of fire for the rolled item
-const fireRateDelay = weaponType === "combatshotgun" ? 300 : weaponType === "shotgun" ? 800 : rateOfFire > 3 ? Math.max(50, 300 - (rateOfFire * 25)) : 100;
+const fireRateDelay = animationData[weaponType].fireRateDelay(rateOfFire);
 
 // now we need to know, how many shots we are using. Since we are sing swim ammo management, there is a timing problem,
 // because swim will edit the chat card and reduce the shots before we can grab them. So we need to add hook on the
@@ -35,10 +39,10 @@ const originalShots = await itemData.getFlag('vjp-macros', 'originalShots'); // 
 let usedShots = 0; // the shots used in the roll, initialized to 0
 
 // if we are set now, we can set the animation and sfx data
-const animationToPlay = "jb2a.bullet.02.orange" // TODO: add animation for other ammo types (e.g. shotgun slug)
-const bulletSize = itemData.name.toLowerCase().includes("shotgun") ? 0.5 : 0.2;
-const casingDelay = weaponType === "shotgun" ? 300 : 0;
-const casingImage = (weaponType !== "standard") ? "modules/vjp-macros/assets/gfx/casings/shotgun_shell.webp" : "modules/vjp-macros/assets/gfx/casings/rifle_casing.webp";
+const animationToPlay = animationData[weaponType].animation;
+const projectileSize = animationData[weaponType].projectileSize;
+const casingDelay = animationData[weaponType].casingDelay;
+const casingImage = animationData[weaponType].casingImage;
 const sfxData = itemData.getFlag('swim', 'config');
 const sfxToPlay = sfxData?.isSilenced ? (sfxData.silencedFireSFX || sfxData.fireSFX || "modules/vjp-macros/assets/sfx/weapons/ak105_fire_01.wav") : (sfxData.fireSFX || "modules/vjp-macros/assets/sfx/weapons/ak105_fire_01.wav");
 const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
@@ -135,7 +139,7 @@ async function playAutoWeaponAnimation() {
                 .stretchTo(target)
                 .file(animationToPlay)
                 .playbackRate(4)
-                .scale({x: 1, y: bulletSize})
+                .scale({x: 1, y: projectileSize})
                 .missed(!isHit)
                 .play();
 
