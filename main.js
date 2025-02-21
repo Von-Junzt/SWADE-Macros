@@ -11,7 +11,7 @@ Hooks.on('BRSW-RollItem', async (br_message, html) => {
 
 Hooks.on('swadeReloadWeapon', async (item, reloaded) => {
     ChatMessage.create({
-        content: `${item.parent.name} reloaded his weapon: <strong>${item.name}</strong>`,
+        content: `<strong>${item.parent.name}</strong> reloaded his weapon: <strong>${item.name}</strong>`,
         whisper: [], // An empty whisper array means the message is sent to all users
         blind: false // Ensure the message is visible to all
     });
