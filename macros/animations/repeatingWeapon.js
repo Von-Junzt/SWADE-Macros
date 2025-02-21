@@ -9,16 +9,24 @@ if(currentShots === 0) {
     return false;
 }
 
+// early exit, if no targets, return
+if(targets.length === 0) {
+    return false;
+}
+
+// determine weapon type by name
+const weaponName = itemData.name.toLowerCase();
+const weaponType = weaponName.includes("shotgun") ? (weaponName.includes("combat") ? "combatshotgun": "shotgun") : "standard";
+// console.log(weaponType);
+
 // let's get the correct rate of fire for the weapon. This creates a clear timing hierarchy:
 // Combat Shotguns: 400ms delay (faster, representing semi-auto combat shotguns)
 // Regular Shotguns: 800ms delay (slower, representing pump/break action)
 // High ROF weapons (>3): Dynamic delay based on ROF
 // Standard weapons: 100ms delay
 const rateOfFire = itemData.system?.rof; // the rate of fire for the rolled item
-const weaponName = itemData.name.toLowerCase();
-const calculatedRepeatsDelay = weaponName.includes("shotgun")
-    ? (weaponName.includes("combat") ? 300 : 800)
-    : (rateOfFire > 3 ? Math.max(50, 300 - (rateOfFire * 25)) : 100)
+const fireRateDelay = weaponType === "combatshotgun" ? 300 : weaponType === "shotgun" ? 800 : rateOfFire > 3 ? Math.max(50, 300 - (rateOfFire * 25)) : 100
+// console.log(calculatedRepeatsDelay);
 
 // now we need to know, how many shots we are using. Since we are sing swim ammo management, there is a timing problem,
 // because swim will edit the chat card and reduce the shots before we can grab them. So we need to add hook on the
@@ -31,8 +39,10 @@ let usedShots = 0; // the shots used in the roll, initialized to 0
 // if we are set now, we can set the animation and sfx data
 const animationToPlay = "jb2a.bullet.02.orange" // TODO: add animation for other ammo types (e.g. shotgun slug)
 const bulletSize = itemData.name.toLowerCase().includes("shotgun") ? 0.5 : 0.2;
+const casingDelay = weaponType === "shotgun" ? 300 : 0;
+const casingImage = (weaponType !== "standard") ? "modules/vjp-macros/assets/gfx/casings/shotgun_shell.webp" : "modules/vjp-macros/assets/gfx/casings/rifle_casing.webp";
 const sfxData = itemData.getFlag('swim', 'config');
-const sfxToPlay = sfxData?.isSilenced ? (sfxData.silencedFireSFX || sfxData.fireSFX || "assets/weapons/ak105_fire_01.wav") : (sfxData.fireSFX || "assets/weapons/ak105_fire_01.wav");
+const sfxToPlay = sfxData?.isSilenced ? (sfxData.silencedFireSFX || sfxData.fireSFX || "modules/vjp-macros/assets/sfx/weapons/ak105_fire_01.wav") : (sfxData.fireSFX || "modules/vjp-macros/assets/sfx/weapons/ak105_fire_01.wav");
 const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
 
 // Get the latest message for this item
@@ -43,8 +53,8 @@ if (latestMessage) {
     messageData = await new game.brsw.BrCommonCard(latestMessage);
     usedShots = messageData.render_data?.used_shots;
     diceRolls = messageData.trait_roll?.rolls[0]?.dice;
-    console.log(messageData);
-    console.log(args[1]);
+    //console.log(messageData);
+    //console.log(args[1]);
 } else {
     console.error('No message found for item:', itemData.id);
     return false;
@@ -95,12 +105,32 @@ async function playAutoWeaponAnimation() {
         // Update source token rotation
         const ray = new Ray(sourceToken.position, target.position);
         const rotation = (ray.angle * 180 / Math.PI) - 90;
+        console.log("rotation:", rotation);
         await sourceToken.document.update({rotation: rotation}, {animate: false});
+
+        // Shell casing effect
+        // Calculate token center coordinates (adjust if your token dimensions are different)
+        const tokenCenter = {
+            x: sourceToken.x + sourceToken.width / 2,
+            y: sourceToken.y + sourceToken.height / 2,
+        };
+
+// Calculate the perpendicular angle (ray.angle + π/2)
+        const offsetDistance = 80;
+        const perpRay = ray.angle + Math.PI / 2;
+
+// Compute the eject point based on the token's center
+        const ejectPoint = {
+            x: tokenCenter.x + Math.cos(perpRay) * offsetDistance,
+            y: tokenCenter.y + Math.sin(perpRay) * offsetDistance,
+        };
+
+        console.log("ejectPoint:", ejectPoint);
 
         // Create sequence for each shot at this target
         for (const isHit of targetHits) {
             const sequence = new Sequence();
-
+            // shot animation
             new Sequence()
                 .sound()
                 .file(sfxToPlay)
@@ -114,7 +144,21 @@ async function playAutoWeaponAnimation() {
                 .missed(!isHit)
                 .play();
 
-            await new Promise(resolve => setTimeout(resolve, calculatedRepeatsDelay));
+            // casing animation
+            new Sequence()
+                .effect()
+                .delay(casingDelay)
+                .file(casingImage)
+                .atLocation(tokenCenter)
+                .scale(0.08)
+                .scaleOut(0.01, 500, { ease: "easeOutCubic" })
+                .duration(150)
+                .moveTowards(ejectPoint)
+                .rotateIn(90, 100)
+                .play()
+
+
+            await new Promise(resolve => setTimeout(resolve, fireRateDelay));
         }
 
         await new Promise(resolve => setTimeout(resolve, 500));
