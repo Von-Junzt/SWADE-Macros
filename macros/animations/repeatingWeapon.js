@@ -17,7 +17,6 @@ if(targets.length === 0) {
 // determine weapon type by name
 const weaponName = itemData.name.toLowerCase();
 const weaponType = weaponName.includes("shotgun") ? (weaponName.includes("combat") ? "combatshotgun": "shotgun") : "standard";
-// console.log(weaponType);
 
 // let's get the correct rate of fire for the weapon. This creates a clear timing hierarchy:
 // Combat Shotguns: 400ms delay (faster, representing semi-auto combat shotguns)
@@ -25,8 +24,7 @@ const weaponType = weaponName.includes("shotgun") ? (weaponName.includes("combat
 // High ROF weapons (>3): Dynamic delay based on ROF
 // Standard weapons: 100ms delay
 const rateOfFire = itemData.system?.rof; // the rate of fire for the rolled item
-const fireRateDelay = weaponType === "combatshotgun" ? 300 : weaponType === "shotgun" ? 800 : rateOfFire > 3 ? Math.max(50, 300 - (rateOfFire * 25)) : 100
-// console.log(calculatedRepeatsDelay);
+const fireRateDelay = weaponType === "combatshotgun" ? 300 : weaponType === "shotgun" ? 800 : rateOfFire > 3 ? Math.max(50, 300 - (rateOfFire * 25)) : 100;
 
 // now we need to know, how many shots we are using. Since we are sing swim ammo management, there is a timing problem,
 // because swim will edit the chat card and reduce the shots before we can grab them. So we need to add hook on the
@@ -53,8 +51,6 @@ if (latestMessage) {
     messageData = await new game.brsw.BrCommonCard(latestMessage);
     usedShots = messageData.render_data?.used_shots;
     diceRolls = messageData.trait_roll?.rolls[0]?.dice;
-    //console.log(messageData);
-    //console.log(args[1]);
 } else {
     console.error('No message found for item:', itemData.id);
     return false;
@@ -105,7 +101,6 @@ async function playAutoWeaponAnimation() {
         // Update source token rotation
         const ray = new Ray(sourceToken.position, target.position);
         const rotation = (ray.angle * 180 / Math.PI) - 90;
-        console.log("rotation:", rotation);
         await sourceToken.document.update({rotation: rotation}, {animate: false});
 
         // Shell casing effect
@@ -115,17 +110,17 @@ async function playAutoWeaponAnimation() {
             y: sourceToken.y + sourceToken.height / 2,
         };
 
-// Calculate the perpendicular angle (ray.angle + π/2)
-        const offsetDistance = 80;
+        // Adjust this value to change the distance of the eject point from the token's center
+        const offsetDistance = 75;
+
+        // Calculate the perpendicular angle (ray.angle + π/2)
         const perpRay = ray.angle + Math.PI / 2;
 
-// Compute the eject point based on the token's center
+        // Compute the eject point based on the token's center
         const ejectPoint = {
             x: tokenCenter.x + Math.cos(perpRay) * offsetDistance,
             y: tokenCenter.y + Math.sin(perpRay) * offsetDistance,
         };
-
-        console.log("ejectPoint:", ejectPoint);
 
         // Create sequence for each shot at this target
         for (const isHit of targetHits) {
