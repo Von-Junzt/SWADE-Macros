@@ -41,6 +41,7 @@ const animationToPlay = game.vjpmacros.animationData[weaponType].animation;
 const projectileSize = game.vjpmacros.animationData[weaponType].projectileSize;
 const casingDelay = game.vjpmacros.animationData[weaponType].casingDelay;
 const casingImage = game.vjpmacros.animationData[weaponType].casingImage;
+const casingSize = game.vjpmacros.animationData[weaponType].casingSize;
 const sfxData = itemData.getFlag('swim', 'config');
 const sfxToPlay = sfxData?.isSilenced ? (sfxData.silencedFireSFX || sfxData.fireSFX || "modules/vjpmacros/assets/sfx/weapons/ak105_fire_01.wav") : (sfxData.fireSFX || "modules/vjpmacros/assets/sfx/weapons/ak105_fire_01.wav");
 const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
@@ -66,8 +67,8 @@ if (originalShots < usedShots) {
 
 // check if we have more targets than shots. If so we return
 if (targets.length > usedShots) {
-    ui.notifications.error("Not enough shots left to hit all targets.");
-    console.error("Not enough shots left to hit all targets.");
+    ui.notifications.error("You have more targets selected than shot dice to roll.");
+    console.error("You have more targets selected than shot dice to roll.");
     return false;
 }
 
@@ -142,13 +143,13 @@ async function playAutoWeaponAnimation() {
                 .play();
 
             // casing animation
-            if(animationData[weaponType].casingImage) {
+            if(casingImage) {
                 new Sequence()
                     .effect()
                     .delay(casingDelay)
                     .file(casingImage)
                     .atLocation(tokenCenter)
-                    .scale(animationData[weaponType].casingSize)
+                    .scale(casingSize)
                     .scaleOut(0.01, 500, { ease: "easeOutCubic" })
                     .duration(200)
                     .moveTowards(ejectPoint)
