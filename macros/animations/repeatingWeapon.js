@@ -147,9 +147,9 @@ async function playAutoWeaponAnimation() {
                 .atLocation(tokenCenter)
                 .scale(0.08)
                 .scaleOut(0.01, 500, { ease: "easeOutCubic" })
-                .duration(150)
+                .duration(200)
                 .moveTowards(ejectPoint)
-                .rotateIn(90, 100)
+                .rotateIn(90, 200)
                 .play()
 
 
