@@ -144,18 +144,19 @@ async function playAutoWeaponAnimation() {
                 .play();
 
             // casing animation
-            new Sequence()
-                .effect()
-                .delay(casingDelay)
-                .file(casingImage)
-                .atLocation(tokenCenter)
-                .scale(0.08)
-                .scaleOut(0.01, 500, { ease: "easeOutCubic" })
-                .duration(200)
-                .moveTowards(ejectPoint)
-                .rotateIn(90, 200)
-                .play()
-
+            if(animationData[weaponType].casingImage) {
+                new Sequence()
+                    .effect()
+                    .delay(casingDelay)
+                    .file(casingImage)
+                    .atLocation(tokenCenter)
+                    .scale(animationData[weaponType].casingSize)
+                    .scaleOut(0.01, 500, { ease: "easeOutCubic" })
+                    .duration(200)
+                    .moveTowards(ejectPoint)
+                    .rotateIn(90, 200)
+                    .play()
+            }
 
             await new Promise(resolve => setTimeout(resolve, fireRateDelay));
         }
