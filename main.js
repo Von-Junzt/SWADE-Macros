@@ -10,8 +10,11 @@ Hooks.on('BRSW-RollItem', async (br_message, html) => {
 });
 
 Hooks.on('swadeReloadWeapon', async (item, reloaded) => {
-    ui.notifications.info(item?.parent?.name + 'reloaded his weapon: ' + item.name);
-    console.log(item);
+    ChatMessage.create({
+        content: `${item.parent.name} reloaded his weapon: <strong>${item.name}</strong>`,
+        whisper: [], // An empty whisper array means the message is sent to all users
+        blind: false // Ensure the message is visible to all
+    });
     // Create audio object
     const sfxData = item.getFlag('swim', 'config');
     const sfxToPlay = sfxData.reloadSFX || "";
