@@ -1,8 +1,13 @@
 import {animationData} from "../../lib/animationData.js";
 import {sfxData} from "../../lib/sfxData.js";
 
+/**
+ * Play the repeating weapon animation
+ * @param br_message
+ * @param weaponType
+ * @returns {Promise<boolean>}
+ */
 export async function repeatingWeapon(br_message, weaponType) {
-
     // item and roll setup
     const usedShots = br_message.render_data?.used_shots; // the used shots for the roll
     const diceRolls = br_message.trait_roll?.rolls[0]?.dice; // how many dice rolls we have
@@ -26,22 +31,45 @@ export async function repeatingWeapon(br_message, weaponType) {
     }
 
     // early exit, if no targets, return
-    if (targets === 0) {
+    if (targets.length === 0) {
+        console.error("No targets selected.");
         return false;
     }
 
-    // check if the weapon has enough shots to fire.
+    // early exit, if the weapon has not enough shots to fire.
     if (originalShots < usedShots) {
         console.error("Not enough shots left in the magazine.");
         return false;
     }
 
-    // check if we have more targets than shots. If so we return
-    if (targets.length > usedShots) {
-        ui.notifications.error("You have more targets selected than shot dice to roll.");
-        console.error("You have more targets selected than shot dice to roll.");
+    // Create hit array from dice rolls
+    let hitArray = diceRolls.filter(die => die.result_text !== "")
+        .map(die => die.result_text !== "Failure");
+
+    // early exit if we have more targets than dice rolls. If so we return
+    if (targets.length > diceRolls.length) {
+        ui.notifications.error("You have more targets selected than trait dice rolls.");
+        console.error("You have more targets selected than trait dice rolls.");
         return false;
     }
+
+    // if we have fewer dice than shots (e.g. Burst Fire), use the first result for all shots
+    if (diceRolls.length < usedShots) {
+        const singleResult = hitArray[0];
+        hitArray = new Array(usedShots).fill(singleResult);
+    }
+
+    // Calculate shots per target
+    const shotsPerTarget = Math.floor(usedShots / targets.length);
+    const extraShots = usedShots % targets.length;
+
+    // Create arrays of hit results for each target
+    const targetHitArrays = targets.map((_, index) => {
+        const start = index * shotsPerTarget;
+        const extra = index < extraShots ? 1 : 0;
+        const end = start + shotsPerTarget + extra;
+        return hitArray.slice(start, end);
+    });
 
     // if we are set now, we can set the animation and sfx data
     // let's get the correct rate of fire for the weapon to make it feel faster/slower and calculate the delay
@@ -63,28 +91,6 @@ export async function repeatingWeapon(br_message, weaponType) {
     const sfxToPlay = isSilenced
         ? (sfxConfig.silencedFireSFX || sfxConfig.fireSFX || defaultFireSound)
         : (sfxConfig.fireSFX || defaultFireSound);
-
-    // Create hit array from dice rolls
-    let hitArray = diceRolls.filter(die => die.result_text !== "")
-        .map(die => die.result_text !== "Failure");
-
-    // If we have fewer dice than shots (e.g. Burst Fire), use the first result for all shots
-    if (diceRolls.length < usedShots) {
-        const singleResult = hitArray[0];
-        hitArray = new Array(usedShots).fill(singleResult);
-    }
-
-    // Calculate shots per target
-    const shotsPerTarget = Math.floor(usedShots / targets.length);
-    const extraShots = usedShots % targets.length;
-
-    // Create arrays of hit results for each target
-    const targetHitArrays = targets.map((_, index) => {
-        const start = index * shotsPerTarget;
-        const extra = index < extraShots ? 1 : 0;
-        const end = start + shotsPerTarget + extra;
-        return hitArray.slice(start, end);
-    });
 
     // If there are as many usedShots as the hitArray length, play the animation for each target and update the source
     // token rotation, if there are less dice, repeat it for usedShots
@@ -117,6 +123,9 @@ export async function repeatingWeapon(br_message, weaponType) {
                 y: tokenCenter.y + Math.sin(perpRay) * offsetDistance,
             };
 
+            // get all the active user ids
+            const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
+
             // Create sequence for each shot at this target
             for (const isHit of targetHits) {
                    // shot animation
@@ -131,7 +140,7 @@ export async function repeatingWeapon(br_message, weaponType) {
                         .playbackRate(4)
                         .scale({x: 1, y: projectileSize})
                         .missed(!isHit)
-                        .play(),
+                        .play()
 
                     // casing animation
                    casingImage ? new Sequence()
@@ -154,6 +163,7 @@ export async function repeatingWeapon(br_message, weaponType) {
     }
     // Execute the function
     playAutoWeaponAnimation();
+    return true;
 }
 
 /**
@@ -176,7 +186,7 @@ async function getWeaponSfxConfig(item) {
  * @param item
  * @returns {Promise<void>}
  */
-export async function reloadWeapon(item) {
+export async function playWeaponReloadSfx(item) {
     ChatMessage.create({
         content: `<strong>${item.parent.name}</strong> reloaded his weapon; <strong>${item.name}</strong>.`,
         whisper: [], // An empty whisper array means the message is sent to all users
@@ -189,15 +199,11 @@ export async function reloadWeapon(item) {
         ui.notifications.warn('No reload sound set for this weapon.');
     }
     // Play the sound
-    const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
-    await new Sequence()
-        .sound()
-        .file(sfxToPlay)
-        .forUsers(activeUserIds)
-        .play();
+    await playSoundForAllUsers(sfxToPlay);
 }
 
 async function playSoundForAllUsers(file) {
+    // get all the active user ids
     const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
     await new Sequence()
         .sound()

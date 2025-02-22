@@ -1,6 +1,6 @@
 import {sfxData} from "./lib/sfxData.js";
 import {animationData} from "./lib/animationData.js";
-import {repeatingWeapon, reloadWeapon} from "./macros/animations/repeatingWeapon.js";
+import {repeatingWeapon, playWeaponReloadSfx} from "./macros/animations/repeatingWeapon.js";
 
 Hooks.once('init', function() {
     console.warn('VON JUNZT SWADE MACROS LOADED');
@@ -34,6 +34,6 @@ Hooks.on('BRSW-RollItem', async (br_message, html) => {
 
 Hooks.on('swadeReloadWeapon', async (item, reloaded) => {
     if(reloaded) {
-        await reloadWeapon(item);
+        await playWeaponReloadSfx(item);
     }
 });
