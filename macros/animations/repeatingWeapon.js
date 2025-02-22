@@ -71,26 +71,29 @@ export async function repeatingWeapon(br_message, weaponType) {
         return hitArray.slice(start, end);
     });
 
-    // if we are set now, we can set the animation and sfx data
+    // if we are set now, we can set the animation data
     // let's get the correct rate of fire for the weapon to make it feel faster/slower and calculate the delay
     // to simulate mechanics like pump action, assault cannons that take significantly more time between shots, etc.
     const rateOfFire = item.system?.rof;
     const fireRateDelay = animationData[weaponType].fireRateDelay(rateOfFire);
     const animationToPlay = animationData[weaponType].animation; // the animation file to play
     const projectileSize = animationData[weaponType].projectileSize; // the size of the projectile. bigger gun, bigger projectile
-    const casingDelay = animationData[weaponType].casingDelay; // the delay before the casing is ejected, e.g. pump action
+    const casingAnimationDelay = animationData[weaponType].casingAnimationDelay; // the delay before the casing is ejected, e.g. pump action
     const casingImage = animationData[weaponType].casingImage; // the image of the casing
     const casingSize = animationData[weaponType].casingSize; // the size of the casing
 
+    // sfx config
     // Check if weapon is silenced through either method
-    const isSilenced = item.system.notes.toLowerCase().includes("silenced") ||
-        sfxConfig.isSilenced;
+    const isSilenced = item.system?.notes?.toLowerCase().includes("silenced") ||
+        (sfxConfig?.isSilenced ?? false)
     // Default fallback sound
-    const defaultFireSound = "modules/vjpmacros/assets/sfx/weapons/ak105_fire_01.wav";
+    const defaultFireSound = "modules/vjpmacros/assets/sfx/weapons/firearm/ak105_fire_01.wav";
     // Get appropriate sound based on silenced status
     const sfxToPlay = isSilenced
-        ? (sfxConfig.silencedFireSFX || sfxConfig.fireSFX || defaultFireSound)
-        : (sfxConfig.fireSFX || defaultFireSound);
+        ? (sfxConfig?.silencedFireSFX || sfxConfig?.fireSFX || defaultFireSound)
+        : (sfxConfig?.fireSFX || defaultFireSound);
+    const casingDropSfx = sfxConfig.casingDropSFX; // the sound effect for the casing drop
+    const casingDropSfxDelay = 400;
 
     // If there are as many usedShots as the hitArray length, play the animation for each target and update the source
     // token rotation, if there are less dice, repeat it for usedShots
@@ -142,22 +145,31 @@ export async function repeatingWeapon(br_message, weaponType) {
                         .missed(!isHit)
                         .play()
 
-                    // casing animation
-                   casingImage ? new Sequence()
-                        .effect()
-                        .delay(casingDelay)
-                        .file(casingImage)
-                        .atLocation(tokenCenter)
-                        .scale(casingSize)
-                        .scaleOut(0.01, 500, {ease: "easeOutCubic"})
-                        .duration(200)
-                        .moveTowards(ejectPoint)
-                        .rotateIn(90, 200)
-                        .play() : Promise.resolve()
+                   // casing animation
+                   if(casingImage) {
+                       new Sequence()
+                           .effect()
+                           .delay(casingAnimationDelay)
+                           .file(casingImage)
+                           .atLocation(tokenCenter)
+                           .scale(casingSize)
+                           .scaleOut(0.01, 500, {ease: "easeOutCubic"})
+                           .duration(200)
+                           .moveTowards(ejectPoint)
+                           .rotateIn(90, 200)
+                           .play()
+                   }
 
+                   if (casingDropSfx) {
+                       new Sequence()
+                           .sound()
+                           .file(casingDropSfx)
+                           .forUsers(activeUserIds)
+                           .delay(casingDropSfxDelay)
+                           .play()
+                   }
                 await new Promise(resolve => setTimeout(resolve, fireRateDelay));
             }
-
             await new Promise(resolve => setTimeout(resolve, 500));
         }
     }
