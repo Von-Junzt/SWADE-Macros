@@ -1,3 +1,4 @@
+import {sfxData} from "./lib/sfxData.js";
 import {animationData} from "./lib/animationData.js";
 import {repeatingWeapon} from "./macros/animations/repeatingWeapon.js";
 
@@ -8,6 +9,7 @@ Hooks.once('init', function() {
 Hooks.once('ready', () => {
     game.vjpmacros = {
         animationData,
+        sfxData
     };
 });
 
@@ -23,8 +25,9 @@ Hooks.on('BRSW-RollItem', async (br_message, html) => {
             .find(type => weaponName.includes(type)) || "notfound";
         // if we have a valid weapon type, we can play the animation
         if (weaponType !== "notfound") {
-            console.warn("Weapon not found in animationData", weaponType);
             await repeatingWeapon(br_message, weaponType);
+        } else {
+            console.warn("Weapon not found in animationData", weaponType);
         }
     }
 });

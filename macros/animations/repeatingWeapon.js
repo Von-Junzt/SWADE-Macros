@@ -39,7 +39,14 @@ export async function repeatingWeapon(br_message, weaponType) {
     const casingDelay = animationData[weaponType].casingDelay;
     const casingImage = animationData[weaponType].casingImage;
     const casingSize = animationData[weaponType].casingSize;
-    const sfxData = item.getFlag('swim', 'config');
+
+    // Get the weapon name in lowercase and find a matching key in sfxData if it exists, otherwise use the full weapon name
+    const weaponName = itemData.name.toLowerCase();
+    const matchingKey = Object.keys(sfxData).find(key => weaponName.includes(key));
+    const weaponSfxID = matchingKey || weaponName;
+
+    // get the sfx data for the weapon
+    const sfxData = sdfData[weaponSfxID] || item.getFlag('swim', 'config');
     const sfxToPlay = sfxData?.isSilenced ? (sfxData.silencedFireSFX || sfxData.fireSFX || "modules/vjpmacros/assets/sfx/weapons/ak105_fire_01.wav") : (sfxData.fireSFX || "modules/vjpmacros/assets/sfx/weapons/ak105_fire_01.wav");
     const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
 
