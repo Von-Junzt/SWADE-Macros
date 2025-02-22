@@ -1,4 +1,5 @@
 import {animationData} from "../../lib/animationData.js";
+import {sfxData} from "../../lib/sfxData.js";
 
 export async function repeatingWeapon(br_message, weaponType) {
 
@@ -40,14 +41,17 @@ export async function repeatingWeapon(br_message, weaponType) {
     const casingImage = animationData[weaponType].casingImage;
     const casingSize = animationData[weaponType].casingSize;
 
-    // Get the weapon name in lowercase and find a matching key in sfxData if it exists, otherwise use the full weapon name
-    const weaponName = itemData.name.toLowerCase();
-    const matchingKey = Object.keys(sfxData).find(key => weaponName.includes(key));
-    const weaponSfxID = matchingKey || weaponName;
+    const sfxConfig = await getWeaponSfxConfig(item) || item.getFlag('swim', 'config');
 
-    // get the sfx data for the weapon
-    const sfxData = sdfData[weaponSfxID] || item.getFlag('swim', 'config');
-    const sfxToPlay = sfxData?.isSilenced ? (sfxData.silencedFireSFX || sfxData.fireSFX || "modules/vjpmacros/assets/sfx/weapons/ak105_fire_01.wav") : (sfxData.fireSFX || "modules/vjpmacros/assets/sfx/weapons/ak105_fire_01.wav");
+    // Check if weapon is silenced through either method
+    const isSilenced = item.system.notes.toLowerCase().includes("silenced") ||
+        sfxConfig.isSilenced;
+    // Default fallback sound
+    const defaultFireSound = "modules/vjpmacros/assets/sfx/weapons/ak105_fire_01.wav";
+    // Get appropriate sound based on silenced status
+    const sfxToPlay = isSilenced
+        ? (sfxConfig.silencedFireSFX || sfxConfig.fireSFX || defaultFireSound)
+        : (sfxConfig.fireSFX || defaultFireSound);
     const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
 
     // check if the weapon has enough shots to fire.
@@ -118,24 +122,23 @@ export async function repeatingWeapon(br_message, weaponType) {
 
             // Create sequence for each shot at this target
             for (const isHit of targetHits) {
-                const sequence = new Sequence();
-                // shot animation
-                new Sequence()
-                    .sound()
-                    .file(sfxToPlay)
-                    .forUsers(activeUserIds)
-                    .effect()
-                    .atLocation(sourceToken)
-                    .stretchTo(target)
-                    .file(animationToPlay)
-                    .playbackRate(4)
-                    .scale({x: 1, y: projectileSize})
-                    .missed(!isHit)
-                    .play();
+                await Promise.all([
+                   // shot animation
+                   new Sequence()
+                        .sound()
+                        .file(sfxToPlay)
+                        .forUsers(activeUserIds)
+                        .effect()
+                        .atLocation(sourceToken)
+                        .stretchTo(target)
+                        .file(animationToPlay)
+                        .playbackRate(4)
+                        .scale({x: 1, y: projectileSize})
+                        .missed(!isHit)
+                        .play(),
 
-                // casing animation
-                if (casingImage) {
-                    new Sequence()
+                    // casing animation
+                   casingImage ? new Sequence()
                         .effect()
                         .delay(casingDelay)
                         .file(casingImage)
@@ -145,9 +148,8 @@ export async function repeatingWeapon(br_message, weaponType) {
                         .duration(200)
                         .moveTowards(ejectPoint)
                         .rotateIn(90, 200)
-                        .play()
-                }
-
+                        .play() : Promise.resolve()
+                   ]);
                 await new Promise(resolve => setTimeout(resolve, fireRateDelay));
             }
 
@@ -156,4 +158,14 @@ export async function repeatingWeapon(br_message, weaponType) {
     }
     // Execute the function
     playAutoWeaponAnimation();
+}
+
+export async function getWeaponSfxConfig(item) {
+    // Get the weapon name in lowercase and find a matching key in sfxData if it exists, otherwise use the full weapon name
+    const weaponName = item.name.toLowerCase();
+    const matchingKey = Object.keys(sfxData).find(key => weaponName.includes(key));
+    const weaponSfxID = matchingKey || weaponName;
+
+    // get the sfx data for the weapon
+    return sfxData[weaponSfxID];
 }
