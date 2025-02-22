@@ -1,6 +1,6 @@
 import {sfxData} from "./lib/sfxData.js";
 import {animationData} from "./lib/animationData.js";
-import {repeatingWeapon, getWeaponSfxConfig} from "./macros/animations/repeatingWeapon.js";
+import {repeatingWeapon, reloadWeapon} from "./macros/animations/repeatingWeapon.js";
 
 Hooks.once('init', function() {
     console.warn('VON JUNZT SWADE MACROS LOADED');
@@ -33,23 +33,7 @@ Hooks.on('BRSW-RollItem', async (br_message, html) => {
 });
 
 Hooks.on('swadeReloadWeapon', async (item, reloaded) => {
-    console.log(reloaded);
-    ChatMessage.create({
-        content: `<strong>${item.parent.name}</strong> reloaded his weapon: <strong>${item.name}</strong>`,
-        whisper: [], // An empty whisper array means the message is sent to all users
-        blind: false // Ensure the message is visible to all
-    });
-
-    const sfxConfig = await getWeaponSfxConfig(item)|| item.getFlag('swim', 'config');
-    const sfxToPlay = sfxConfig.reloadSFX || "";
-    if (sfxToPlay === "") {
-        ui.notifications.warn('No reload sound set for this weapon.');
+    if(reloaded) {
+        await reloadWeapon(item);
     }
-    // Play the sound
-    const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
-    await new Sequence()
-        .sound()
-        .file(sfxToPlay)
-        .forUsers(activeUserIds)
-        .play();
 });

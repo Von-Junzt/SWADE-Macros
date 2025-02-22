@@ -3,16 +3,25 @@ import {sfxData} from "../../lib/sfxData.js";
 
 export async function repeatingWeapon(br_message, weaponType) {
 
-    // the setup constants for the macro
-    const usedShots = br_message.render_data?.used_shots;
-    const diceRolls = br_message.trait_roll?.rolls[0]?.dice;
+    // item and roll setup
+    const usedShots = br_message.render_data?.used_shots; // the used shots for the roll
+    const diceRolls = br_message.trait_roll?.rolls[0]?.dice; // how many dice rolls we have
     const sourceToken = br_message.token; // the token that rolled the item
     const targets = Array.from(game.user.targets); // the targets of the roll
     const item = br_message.item; // the rolled item
     const currentShots = item.system?.currentShots; // the current shots in the magazine
+    // now we need to know, how many shots are left in the magazine. Since we are sing swim ammo management, there is a
+    // timing problem, because swim will edit the chat card and reduce the shots before we can grab them. So we added a
+    // hook on the  item roll to save the original shots in the magazine as item flag, before the message is altered.
+    // It feels a bit hacky, but it works. Maybe I should not use the swim ammo management anymore. We will see.
+    const originalShots = await item.getFlag('vjpmacros', 'originalShots'); // the original shots count
 
-    // early exit, return if magazine is empty
+    // first get the sfx config for the weapon.
+    const sfxConfig = await getWeaponSfxConfig(item) || item.getFlag('swim', 'config');
+
+    // early exit, return if magazine is empty, play sound
     if (currentShots === 0) {
+        await playSoundForAllUsers(sfxConfig.emptySFX);
         return false;
     }
 
@@ -20,39 +29,6 @@ export async function repeatingWeapon(br_message, weaponType) {
     if (targets === 0) {
         return false;
     }
-
-    // let's get the correct rate of fire for the weapon. This creates a clear timing hierarchy:
-    // Combat Shotguns: 400ms delay (faster, representing semi-auto combat shotguns)
-    // Regular Shotguns: 800ms delay (slower, representing pump/break action)
-    // High ROF weapons (>3): Dynamic delay based on ROF
-    // Standard weapons: 100ms delay
-    const rateOfFire = item.system?.rof; // the rate of fire for the rolled item
-    const fireRateDelay = animationData[weaponType].fireRateDelay(rateOfFire);
-
-    // now we need to know, how many shots we are using. Since we are sing swim ammo management, there is a timing problem,
-    // because swim will edit the chat card and reduce the shots before we can grab them. So we need to add hook on the
-    // item roll to get for the shots in the magazine before the message is altered. It feels a bit hacky, but it works.
-    const originalShots = await item.getFlag('vjpmacros', 'originalShots'); // the original shots count
-
-    // if we are set now, we can set the animation and sfx data
-    const animationToPlay = animationData[weaponType].animation;
-    const projectileSize = animationData[weaponType].projectileSize;
-    const casingDelay = animationData[weaponType].casingDelay;
-    const casingImage = animationData[weaponType].casingImage;
-    const casingSize = animationData[weaponType].casingSize;
-
-    const sfxConfig = await getWeaponSfxConfig(item) || item.getFlag('swim', 'config');
-
-    // Check if weapon is silenced through either method
-    const isSilenced = item.system.notes.toLowerCase().includes("silenced") ||
-        sfxConfig.isSilenced;
-    // Default fallback sound
-    const defaultFireSound = "modules/vjpmacros/assets/sfx/weapons/ak105_fire_01.wav";
-    // Get appropriate sound based on silenced status
-    const sfxToPlay = isSilenced
-        ? (sfxConfig.silencedFireSFX || sfxConfig.fireSFX || defaultFireSound)
-        : (sfxConfig.fireSFX || defaultFireSound);
-    const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
 
     // check if the weapon has enough shots to fire.
     if (originalShots < usedShots) {
@@ -66,6 +42,27 @@ export async function repeatingWeapon(br_message, weaponType) {
         console.error("You have more targets selected than shot dice to roll.");
         return false;
     }
+
+    // if we are set now, we can set the animation and sfx data
+    // let's get the correct rate of fire for the weapon to make it feel faster/slower and calculate the delay
+    // to simulate mechanics like pump action, assault cannons that take significantly more time between shots, etc.
+    const rateOfFire = item.system?.rof;
+    const fireRateDelay = animationData[weaponType].fireRateDelay(rateOfFire);
+    const animationToPlay = animationData[weaponType].animation; // the animation file to play
+    const projectileSize = animationData[weaponType].projectileSize; // the size of the projectile. bigger gun, bigger projectile
+    const casingDelay = animationData[weaponType].casingDelay; // the delay before the casing is ejected, e.g. pump action
+    const casingImage = animationData[weaponType].casingImage; // the image of the casing
+    const casingSize = animationData[weaponType].casingSize; // the size of the casing
+
+    // Check if weapon is silenced through either method
+    const isSilenced = item.system.notes.toLowerCase().includes("silenced") ||
+        sfxConfig.isSilenced;
+    // Default fallback sound
+    const defaultFireSound = "modules/vjpmacros/assets/sfx/weapons/ak105_fire_01.wav";
+    // Get appropriate sound based on silenced status
+    const sfxToPlay = isSilenced
+        ? (sfxConfig.silencedFireSFX || sfxConfig.fireSFX || defaultFireSound)
+        : (sfxConfig.fireSFX || defaultFireSound);
 
     // Create hit array from dice rolls
     let hitArray = diceRolls.filter(die => die.result_text !== "")
@@ -122,7 +119,6 @@ export async function repeatingWeapon(br_message, weaponType) {
 
             // Create sequence for each shot at this target
             for (const isHit of targetHits) {
-                await Promise.all([
                    // shot animation
                    new Sequence()
                         .sound()
@@ -149,7 +145,7 @@ export async function repeatingWeapon(br_message, weaponType) {
                         .moveTowards(ejectPoint)
                         .rotateIn(90, 200)
                         .play() : Promise.resolve()
-                   ]);
+
                 await new Promise(resolve => setTimeout(resolve, fireRateDelay));
             }
 
@@ -160,7 +156,12 @@ export async function repeatingWeapon(br_message, weaponType) {
     playAutoWeaponAnimation();
 }
 
-export async function getWeaponSfxConfig(item) {
+/**
+ * Get the weapon sfx config for the given item
+ * @param item
+ * @returns {Promise<*>}
+ */
+async function getWeaponSfxConfig(item) {
     // Get the weapon name in lowercase and find a matching key in sfxData if it exists, otherwise use the full weapon name
     const weaponName = item.name.toLowerCase();
     const matchingKey = Object.keys(sfxData).find(key => weaponName.includes(key));
@@ -168,4 +169,39 @@ export async function getWeaponSfxConfig(item) {
 
     // get the sfx data for the weapon
     return sfxData[weaponSfxID];
+}
+
+/**
+ * Play the reload animation for the given item
+ * @param item
+ * @returns {Promise<void>}
+ */
+export async function reloadWeapon(item) {
+    ChatMessage.create({
+        content: `<strong>${item.parent.name}</strong> reloaded his weapon; <strong>${item.name}</strong>.`,
+        whisper: [], // An empty whisper array means the message is sent to all users
+        blind: false // Ensure the message is visible to all
+    });
+
+    const sfxConfig = await getWeaponSfxConfig(item)|| item.getFlag('swim', 'config');
+    const sfxToPlay = sfxConfig.reloadSFX || "";
+    if (sfxToPlay === "") {
+        ui.notifications.warn('No reload sound set for this weapon.');
+    }
+    // Play the sound
+    const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
+    await new Sequence()
+        .sound()
+        .file(sfxToPlay)
+        .forUsers(activeUserIds)
+        .play();
+}
+
+async function playSoundForAllUsers(file) {
+    const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
+    await new Sequence()
+        .sound()
+        .file(file)
+        .forUsers(activeUserIds)
+        .play();
 }
