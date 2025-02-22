@@ -71,17 +71,6 @@ export async function repeatingWeapon(br_message, weaponType) {
         return hitArray.slice(start, end);
     });
 
-    // if we are set now, we can set the animation data
-    // let's get the correct rate of fire for the weapon to make it feel faster/slower and calculate the delay
-    // to simulate mechanics like pump action, assault cannons that take significantly more time between shots, etc.
-    const rateOfFire = item.system?.rof;
-    const fireRateDelay = animationData[weaponType].fireRateDelay(rateOfFire);
-    const animationToPlay = animationData[weaponType].animation; // the animation file to play
-    const projectileSize = animationData[weaponType].projectileSize; // the size of the projectile. bigger gun, bigger projectile
-    const casingAnimationDelay = animationData[weaponType].casingAnimationDelay; // the delay before the casing is ejected, e.g. pump action
-    const casingImage = animationData[weaponType].casingImage; // the image of the casing
-    const casingSize = animationData[weaponType].casingSize; // the size of the casing
-
     // sfx config
     // Check if weapon is silenced through either method
     const isSilenced = item.system?.notes?.toLowerCase().includes("silenced") ||
@@ -94,6 +83,17 @@ export async function repeatingWeapon(br_message, weaponType) {
         : (sfxConfig?.fireSFX || defaultFireSound);
     const casingDropSfx = sfxConfig.casingDropSFX; // the sound effect for the casing drop
     const casingDropSfxDelay = 400;
+
+    // if we are set now, we can set the animation data
+    // let's get the correct rate of fire for the weapon to make it feel faster/slower and calculate the delay
+    // to simulate mechanics like pump action, assault cannons that take significantly more time between shots, etc.
+    const rateOfFire = sfxConfig.rof; // the rate of fire of the weapon, used to calculate the delay between shots
+    const fireRateDelay = animationData[weaponType].fireRateDelay(rateOfFire);
+    const animationToPlay = animationData[weaponType].animation; // the animation file to play
+    const projectileSize = animationData[weaponType].projectileSize; // the size of the projectile. bigger gun, bigger projectile
+    const casingAnimationDelay = animationData[weaponType].casingAnimationDelay; // the delay before the casing is ejected, e.g. pump action
+    const casingImage = animationData[weaponType].casingImage; // the image of the casing
+    const casingSize = animationData[weaponType].casingSize; // the size of the casing
 
     // If there are as many usedShots as the hitArray length, play the animation for each target and update the source
     // token rotation, if there are less dice, repeat it for usedShots
@@ -131,7 +131,7 @@ export async function repeatingWeapon(br_message, weaponType) {
 
             // Create sequence for each shot at this target
             for (const isHit of targetHits) {
-                   // shot animation
+                   // shot sfx and animation
                    new Sequence()
                         .sound()
                         .file(sfxToPlay)
@@ -156,7 +156,7 @@ export async function repeatingWeapon(br_message, weaponType) {
                            .scaleOut(0.01, 500, {ease: "easeOutCubic"})
                            .duration(200)
                            .moveTowards(ejectPoint)
-                           .rotateIn(90, 200)
+                           .rotateIn(45, 200)
                            .play()
                    }
 
@@ -175,6 +175,7 @@ export async function repeatingWeapon(br_message, weaponType) {
     }
     // Execute the function
     playAutoWeaponAnimation();
+    if(false) printDebugObject();
     return true;
 }
 
@@ -222,4 +223,52 @@ async function playSoundForAllUsers(file) {
         .file(file)
         .forUsers(activeUserIds)
         .play();
+}
+
+function printDebugObject() {
+    const debugObject = {
+        // Message and Roll Data
+        usedShots,
+        diceRolls,
+        hitArray,
+        originalShots,
+        currentShots,
+
+        // Token and Target Info
+        sourceToken: {
+            id: sourceToken?.id,
+            name: sourceToken?.name,
+            position: sourceToken?.position
+        },
+        targetCount: targets.length,
+        targetInfo: targets.map(t => ({
+            id: t.id,
+            name: t.name,
+            position: t.position
+        })),
+
+        // Weapon Configuration
+        weaponType,
+        itemName: item.name,
+        isSilenced,
+
+        // Animation Settings
+        rateOfFire,
+        fireRateDelay,
+        projectileSize,
+        casingAnimationDelay,
+        casingSize,
+
+        // SFX Configuration
+        sfxConfig,
+        sfxToPlay,
+        casingDropSfx,
+        casingDropSfxDelay,
+
+        // Distribution Info
+        shotsPerTarget,
+        extraShots,
+        targetHitArrays
+    };
+    console.table(debugObject);
 }
