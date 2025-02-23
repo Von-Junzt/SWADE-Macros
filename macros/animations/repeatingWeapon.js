@@ -174,7 +174,7 @@ export async function repeatingWeapon(br_message, weaponType) {
     }
     // Execute the function
     playAutoWeaponAnimation();
-    if(false) printDebugObject();
+    if(true) printDebugObject();
     return true;
 }
 
