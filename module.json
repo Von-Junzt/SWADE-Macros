@@ -30,7 +30,8 @@
     },
     {
       "name": "von-junzt-premade-macros",
-      "label": "Von Junzt Premade macros",
+      "label": "Von Junzt Premade Macros",
+
       "path": "packs/von-junzt-premade-macros",
       "type": "Macro",
       "ownership": {

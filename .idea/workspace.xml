@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added animationData.js to make animation data more configurable and readable">
-      <change afterPath="$PROJECT_DIR$/assets/gfx/weapons/pistols/remington_roomsweeper.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/gfx/weapons/pistols/remington_roomsweeper_small.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/animationData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/animationData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
-    </list>
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added animationData.js to make animation data more configurable and readable" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -113,7 +108,7 @@
       <workItem from="1740216669564" duration="3904000" />
       <workItem from="1740228188337" duration="18020000" />
       <workItem from="1740260958015" duration="6246000" />
-      <workItem from="1740302713683" duration="4429000" />
+      <workItem from="1740302713683" duration="5146000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -363,7 +358,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740307673913</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740309298943</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1740309298943</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
