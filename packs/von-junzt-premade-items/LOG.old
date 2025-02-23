@@ -1,6 +1,5 @@
-2025/02/23-01:10:20.641 50a0 Recovering log #30
-2025/02/23-01:10:20.641 50a0 Level-0 table #32: started
-2025/02/23-01:10:20.643 50a0 Level-0 table #32: 13900 bytes OK
-2025/02/23-01:10:20.648 50a0 Delete type=0 #30
-2025/02/23-01:10:20.648 50a0 Delete type=3 #18
-2025/02/23-01:10:20.648 50a0 Delete type=3 #24
+2025/02/23-15:01:44.466 3cdc Recovering log #35
+2025/02/23-15:01:44.466 3cdc Level-0 table #37: started
+2025/02/23-15:01:44.468 3cdc Level-0 table #37: 11958 bytes OK
+2025/02/23-15:01:44.472 3cdc Delete type=0 #35
+2025/02/23-15:01:44.473 3cdc Delete type=3 #34
