@@ -87,8 +87,7 @@ export async function repeatingWeapon(br_message, weaponType) {
     // if we are set now, we can set the animation data
     // let's get the correct rate of fire for the weapon to make it feel faster/slower and calculate the delay
     // to simulate mechanics like pump action, assault cannons that take significantly more time between shots, etc.
-    const rateOfFire = sfxConfig.rof; // the rate of fire of the weapon, used to calculate the delay between shots
-    const fireRateDelay = animationData[weaponType].fireRateDelay(rateOfFire);
+    const fireRateDelay = sfxConfig.fireRateDelay; // the delay between shots
     const animationToPlay = animationData[weaponType].animation; // the animation file to play
     const projectileSize = animationData[weaponType].projectileSize; // the size of the projectile. bigger gun, bigger projectile
     const casingAnimationDelay = animationData[weaponType].casingAnimationDelay; // the delay before the casing is ejected, e.g. pump action
