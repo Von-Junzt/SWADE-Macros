@@ -42,8 +42,7 @@ export async function repeatingWeapon(br_message, weaponType) {
         return false;
     }
 
-    // Build the hitArray from all dice, interpret dies as hit/miss. Empty result_text will be discarded.
-    // "Failure" or empty result_text => false, otherwise => true.
+    // Build the hitArray from all dice, filter out all empty results and map the filtered results to a boolean array
     const filteredDice = diceRolls.filter(die => die.result_text !== "");
     let hitArray = filteredDice.map(die => die.result_text !== "Failure");
 
