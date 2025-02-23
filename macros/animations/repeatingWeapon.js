@@ -42,9 +42,17 @@ export async function repeatingWeapon(br_message, weaponType) {
         return false;
     }
 
-    // Create hit array from dice rolls
-    let hitArray = diceRolls.filter(die => die.result_text !== "")
-        .map(die => die.result_text !== "Failure");
+    // Build the hitArray from all dice, interpret dies as hit/miss. Empty result_text will be discarded.
+    // "Failure" or empty result_text => false, otherwise => true.
+    const filteredDice = diceRolls.filter(die => die.result_text !== "");
+    let hitArray = filteredDice.map(die => die.result_text !== "Failure");
+
+    if (hitArray.length < usedShots) { // CHANGED
+        const lastResult = hitArray[hitArray.length - 1] ?? false; // CHANGED
+        while (hitArray.length < usedShots) { // CHANGED
+            hitArray.push(lastResult);       // CHANGED
+        }
+    }
 
     // early exit if we have more targets than dice rolls. If so we return
     if (targets.length > diceRolls.length) {
