@@ -174,7 +174,54 @@ export async function repeatingWeapon(br_message, weaponType) {
     }
     // Execute the function
     playAutoWeaponAnimation();
-    if(true) printDebugObject();
+
+    // print debug info
+    if(true) {
+        const debugObject = {
+            // Message and Roll Data
+            usedShots,
+            diceRolls,
+            hitArray,
+            originalShots,
+            currentShots,
+
+            // Token and Target Info
+            sourceToken: {
+                id: sourceToken?.id,
+                name: sourceToken?.name,
+                position: sourceToken?.position
+            },
+            targetCount: targets.length,
+            targetInfo: targets.map(t => ({
+                id: t.id,
+                name: t.name,
+                position: t.position
+            })),
+
+            // Weapon Configuration
+            weaponType,
+            itemName: item.name,
+            isSilenced,
+
+            // Animation Settings
+            fireRateDelay,
+            projectileSize,
+            casingAnimationDelay,
+            casingSize,
+
+            // SFX Configuration
+            sfxConfig,
+            sfxToPlay,
+            casingDropSfx,
+            casingDropSfxDelay,
+
+            // Distribution Info
+            shotsPerTarget,
+            extraShots,
+            targetHitArrays
+        };
+        console.table(debugObject);
+    }
     return true;
 }
 
@@ -222,52 +269,4 @@ async function playSoundForAllUsers(file) {
         .file(file)
         .forUsers(activeUserIds)
         .play();
-}
-
-function printDebugObject() {
-    const debugObject = {
-        // Message and Roll Data
-        usedShots,
-        diceRolls,
-        hitArray,
-        originalShots,
-        currentShots,
-
-        // Token and Target Info
-        sourceToken: {
-            id: sourceToken?.id,
-            name: sourceToken?.name,
-            position: sourceToken?.position
-        },
-        targetCount: targets.length,
-        targetInfo: targets.map(t => ({
-            id: t.id,
-            name: t.name,
-            position: t.position
-        })),
-
-        // Weapon Configuration
-        weaponType,
-        itemName: item.name,
-        isSilenced,
-
-        // Animation Settings
-        rateOfFire,
-        fireRateDelay,
-        projectileSize,
-        casingAnimationDelay,
-        casingSize,
-
-        // SFX Configuration
-        sfxConfig,
-        sfxToPlay,
-        casingDropSfx,
-        casingDropSfxDelay,
-
-        // Distribution Info
-        shotsPerTarget,
-        extraShots,
-        targetHitArrays
-    };
-    console.table(debugObject);
 }
