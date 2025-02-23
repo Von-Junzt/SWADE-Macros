@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added animationData.js to make animation data more configurable and readable">
+      <change afterPath="$PROJECT_DIR$/assets/gfx/weapons/pistols/remington_roomsweeper.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/gfx/weapons/pistols/remington_roomsweeper_small.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/animationData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/animationData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Von-Junzt&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Von-Junzt/SWADE-Sci-Fi-Animations.git&quot;,
+    &quot;accountId&quot;: &quot;c86aa340-a725-4f31-bec2-f27d6167198a&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2tEI0GzvUOU5ccqZKYmXRoqFu7d" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ChatTagsLlmMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyAccountHistoryMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyAccountsIdsRefresh&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyConvertUrlToCodebaseName&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyHistoryLlmMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyMigrateChatHistory-v2&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyProjectSettingsMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.DeprecatedChatLlmMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ToggleCodyToolWindowAfterMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;disable.download.node.interpreter.editor.notification&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Coding/vjpmacros&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.updates&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Coding\Von Junzt SWADE Macros" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Coding\vjp-macros\macros" />
+      <recent name="D:\Coding\vjp-macros" />
+      <recent name="D:\Coding\Von Junzt SWADE Macros\animations" />
+      <recent name="D:\Coding\Von Junzt SWADE Macros" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-WS-243.24978.60" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="" />
+      <created>1739910581692</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739910581692</updated>
+      <workItem from="1739910582735" duration="9826000" />
+      <workItem from="1739948192332" duration="9713000" />
+      <workItem from="1740000085127" duration="44000" />
+      <workItem from="1740000155045" duration="3306000" />
+      <workItem from="1740037725513" duration="77000" />
+      <workItem from="1740038016043" duration="23007000" />
+      <workItem from="1740085932362" duration="6060000" />
+      <workItem from="1740124541133" duration="22338000" />
+      <workItem from="1740174167804" duration="4318000" />
+      <workItem from="1740216669564" duration="3904000" />
+      <workItem from="1740228188337" duration="18020000" />
+      <workItem from="1740260958015" duration="6246000" />
+      <workItem from="1740302713683" duration="4429000" />
+    </task>
+    <task id="LOCAL-00001" summary="Initial Commit">
+      <option name="closed" value="true" />
+      <created>1739960480589</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739960480589</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added await to make shure usedshots is setup correctly">
+      <option name="closed" value="true" />
+      <created>1740006740768</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1740006740768</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added await to make shure usedshots is setup correctly">
+      <option name="closed" value="true" />
+      <created>1740051399745</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1740051399745</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added await to make shure usedshots is setup correctly">
+      <option name="closed" value="true" />
+      <created>1740077257971</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1740077257971</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added await to make shure usedshots is setup correctly">
+      <option name="closed" value="true" />
+      <created>1740086856548</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1740086856548</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added await to make shure usedshots is setup correctly">
+      <option name="closed" value="true" />
+      <created>1740087077136</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1740087077136</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added await to make shure usedshots is setup correctly">
+      <option name="closed" value="true" />
+      <created>1740087404558</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1740087404558</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added await to make shure usedshots is setup correctly">
+      <option name="closed" value="true" />
+      <created>1740091372240</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1740091372240</updated>
+    </task>
+    <task id="LOCAL-00009" summary="added await to make shure usedshots is setup correctly">
+      <option name="closed" value="true" />
+      <created>1740154983561</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1740154983561</updated>
+    </task>
+    <task id="LOCAL-00010" summary="comments">
+      <option name="closed" value="true" />
+      <created>1740160168256</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1740160168256</updated>
+    </task>
+    <task id="LOCAL-00011" summary="comments">
+      <option name="closed" value="true" />
+      <created>1740161625775</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1740161625775</updated>
+    </task>
+    <task id="LOCAL-00012" summary="comments">
+      <option name="closed" value="true" />
+      <created>1740162762371</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1740162762371</updated>
+    </task>
+    <task id="LOCAL-00013" summary="added reloading sounds">
+      <option name="closed" value="true" />
+      <created>1740169878189</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1740169878189</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added reloading sounds">
+      <option name="closed" value="true" />
+      <created>1740170253077</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1740170253077</updated>
+    </task>
+    <task id="LOCAL-00015" summary="added reloading sounds and notifications">
+      <option name="closed" value="true" />
+      <created>1740170388383</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1740170388383</updated>
+    </task>
+    <task id="LOCAL-00016" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740170411256</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1740170411256</updated>
+    </task>
+    <task id="LOCAL-00017" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740171303878</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1740171303878</updated>
+    </task>
+    <task id="LOCAL-00018" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740171559566</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1740171559566</updated>
+    </task>
+    <task id="LOCAL-00019" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740175650938</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1740175650938</updated>
+    </task>
+    <task id="LOCAL-00020" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740176910781</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1740176910781</updated>
+    </task>
+    <task id="LOCAL-00021" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740235447091</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1740235447091</updated>
+    </task>
+    <task id="LOCAL-00022" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740236479522</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1740236479522</updated>
+    </task>
+    <task id="LOCAL-00023" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740240561733</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1740240561733</updated>
+    </task>
+    <task id="LOCAL-00024" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740250236329</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1740250236329</updated>
+    </task>
+    <task id="LOCAL-00025" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740251544531</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1740251544531</updated>
+    </task>
+    <task id="LOCAL-00026" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740259514659</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1740259514659</updated>
+    </task>
+    <task id="LOCAL-00027" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740261927816</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1740261927816</updated>
+    </task>
+    <task id="LOCAL-00028" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740265241636</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1740265241636</updated>
+    </task>
+    <task id="LOCAL-00029" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740305918135</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1740305918135</updated>
+    </task>
+    <task id="LOCAL-00030" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740307147144</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1740307147144</updated>
+    </task>
+    <task id="LOCAL-00031" summary="added animationData.js to make animation data more configurable and readable">
+      <option name="closed" value="true" />
+      <created>1740307673913</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1740307673913</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial Commit" />
+    <MESSAGE value="added await to make shure usedshots is setup correctly" />
+    <MESSAGE value="comments" />
+    <MESSAGE value="added reloading sounds" />
+    <MESSAGE value="added reloading sounds and notifications" />
+    <MESSAGE value="added animationData.js to make animation data more configurable and readable" />
+    <option name="LAST_COMMIT_MESSAGE" value="added animationData.js to make animation data more configurable and readable" />
+  </component>
+</project>
