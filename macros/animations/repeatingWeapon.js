@@ -54,7 +54,7 @@ export async function repeatingWeapon(br_message, weaponType) {
     }
 
     // if we have fewer dice than shots (e.g. Burst Fire), use the first result for all shots
-    if (diceRolls.length < usedShots) {
+    if (hitArray.length < usedShots) {
         const singleResult = hitArray[0];
         hitArray = new Array(usedShots).fill(singleResult);
     }
@@ -130,8 +130,8 @@ export async function repeatingWeapon(br_message, weaponType) {
 
             // Create sequence for each shot at this target
             for (const isHit of targetHits) {
-                   // shot sfx and animation
-                   new Sequence()
+                    // shot sfx and animation
+                    new Sequence()
                         .sound()
                         .file(sfxToPlay)
                         .forUsers(activeUserIds)
@@ -144,9 +144,9 @@ export async function repeatingWeapon(br_message, weaponType) {
                         .missed(!isHit)
                         .play()
 
-                   // casing animation
-                   if(casingImage) {
-                       new Sequence()
+                    // casing animation
+                    if(casingImage) {
+                        new Sequence()
                            .effect()
                            .delay(casingAnimationDelay)
                            .file(casingImage)

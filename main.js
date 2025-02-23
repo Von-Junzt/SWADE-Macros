@@ -19,7 +19,7 @@ Hooks.on('BRSW-RollItem', async (br_message, html) => {
         // set the original shots count
         await item.setFlag('vjpmacros', 'originalShots', item.system.currentShots);
         // determine weapon type by name
-        const weaponName = item.name.toLowerCase();
+        const weaponName = item.system?.category.toLowerCase();
         const weaponType = Object.keys(animationData)
             .sort((a, b) => b.length - a.length)  // Sort by length descending
             .find(type => weaponName.includes(type)) || "notfound";
