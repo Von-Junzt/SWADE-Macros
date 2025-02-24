@@ -95,7 +95,8 @@ export async function repeatingWeapon(br_message, weaponType) {
     // let's get the correct rate of fire for the weapon to make it feel faster/slower and calculate the delay
     // to simulate mechanics like pump action, assault cannons that take significantly more time between shots, etc.
     const fireRateDelay = sfxConfig.fireRateDelay; // the delay between shots
-    const animationToPlay = animationData[weaponType].animation; // the animation file to play
+    const shotAnimation = animationData[weaponType].animation; // the animation file to play
+    const projectileVelocity = animationData[weaponType].projectileVelocity;
     const projectileSize = animationData[weaponType].projectileSize; // the size of the projectile. bigger gun, bigger projectile
     const casingAnimationDelay = animationData[weaponType].casingAnimationDelay; // the delay before the casing is ejected, e.g. pump action
     const casingImage = animationData[weaponType].casingImage; // the image of the casing
@@ -137,50 +138,49 @@ export async function repeatingWeapon(br_message, weaponType) {
 
             // Create sequence for each shot at this target
             for (const isHit of targetHits) {
-                    // shot sfx and animation
+                // shot sfx
+                playSoundForAllUsers(sfxToPlay);
+
+                // animation
+                if(shotAnimation) {
                     new Sequence()
-                        .sound()
-                        .file(sfxToPlay)
-                        .forUsers(activeUserIds)
                         .effect()
                         .atLocation(sourceToken)
                         .stretchTo(target)
-                        .file(animationToPlay)
-                        .playbackRate(4)
-                        .scale({x: 1, y: projectileSize})
+                        .file(shotAnimation)
+                        .playbackRate(projectileVelocity)
+                        .scale(projectileSize)
                         .missed(!isHit)
                         .play()
+                }
 
-                    // casing animation
-                    if(casingImage) {
-                        new Sequence()
-                           .effect()
-                           .delay(casingAnimationDelay)
-                           .file(casingImage)
-                           .atLocation(tokenCenter)
-                           .scale(casingSize)
-                           .scaleOut(0.01, 500, {ease: "easeOutCubic"})
-                           .duration(200)
-                           .moveTowards(ejectPoint)
-                           .rotateIn(45, 200)
-                           .play()
-                   }
+                // casing animation
+                if(casingImage) {
+                    new Sequence()
+                       .effect()
+                       .delay(casingAnimationDelay)
+                       .file(casingImage)
+                       .atLocation(tokenCenter)
+                       .scale(casingSize)
+                       .scaleOut(0.01, 500, {ease: "easeOutCubic"})
+                       .duration(200)
+                       .moveTowards(ejectPoint)
+                       .rotateIn(45, 200)
+                       .play()
+                }
 
-                   if (casingDropSfx) {
-                       new Sequence()
-                           .sound()
-                           .file(casingDropSfx)
-                           .forUsers(activeUserIds)
-                           .delay(casingDropSfxDelay)
-                           .play()
-                   }
+                // casing Sfx
+                playSoundForAllUsers(casingDropSfx, casingDropSfxDelay);
+
+                // delay between shots
                 await new Promise(resolve => setTimeout(resolve, fireRateDelay));
             }
+            // delay between targets
             await new Promise(resolve => setTimeout(resolve, 500));
         }
     }
     // Execute the function
-    playAutoWeaponAnimation();
+    await playAutoWeaponAnimation();
 
     // print debug info
     if(true) {
@@ -268,12 +268,14 @@ export async function playWeaponReloadSfx(item) {
     await playSoundForAllUsers(sfxToPlay);
 }
 
-async function playSoundForAllUsers(file) {
+async function playSoundForAllUsers(file, delay) {
     // get all the active user ids
+    const delayIntervall = delay || 0;
     const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
     await new Sequence()
         .sound()
         .file(file)
         .forUsers(activeUserIds)
+        .delay(delayIntervall)
         .play();
 }

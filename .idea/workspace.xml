@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="images">
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="comment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/animationData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/animationData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
@@ -116,6 +116,8 @@
       <workItem from="1740302713683" duration="12468000" />
       <workItem from="1740336794110" duration="681000" />
       <workItem from="1740343001153" duration="2295000" />
+      <workItem from="1740345331329" duration="88000" />
+      <workItem from="1740413785788" duration="3126000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -405,7 +407,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740336863368</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="images">
+      <option name="closed" value="true" />
+      <created>1740345343154</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1740345343154</updated>
+    </task>
+    <task id="LOCAL-00038" summary="comment">
+      <option name="closed" value="true" />
+      <created>1740345386240</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1740345386240</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -419,6 +437,7 @@
     <MESSAGE value="added reloading sounds and notifications" />
     <MESSAGE value="added animationData.js to make animation data more configurable and readable" />
     <MESSAGE value="images" />
-    <option name="LAST_COMMIT_MESSAGE" value="images" />
+    <MESSAGE value="comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="comment" />
   </component>
 </project>
