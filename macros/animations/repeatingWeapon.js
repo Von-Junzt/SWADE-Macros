@@ -42,16 +42,10 @@ export async function repeatingWeapon(br_message, weaponType) {
         return false;
     }
 
-    // Build the hitArray from all dice, filter out all empty results and map the filtered results to a boolean array
+    // Build hitArray from diceRolls preserving the existing order
     const filteredDice = diceRolls.filter(die => die.result_text !== "");
     let hitArray = filteredDice.map(die => die.result_text !== "Failure");
 
-    if (hitArray.length < usedShots) { // CHANGED
-        const lastResult = hitArray[hitArray.length - 1] ?? false; // CHANGED
-        while (hitArray.length < usedShots) { // CHANGED
-            hitArray.push(lastResult);       // CHANGED
-        }
-    }
 
     // early exit if we have more targets than dice rolls. If so we return
     if (targets.length > diceRolls.length) {
@@ -62,8 +56,10 @@ export async function repeatingWeapon(br_message, weaponType) {
 
     // if we have fewer dice than shots (e.g. Burst Fire), use the first result for all shots
     if (hitArray.length < usedShots) {
-        const singleResult = hitArray[0];
-        hitArray = new Array(usedShots).fill(singleResult);
+        const lastResult = hitArray[hitArray.length - 1] ?? false;
+        while (hitArray.length < usedShots) {
+            hitArray.push(lastResult);
+        }
     }
 
     // Calculate shots per target
@@ -170,7 +166,9 @@ export async function repeatingWeapon(br_message, weaponType) {
                 }
 
                 // casing Sfx
-                playSoundForAllUsers(casingDropSfx, casingDropSfxDelay);
+                if(casingDropSfx) {
+                    playSoundForAllUsers(casingDropSfx, casingDropSfxDelay);
+                }
 
                 // delay between shots
                 await new Promise(resolve => setTimeout(resolve, fireRateDelay));
