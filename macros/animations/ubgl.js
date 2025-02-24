@@ -1,7 +1,7 @@
 const sourceToken = args[1].sourceToken; // the token that rolled the item
 const lastTemplate = canvas.templates.placeables[canvas.templates.placeables.length - 1]; // the last template created
 const sfxToPlay = game.vjpmacros.sfxData["ubgl"].fireSFX;
-const animationToPlay = "modules/jb2a_patreon/Library/Generic/Weapon_Attacks/Ranged/LaunchGrenade01_01_Regular_Green_Thumb.webp";
+const animationToPlay = "modules/vjpmacros/assets/gfx/weapons/grenades/m203_grenade_green.webp";
 
 await new Sequence()
     .sound()
@@ -10,9 +10,9 @@ await new Sequence()
     .file(animationToPlay)
     .atLocation(sourceToken)
     .moveTowards(lastTemplate)
-    .scale({x: 0.3, y: 0.3})
-    .rotate(-45)
-    .playbackRate(2)
+    .moveSpeed(1500)
+    .scale({x: 0.15, y: 0.15})
+    .rotate(-90)
     .waitUntilFinished(-200)
     .effect()
     .file('jb2a.explosion.shrapnel.grenade.02.black')
