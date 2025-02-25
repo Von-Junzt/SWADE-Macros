@@ -1,9 +1,11 @@
 const sourceToken = args[1].sourceToken; // the token that rolled the item
 const lastTemplate = canvas.templates.placeables[canvas.templates.placeables.length - 1]; // the last template created
+const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
 
 await new Sequence()
     .sound()
     .file('modules/vjpmacros/assets/sfx/equipment/grenade_use.wav')
+    .forUsers(activeUserIds)
     .effect()
     .file('jb2a.throwable.throw.grenade.03.blackblue')
     .atLocation(sourceToken)
