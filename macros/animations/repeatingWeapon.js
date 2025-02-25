@@ -30,26 +30,12 @@ export async function repeatingWeapon(br_message, weaponType) {
         return false;
     }
 
-    // early exit, if no targets, return
-    if (targets.length === 0) {
-        console.error("No targets selected.");
-        return false;
-    }
-
-    // early exit, if the weapon has not enough shots to fire.
-    if (originalShots < usedShots) {
-        console.error("Not enough shots left in the magazine.");
-        return false;
-    }
-
     // Build hitArray from diceRolls preserving the existing order
     const filteredDice = diceRolls.filter(die => die.result_text !== "");
     let hitArray = filteredDice.map(die => die.result_text !== "Failure");
 
-    // early exit if we have more targets than dice rolls. If so we return
-    if (targets.length > diceRolls.length) {
-        ui.notifications.error("You have more targets selected than trait dice rolls.");
-        console.error("You have more targets selected than trait dice rolls.");
+    // Validate targets and shots - early exit if validation fails
+    if (!validateTargetsAndShots(targets, filteredDice, usedShots, originalShots)) {
         return false;
     }
 
@@ -115,26 +101,17 @@ export async function repeatingWeapon(br_message, weaponType) {
             const casingOffsetDistance = canvas.grid.size * 2;    // offset distance for shell casing ejection
 
             // Use ray.angle directly because token art faces right
-            const muzzleFlashPoint = {
-                x: sourceToken.center.x + Math.cos(ray.angle) * muzzleFlashOffsetDistance,
-                y: sourceToken.center.y + Math.sin(ray.angle) * muzzleFlashOffsetDistance,
-            };
+            const muzzleFlashPoint = await calculateOffsetpoint(sourceToken, ray.angle, muzzleFlashOffsetDistance);
 
             // We want to eject the casings perpendicular to the tokens pointing direction. For this we need to
             // calculate a perpendicular array angle (ray.angle + π/2)
             const perpRay = ray.angle + Math.PI / 2;
 
             // Compute the casings ejection point based on the token's center
-            const casingEjectPoint = {
-                x: sourceToken.center.x + Math.cos(perpRay) * casingEjectPointOffsetDistance,
-                y: sourceToken.center.y + Math.sin(perpRay) * casingEjectPointOffsetDistance,
-            };
+            const casingEjectPoint = await calculateOffsetpoint(sourceToken, perpRay, casingEjectPointOffsetDistance);
 
             // Compute the casings target point based on the token's center
-            const casingTargetPoint = {
-                x: sourceToken.center.x + Math.cos(perpRay) * casingOffsetDistance,
-                y: sourceToken.center.y + Math.sin(perpRay) * casingOffsetDistance,
-            };
+            const casingTargetPoint = await calculateOffsetpoint(sourceToken, perpRay, casingOffsetDistance);
 
             // get all the active user ids
             const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
@@ -190,12 +167,12 @@ export async function repeatingWeapon(br_message, weaponType) {
     // Execute the function
     await playAutoWeaponAnimation();
 
-    // print debug info
     if(true) {
         const debugObject = {
             // Message and Roll Data
             usedShots,
             diceRolls,
+            filteredDice,
             hitArray,
             originalShots,
             currentShots,
@@ -237,7 +214,7 @@ export async function repeatingWeapon(br_message, weaponType) {
             targetHitArrays
         };
         console.table(debugObject);
-    }
+    } // Print debug object
     return true;
 }
 
@@ -287,4 +264,31 @@ async function playSoundForAllUsers(file, delay) {
         .forUsers(activeUserIds)
         .delay(delayIntervall)
         .play();
+}
+
+async function calculateOffsetpoint(token, rayAngle, offsetDistance) {
+    return {
+        x: token.center.x + Math.cos(rayAngle) * offsetDistance,
+        y: token.center.y + Math.sin(rayAngle) * offsetDistance,
+    };
+}
+
+function validateTargetsAndShots(targets, filteredDice, usedShots, originalShots) {
+    if (targets.length === 0) {
+        console.error("No targets selected.");
+        return false;
+    }
+
+    if (originalShots < usedShots) {
+        console.error("Not enough shots left in the magazine.");
+        return false;
+    }
+
+    if (targets.length > filteredDice.length) {
+        ui.notifications.error("You have more targets selected than trait dice rolls.");
+        console.error("You have more targets selected than trait dice rolls.");
+        return false;
+    }
+
+    return true;
 }
