@@ -96,8 +96,8 @@ export async function repeatingWeapon(br_message, weaponType) {
 
             // Define how far from the token center the source of the muzzle flash, and the ejection point for casings
             // should be placed
-            const muzzleFlashOffsetDistance = canvas.grid.size * 0.5;  // Adjust as needed
-            const casingEjectPointOffsetDistance = canvas.grid.size * 0.5;  // Adjust as needed
+            const muzzleFlashOffsetDistance = canvas.grid.size * 0.4;  // Adjust as needed
+            const casingEjectPointOffsetDistance = canvas.grid.size * 0.25;  // Adjust as needed
             const casingOffsetDistance = canvas.grid.size * 2;    // offset distance for shell casing ejection
 
             // Use ray.angle directly because token art faces right
@@ -105,13 +105,13 @@ export async function repeatingWeapon(br_message, weaponType) {
 
             // We want to eject the casings perpendicular to the tokens pointing direction. For this we need to
             // calculate a perpendicular array angle (ray.angle + π/2)
-            const perpRay = ray.angle + Math.PI / 2;
+            const perpRayAngle = ray.angle + Math.PI / 2;
 
             // Compute the casings ejection point based on the token's center
-            const casingEjectPoint = await calculateOffsetpoint(sourceToken, perpRay, casingEjectPointOffsetDistance);
+            const casingEjectPoint = await calculateOffsetpoint(sourceToken, ray.angle, casingEjectPointOffsetDistance);
 
             // Compute the casings target point based on the token's center
-            const casingTargetPoint = await calculateOffsetpoint(sourceToken, perpRay, casingOffsetDistance);
+            const casingTargetPoint = await calculateOffsetpoint(sourceToken, perpRayAngle, casingOffsetDistance);
 
             // get all the active user ids
             const activeUserIds = game.users.filter(user => user.active).map(user => user.id);

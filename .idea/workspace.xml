@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="used token.center correctly">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/animationData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/animationData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/macros/animations/repeatingWeapon.js" beforeDir="false" afterPath="$PROJECT_DIR$/macros/animations/repeatingWeapon.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -120,7 +121,7 @@
       <workItem from="1740432414970" duration="19000" />
       <workItem from="1740491871590" duration="11307000" />
       <workItem from="1740510009383" duration="26000" />
-      <workItem from="1740521366605" duration="1486000" />
+      <workItem from="1740521366605" duration="3091000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -482,7 +483,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740510027318</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="used token.center correctly">
+      <option name="closed" value="true" />
+      <created>1740523014953</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1740523014953</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
