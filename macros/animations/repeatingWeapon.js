@@ -46,7 +46,6 @@ export async function repeatingWeapon(br_message, weaponType) {
     const filteredDice = diceRolls.filter(die => die.result_text !== "");
     let hitArray = filteredDice.map(die => die.result_text !== "Failure");
 
-
     // early exit if we have more targets than dice rolls. If so we return
     if (targets.length > diceRolls.length) {
         ui.notifications.error("You have more targets selected than trait dice rolls.");
@@ -109,8 +108,11 @@ export async function repeatingWeapon(br_message, weaponType) {
             const rotation = (ray.angle * 180 / Math.PI) - 90;
             await sourceToken.document.update({rotation: rotation}, {animate: false});
 
-            // Define how far from the token center the muzzle flash should originate
+            // Define how far from the token center the source of the muzzle flash, and the ejection point for casings
+            // should be placed
             const muzzleFlashOffsetDistance = canvas.grid.size * 0.5;  // Adjust as needed
+            const casingEjectPointOffsetDistance = canvas.grid.size * 0.5;  // Adjust as needed
+            const casingOffsetDistance = canvas.grid.size * 2;    // offset distance for shell casing ejection
 
             // Use ray.angle directly because token art faces right
             const muzzleFlashPoint = {
@@ -118,14 +120,18 @@ export async function repeatingWeapon(br_message, weaponType) {
                 y: sourceToken.center.y + Math.sin(ray.angle) * muzzleFlashOffsetDistance,
             };
 
-            // Adjust this value to change the distance of the eject point from the token's center
-            const casingOffsetDistance = canvas.grid.size * 2;    // offset distance for shell casing ejection
-
-            // Calculate the perpendicular angle (ray.angle + π/2) for the shell casings
+            // We want to eject the casings perpendicular to the tokens pointing direction. For this we need to
+            // calculate a perpendicular array angle (ray.angle + π/2)
             const perpRay = ray.angle + Math.PI / 2;
 
-            // Compute the eject point based on the token's center
+            // Compute the casings ejection point based on the token's center
             const casingEjectPoint = {
+                x: sourceToken.center.x + Math.cos(perpRay) * casingEjectPointOffsetDistance,
+                y: sourceToken.center.y + Math.sin(perpRay) * casingEjectPointOffsetDistance,
+            };
+
+            // Compute the casings target point based on the token's center
+            const casingTargetPoint = {
                 x: sourceToken.center.x + Math.cos(perpRay) * casingOffsetDistance,
                 y: sourceToken.center.y + Math.sin(perpRay) * casingOffsetDistance,
             };
@@ -160,11 +166,11 @@ export async function repeatingWeapon(br_message, weaponType) {
                        .effect()
                        .delay(casingAnimationDelay)
                        .file(casingImage)
-                       .atLocation(sourceToken.center)
+                       .atLocation(casingEjectPoint)
                        .scale(casingSize)
                        .scaleOut(0.01, 500, {ease: "easeOutCubic"})
                        .duration(200)
-                       .moveTowards(casingEjectPoint)
+                       .moveTowards(casingTargetPoint)
                        .rotateIn(45, 200)
                        .play()
                 }
