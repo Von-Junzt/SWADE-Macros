@@ -104,29 +104,30 @@ export async function repeatingWeapon(br_message, weaponType) {
         for (let i = 0; i < targets.length; i++) {
             const target = targets[i];
             const targetHits = targetHitArrays[i];
-
             // Update source token rotation
-            const ray = new Ray(sourceToken.position, target.position);
+            const ray = new Ray(sourceToken.center, target.center)
             const rotation = (ray.angle * 180 / Math.PI) - 90;
             await sourceToken.document.update({rotation: rotation}, {animate: false});
 
-            // Shell casing effect
-            // Calculate token center coordinates (adjust if your token dimensions are different)
-            const tokenCenter = {
-                x: sourceToken.x + sourceToken.width / 2,
-                y: sourceToken.y + sourceToken.height / 2,
+            // Define how far from the token center the muzzle flash should originate
+            const muzzleFlashOffsetDistance = canvas.grid.size * 0.5;  // Adjust as needed
+
+            // Use ray.angle directly because token art faces right
+            const muzzleFlashPoint = {
+                x: sourceToken.center.x + Math.cos(ray.angle) * muzzleFlashOffsetDistance,
+                y: sourceToken.center.y + Math.sin(ray.angle) * muzzleFlashOffsetDistance,
             };
 
             // Adjust this value to change the distance of the eject point from the token's center
-            const offsetDistance = canvas.grid.size * 2;
+            const casingOffsetDistance = canvas.grid.size * 2;    // offset distance for shell casing ejection
 
-            // Calculate the perpendicular angle (ray.angle + π/2)
+            // Calculate the perpendicular angle (ray.angle + π/2) for the shell casings
             const perpRay = ray.angle + Math.PI / 2;
 
             // Compute the eject point based on the token's center
-            const ejectPoint = {
-                x: tokenCenter.x + Math.cos(perpRay) * offsetDistance,
-                y: tokenCenter.y + Math.sin(perpRay) * offsetDistance,
+            const casingEjectPoint = {
+                x: sourceToken.center.x + Math.cos(perpRay) * casingOffsetDistance,
+                y: sourceToken.center.y + Math.sin(perpRay) * casingOffsetDistance,
             };
 
             // get all the active user ids
@@ -137,11 +138,14 @@ export async function repeatingWeapon(br_message, weaponType) {
                 // shot sfx
                 playSoundForAllUsers(sfxToPlay);
 
-                // animation
+                // animation alternative:
+                // .moveTowards(target)
+                // .moveSpeed(projectileVelocity)
+                // seems to work but doesn't look that good without tweaking
                 if(shotAnimation) {
                     new Sequence()
                         .effect()
-                        .atLocation(sourceToken)
+                        .atLocation(muzzleFlashPoint)
                         .stretchTo(target)
                         .file(shotAnimation)
                         .playbackRate(projectileVelocity)
@@ -156,11 +160,11 @@ export async function repeatingWeapon(br_message, weaponType) {
                        .effect()
                        .delay(casingAnimationDelay)
                        .file(casingImage)
-                       .atLocation(tokenCenter)
+                       .atLocation(sourceToken.center)
                        .scale(casingSize)
                        .scaleOut(0.01, 500, {ease: "easeOutCubic"})
                        .duration(200)
-                       .moveTowards(ejectPoint)
+                       .moveTowards(casingEjectPoint)
                        .rotateIn(45, 200)
                        .play()
                 }
@@ -213,6 +217,7 @@ export async function repeatingWeapon(br_message, weaponType) {
             projectileSize,
             casingAnimationDelay,
             casingSize,
+            casingImage,
 
             // SFX Configuration
             sfxConfig,
