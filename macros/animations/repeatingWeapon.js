@@ -115,11 +115,14 @@ export async function repeatingWeapon(br_message, weaponType) {
             // get all the active user ids
             const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
 
+            // keep track of the shots fired
+            let shotsFired = 0;
+
             // Create sequence for each shot at this target
             for (const isHit of targetHits) {
                 // shot sfx
                 playSoundForAllUsers(sfxToPlay);
-
+                shotsFired++;
                 // animation alternative:
                 // .moveTowards(target)
                 // .moveSpeed(projectileVelocity)
@@ -134,6 +137,14 @@ export async function repeatingWeapon(br_message, weaponType) {
                         .scale(projectileSize)
                         .missed(!isHit)
                         .play()
+                }
+
+                // if this is the last shot in the magazine, we test if there is an extra sfx specified for the last shot (e.g. M1 Garand)
+                if(originalShots - shotsFired === 0 && sfxConfig.lastShotSFX) {
+                    // Wait a small delay to make the last shot sound more natural after the regular shot sound
+                    setTimeout(() => {
+                        playSoundForAllUsers(sfxConfig.lastShotSFX);
+                    }, 25);
                 }
 
                 // casing animation
