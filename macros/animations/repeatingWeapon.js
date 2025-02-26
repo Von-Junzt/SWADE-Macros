@@ -69,7 +69,8 @@ export async function repeatingWeapon(br_message, weaponType) {
         ? (sfxConfig?.silencedFireSFX || sfxConfig?.fireSFX || defaultFireSound)
         : (sfxConfig?.fireSFX || defaultFireSound);
     const casingDropSfx = sfxConfig.casingDropSFX; // the sound effect for the casing drop
-    const casingDropSfxDelay = 400;
+    const casingDropSfxDelay = sfxConfig.casingDropSfxDelay || 400; // e.g. lever-action guns need this delay
+    const leverActionSfx = weaponType.includes("lever-action") ? "modules/vjpmacros/assets/sfx/weapons_general/lever_action_repeater.ogg" : undefined;
 
     // if we are set now, we can set the animation data
     // let's get the correct rate of fire for the weapon to make it feel faster/slower and calculate the delay
@@ -142,9 +143,12 @@ export async function repeatingWeapon(br_message, weaponType) {
                 // if this is the last shot in the magazine, we test if there is an extra sfx specified for the last shot (e.g. M1 Garand)
                 if(originalShots - shotsFired === 0 && sfxConfig.lastShotSFX) {
                     // Wait a small delay to make the last shot sound more natural after the regular shot sound
-                    setTimeout(() => {
-                        playSoundForAllUsers(sfxConfig.lastShotSFX);
-                    }, 25);
+                        playSoundForAllUsers(sfxConfig.lastShotSFX, 25);
+                }
+
+                // if we have a lever-action gun, we want to play the lever action sfx now
+                if(leverActionSfx) {
+                    playSoundForAllUsers(leverActionSfx, 500);
                 }
 
                 // casing animation
