@@ -2,10 +2,16 @@ import {sfxData} from "./lib/sfxData.js";
 import {animationData} from "./lib/animationData.js";
 import {repeatingWeapon, playWeaponReloadSfx} from "./macros/animations/repeatingWeapon.js";
 
+/**
+ * Initialize the module
+ */
 Hooks.once('init', function() {
     console.warn('VON JUNZT SWADE MACROS LOADED');
 });
 
+/**
+ * Setup objects to be available directly in Foundry
+ */
 Hooks.once('ready', () => {
     game.vjpmacros = {
         animationData,
@@ -13,6 +19,9 @@ Hooks.once('ready', () => {
     };
 });
 
+/**
+ * Play firing sound and animation for the given weapon
+ */
 Hooks.on('BRSW-RollItem', async (br_message, html) => {
     const item = br_message.item;
     if (item.type === 'weapon') {
@@ -32,8 +41,13 @@ Hooks.on('BRSW-RollItem', async (br_message, html) => {
     }
 });
 
+/**
+ * Play the reload animation for the given item
+ */
 Hooks.on('swadeReloadWeapon', async (item, reloaded) => {
     if(reloaded) {
         await playWeaponReloadSfx(item);
     }
 });
+
+// TODO: Remove SWIM dependency, use swade ammoo management instead

@@ -2,7 +2,7 @@ import {animationData} from "../../lib/animationData.js";
 import {sfxData} from "../../lib/sfxData.js";
 
 /**
- * Play the repeating weapon animation
+ * Play firing sound and animation for the given weapon
  * @param br_message
  * @param weaponType
  * @returns {Promise<boolean>}
@@ -61,8 +61,7 @@ export async function repeatingWeapon(br_message, weaponType) {
 
     // sfx config
     // Check if weapon is silenced through either method
-    const isSilenced = item.system?.notes?.toLowerCase().includes("silenced") ||
-        (sfxConfig?.isSilenced ?? false)
+    const isSilenced = item.system?.notes?.toLowerCase().includes("silenced");
     // Default fallback sound
     const defaultFireSound = "modules/vjpmacros/assets/sfx/weapons/firearm/ak105_fire_01.wav";
     // Get appropriate sound based on silenced status
@@ -219,6 +218,21 @@ export async function repeatingWeapon(br_message, weaponType) {
 }
 
 /**
+ * Calculates the offset point for a given ray angle and distance from a token.
+ * @param token
+ * @param rayAngle
+ * @param offsetDistance
+ * @returns {Promise<{x: *, y: *}>}
+ */
+async function calculateOffsetpoint(token, rayAngle, offsetDistance) {
+    return {
+        x: token.center.x + Math.cos(rayAngle) * offsetDistance,
+        y: token.center.y + Math.sin(rayAngle) * offsetDistance,
+    };
+}
+
+
+/**
  * Get the weapon sfx config for the given item
  * @param item
  * @returns {Promise<*>}
@@ -254,6 +268,12 @@ export async function playWeaponReloadSfx(item) {
     await playSoundForAllUsers(sfxToPlay);
 }
 
+/**
+ * Play a sound for all users
+ * @param file
+ * @param delay
+ * @returns {Promise<void>}
+ */
 async function playSoundForAllUsers(file, delay) {
     // get all the active user ids
     const delayIntervall = delay || 0;
@@ -266,13 +286,14 @@ async function playSoundForAllUsers(file, delay) {
         .play();
 }
 
-async function calculateOffsetpoint(token, rayAngle, offsetDistance) {
-    return {
-        x: token.center.x + Math.cos(rayAngle) * offsetDistance,
-        y: token.center.y + Math.sin(rayAngle) * offsetDistance,
-    };
-}
-
+/**
+ * Validate targets and shots
+ * @param targets
+ * @param filteredDice
+ * @param usedShots
+ * @param originalShots
+ * @returns {boolean}
+ */
 function validateTargetsAndShots(targets, filteredDice, usedShots, originalShots) {
     if (targets.length === 0) {
         console.error("No targets selected.");
