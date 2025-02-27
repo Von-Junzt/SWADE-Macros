@@ -145,7 +145,7 @@ export async function repeatingWeapon(br_message, weaponType) {
                 // if this is the last shot in the magazine, we test if there is an extra sfx specified for the last shot (e.g. M1 Garand)
                 if(originalShots - shotsFired === 0 && sfxConfig.lastShotSFX) {
                     // Wait a small delay to make the last shot sound more natural after the regular shot sound
-                        playSoundForAllUsers(sfxConfig.lastShotSFX, 5);
+                    playSoundForAllUsers(sfxConfig.lastShotSFX, 5);
                 }
 
                 // if we have a special ammo cycling mechanism, play ammoCycleSfx now
