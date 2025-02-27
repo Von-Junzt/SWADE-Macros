@@ -1,5 +1,6 @@
 import {animationData} from "../../lib/animationData.js";
 import {sfxData} from "../../lib/sfxData.js";
+import {createChatMessage,playSoundForAllUsers} from "../helpers/helpers.js";
 
 /**
  * Play firing sound and animation for the given weapon
@@ -10,7 +11,7 @@ import {sfxData} from "../../lib/sfxData.js";
 export async function repeatingWeapon(br_message, weaponType) {
     // item and roll setup
     const usedShots = br_message.render_data?.used_shots; // the used shots for the roll
-    const diceRolls = br_message.trait_roll?.rolls[0]?.dice; // how many dice rolls we have
+    const diceRolls = br_message.trait_roll?.rolls[br_message.trait_roll.rolls.length - 1]?.dice // allways use the most recent roll
     const sourceToken = br_message.token; // the token that rolled the item
     const targets = Array.from(game.user.targets); // the targets of the roll
     const item = br_message.item; // the rolled item
@@ -269,11 +270,8 @@ async function getWeaponSfxConfig(item) {
  * @returns {Promise<void>}
  */
 export async function playWeaponReloadSfx(item) {
-    ChatMessage.create({
-        content: `<strong>${item.parent.name}</strong> reloaded his weapon; <strong>${item.name}</strong>.`,
-        whisper: [], // An empty whisper array means the message is sent to all users
-        blind: false // Ensure the message is visible to all
-    });
+    const msgText = `<strong>${item.parent.name}</strong> reloaded his weapon; <strong>${item.name}</strong>.`
+    await createChatMessage(msgText);
 
     const sfxConfig = await getWeaponSfxConfig(item)|| item.getFlag('swim', 'config');
     const sfxToPlay = sfxConfig.reloadSFX || "";
@@ -282,24 +280,6 @@ export async function playWeaponReloadSfx(item) {
     }
     // Play the sound
     await playSoundForAllUsers(sfxToPlay);
-}
-
-/**
- * Play a sound for all users
- * @param file
- * @param delay
- * @returns {Promise<void>}
- */
-async function playSoundForAllUsers(file, delay) {
-    // get all the active user ids
-    const delayIntervall = delay || 0;
-    const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
-    await new Sequence()
-        .sound()
-        .file(file)
-        .forUsers(activeUserIds)
-        .delay(delayIntervall)
-        .play();
 }
 
 /**
