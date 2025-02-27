@@ -40,8 +40,9 @@ Hooks.on('BRSW-RollItem', async (br_message, html) => {
         }
     }
     // check if the player has rolled a natural 1, when using a power (sprawlrunners specific rule)
-    if((item.type === 'power')) {
-        await backlashCheck(br_message.trait_roll?.rolls[br_message.trait_roll.rolls.length - 1]?.dice, br_message.actor);
+    if((item.type === 'power') && ! (!br_message.trait_roll?.current_roll?.is_fumble)) {
+        console.log(br_message);
+        await backlashCheck(br_message.trait_roll?.current_roll?.dice, br_message.actor);
     }
 });
 

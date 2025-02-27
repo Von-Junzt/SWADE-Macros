@@ -11,7 +11,7 @@ import {createChatMessage,playSoundForAllUsers} from "../helpers/helpers.js";
 export async function repeatingWeapon(br_message, weaponType) {
     // item and roll setup
     const usedShots = br_message.render_data?.used_shots; // the used shots for the roll
-    const diceRolls = br_message.trait_roll?.rolls[br_message.trait_roll.rolls.length - 1]?.dice // allways use the most recent roll
+    const diceRolls = br_message.trait_roll?.current_roll?.dice // allways use the most recent roll
     const sourceToken = br_message.token; // the token that rolled the item
     const targets = Array.from(game.user.targets); // the targets of the roll
     const item = br_message.item; // the rolled item
