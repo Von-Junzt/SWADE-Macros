@@ -144,7 +144,7 @@ export async function repeatingWeapon(br_message, weaponType) {
                 // if this is the last shot in the magazine, we test if there is an extra sfx specified for the last shot (e.g. M1 Garand)
                 if(originalShots - shotsFired === 0 && sfxConfig.lastShotSFX) {
                     // Wait a small delay to make the last shot sound more natural after the regular shot sound
-                        playSoundForAllUsers(sfxConfig.lastShotSFX, 15);
+                        playSoundForAllUsers(sfxConfig.lastShotSFX, 5);
                 }
 
                 // if we have a special ammo cycling mechanism, play ammoCycleSfx now
@@ -169,7 +169,7 @@ export async function repeatingWeapon(br_message, weaponType) {
 
                 // casing Sfx
                 if(casingDropSfx) {
-                    playSoundForAllUsers(casingDropSfx, casingDropSfxDelay);
+                    playSoundForAllUsers(getRandomShellDropSound(casingDropSfx), casingDropSfxDelay);
                 }
 
                 // delay between shots
@@ -328,4 +328,19 @@ function validateTargetsAndShots(targets, filteredDice, usedShots, originalShots
     }
 
     return true;
+}
+
+/**
+ * Get the random shell drop sound
+ * @param baseSoundPath
+ * @returns {string}
+ */
+function getRandomShellDropSound(baseSoundPath) {
+    // Extract the base path by removing the _01.wav (or similar) ending
+    const basePath = baseSoundPath.replace(/_0\d\.\w+$/, '');
+    // Generate random number between 1-3
+    const randomSuffix = Math.floor(Math.random() * 3) + 1;
+    // Construct the new path with random suffix
+    const fileExtension = baseSoundPath.split('.').pop();
+    return `${basePath}_0${randomSuffix}.${fileExtension}`;
 }
