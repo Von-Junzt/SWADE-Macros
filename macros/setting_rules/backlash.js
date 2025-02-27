@@ -1,5 +1,11 @@
 import {createChatMessage, playSoundForAllUsers} from "../helpers/helpers.js";
 
+/**
+ * Adds backlash for a natural 1 on a trait die, modifying the original SWADE backlash rule.
+ * @param dice
+ * @param actor
+ * @returns {Promise<void>}
+ */
 export async function backlashCheck(dice, actor) {
 
     // check if any dice with label === "Trait Die" have raw_total === 1
@@ -24,8 +30,5 @@ export async function backlashCheck(dice, actor) {
             }
             game.succ.toggleCondition('incapacitated', actor.token);
         }
-
-
-
     }
 }
