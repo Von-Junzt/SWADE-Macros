@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="fixed missing file endings, extended bolt_action.ogg">
-      <change beforePath="$PROJECT_DIR$/assets/sfx/weapons_general/bolt_action.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sfx/weapons_general/bolt_action.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
-    </list>
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="disabled debug" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -129,15 +126,7 @@
       <workItem from="1740653093549" duration="12565000" />
       <workItem from="1740696200928" duration="22000" />
       <workItem from="1740696239571" duration="235000" />
-      <workItem from="1740734265537" duration="13308000" />
-    </task>
-    <task id="LOCAL-00023" summary="added animationData.js to make animation data more configurable and readable">
-      <option name="closed" value="true" />
-      <created>1740240561733</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1740240561733</updated>
+      <workItem from="1740734265537" duration="13795000" />
     </task>
     <task id="LOCAL-00024" summary="added animationData.js to make animation data more configurable and readable">
       <option name="closed" value="true" />
@@ -523,7 +512,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740784260858</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="disabled debug">
+      <option name="closed" value="true" />
+      <created>1740784341613</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1740784341613</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -550,6 +547,7 @@
     <MESSAGE value="added assault cannons" />
     <MESSAGE value="added random fire sfx variations" />
     <MESSAGE value="fixed missing file endings, extended bolt_action.ogg" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed missing file endings, extended bolt_action.ogg" />
+    <MESSAGE value="disabled debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="disabled debug" />
   </component>
 </project>
