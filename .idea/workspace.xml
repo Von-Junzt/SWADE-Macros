@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added assault cannons">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="fixed missing file endings, extended bolt_action.ogg">
+      <change beforePath="$PROJECT_DIR$/assets/sfx/weapons_general/bolt_action.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sfx/weapons_general/bolt_action.ogg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/animations/repeatingWeapon.js" beforeDir="false" afterPath="$PROJECT_DIR$/macros/animations/repeatingWeapon.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,23 +129,7 @@
       <workItem from="1740653093549" duration="12565000" />
       <workItem from="1740696200928" duration="22000" />
       <workItem from="1740696239571" duration="235000" />
-      <workItem from="1740734265537" duration="12683000" />
-    </task>
-    <task id="LOCAL-00021" summary="added animationData.js to make animation data more configurable and readable">
-      <option name="closed" value="true" />
-      <created>1740235447091</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1740235447091</updated>
-    </task>
-    <task id="LOCAL-00022" summary="added animationData.js to make animation data more configurable and readable">
-      <option name="closed" value="true" />
-      <created>1740236479522</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1740236479522</updated>
+      <workItem from="1740734265537" duration="13308000" />
     </task>
     <task id="LOCAL-00023" summary="added animationData.js to make animation data more configurable and readable">
       <option name="closed" value="true" />
@@ -524,7 +507,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740780516943</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="added random fire sfx variations">
+      <option name="closed" value="true" />
+      <created>1740783733492</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1740783733492</updated>
+    </task>
+    <task id="LOCAL-00071" summary="fixed missing file endings, extended bolt_action.ogg">
+      <option name="closed" value="true" />
+      <created>1740784260858</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1740784260858</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -549,6 +548,8 @@
     <MESSAGE value="added sound preloading" />
     <MESSAGE value="added machine guns" />
     <MESSAGE value="added assault cannons" />
-    <option name="LAST_COMMIT_MESSAGE" value="added assault cannons" />
+    <MESSAGE value="added random fire sfx variations" />
+    <MESSAGE value="fixed missing file endings, extended bolt_action.ogg" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed missing file endings, extended bolt_action.ogg" />
   </component>
 </project>

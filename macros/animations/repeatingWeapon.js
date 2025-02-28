@@ -193,7 +193,7 @@ export async function repeatingWeapon(br_message, weaponType) {
     // Execute the function
     await playAutoWeaponAnimation();
 
-    if(true) {
+    if(false) {
         const debugObject = {
             // Message and Roll Data
             usedShots,
