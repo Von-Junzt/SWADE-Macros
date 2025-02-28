@@ -74,6 +74,9 @@ export async function repeatingWeapon(br_message, weaponType) {
     const ammoCycleSfx = sfxConfig.ammoCycleSfx;
     const ammoCycleSfxDelay = sfxConfig.ammoCycleSfxDelay;
 
+    // We need to preload the fireSFX because if not the shot delay is not correct between the first two shots
+    await Sequencer.Preloader.preloadForClients(sfxToPlay);
+
     // if we are set now, we can set the animation data
     // let's get the correct rate of fire for the weapon to make it feel faster/slower and calculate the delay
     // to simulate mechanics like pump action, assault cannons that take significantly more time between shots, etc.
@@ -84,9 +87,6 @@ export async function repeatingWeapon(br_message, weaponType) {
     const casingAnimationDelay = animationData[weaponType].casingAnimationDelay; // the delay before the casing is ejected, e.g. pump action
     const casingImage = animationData[weaponType].casingImage; // the image of the casing
     const casingSize = animationData[weaponType].casingSize; // the size of the casing
-
-    // We need to preload the fireSFX because if not the shot delay is not correct between the first two shots
-    await Sequencer.Preloader.preloadForClients(sfxToPlay);
 
     // If there are as many usedShots as the hitArray length, play the animation for each target and update the source
     // token rotation, if there are less dice, repeat it for usedShots
