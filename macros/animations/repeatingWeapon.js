@@ -85,6 +85,9 @@ export async function repeatingWeapon(br_message, weaponType) {
     const casingImage = animationData[weaponType].casingImage; // the image of the casing
     const casingSize = animationData[weaponType].casingSize; // the size of the casing
 
+    // We need to preload the fireSFX because if not the shot delay is not correct between the first two shots
+    await Sequencer.Preloader.preloadForClients(sfxToPlay);
+
     // If there are as many usedShots as the hitArray length, play the animation for each target and update the source
     // token rotation, if there are less dice, repeat it for usedShots
     async function playAutoWeaponAnimation() {
