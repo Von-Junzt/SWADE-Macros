@@ -20,7 +20,9 @@ Hooks.once('ready', () => {
     };
 });
 
-
+/**
+ * initiate weapon animation and check for backlash
+ */
 Hooks.on('BRSW-RollItem', async (br_message, html) => {
     const item = br_message.item;
     // check if item is a weapon and if it's included in the animationData

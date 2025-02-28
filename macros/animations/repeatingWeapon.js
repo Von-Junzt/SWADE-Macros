@@ -75,7 +75,14 @@ export async function repeatingWeapon(br_message, weaponType) {
     const ammoCycleSfxDelay = sfxConfig.ammoCycleSfxDelay;
 
     // We need to preload the fireSFX because if not the shot delay is not correct between the first two shots
-    await Sequencer.Preloader.preloadForClients(sfxToPlay);
+    const preloadSFXArray = [
+        sfxToPlay,
+        casingDropSfx,
+        sfxConfig.emptySFX,
+        sfxConfig.lastShotSFX,
+        ammoCycleSfx
+    ].filter(sound => sound !== undefined && sound !== null && sound !== ""); // we don't want to preload empty sounds
+    await Sequencer.Preloader.preloadForClients(preloadSFXArray);
 
     // if we are set now, we can set the animation data
     // let's get the correct rate of fire for the weapon to make it feel faster/slower and calculate the delay
