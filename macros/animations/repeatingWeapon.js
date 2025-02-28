@@ -76,12 +76,12 @@ export async function repeatingWeapon(br_message, weaponType) {
 
     // We need to preload the fireSFX because if not the shot delay is not correct between the first two shots
     const preloadSFXArray = [
-        sfxToPlay,
+        ...(Array.isArray(sfxToPlay) ? sfxToPlay : [sfxToPlay]),
         casingDropSfx,
         sfxConfig.emptySFX,
         sfxConfig.lastShotSFX,
         ammoCycleSfx
-    ].filter(sound => sound !== undefined && sound !== null && sound !== ""); // we don't want to preload empty sounds
+    ].filter(sound => sound !== undefined && sound !== null && sound !== "");
     await Sequencer.Preloader.preloadForClients(preloadSFXArray);
 
     // if we are set now, we can set the animation data
@@ -134,12 +134,12 @@ export async function repeatingWeapon(br_message, weaponType) {
             // Create sequence for each shot at this target
             for (const isHit of targetHits) {
                 // shot sfx
-                playSoundForAllUsers(sfxToPlay);
+                playSoundForAllUsers(getRandomFireSound(sfxToPlay));
+
+                // add shotFired
                 shotsFired++;
-                // animation alternative:
-                // .moveTowards(target)
-                // .moveSpeed(projectileVelocity)
-                // seems to work but doesn't look that good without tweaking
+
+                // play the shot animation
                 if(shotAnimation) {
                     new Sequence()
                         .effect()
@@ -333,4 +333,17 @@ function getRandomShellDropSound(baseSoundPath) {
     // Construct the new path with random suffix
     const fileExtension = baseSoundPath.split('.').pop();
     return `${basePath}_0${randomSuffix}.${fileExtension}`;
+}
+
+/**
+ * Gets a random firing sound from either a single sound or array of sounds
+ * @param {string|string[]} fireSounds - Single sound path or array of sound paths
+ * @returns {string} - The selected sound path
+ */
+function getRandomFireSound(fireSounds) {
+    if (Array.isArray(fireSounds)) {
+        const randomIndex = Math.floor(Math.random() * fireSounds.length);
+        return fireSounds[randomIndex];
+    }
+    return fireSounds;
 }
