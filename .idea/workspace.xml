@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="transparent weapon images">
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added multiple guns">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/gfx/weapons/sporting_rifles/m1_garand.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/gfx/weapons/sporting_rifles/m1_garand.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/gfx/weapons/sporting_rifles/marlin_3468SS.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/gfx/weapons/sporting_rifles/marlin_3468SS.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/gfx/weapons/sporting_rifles/marlin_x71.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/gfx/weapons/sporting_rifles/marlin_x71.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/gfx/weapons/sporting_rifles/springfield_2003.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/gfx/weapons/sporting_rifles/springfield_2003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/gfx/weapons/pistols/streetline_special_small.webp" beforeDir="false" afterPath="$PROJECT_DIR$/assets/gfx/weapons/pistols/streetline_special_small.webp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -135,15 +132,7 @@
       <workItem from="1740696239571" duration="235000" />
       <workItem from="1740734265537" duration="13795000" />
       <workItem from="1740784865080" duration="12000" />
-      <workItem from="1740830633063" duration="6841000" />
-    </task>
-    <task id="LOCAL-00028" summary="added animationData.js to make animation data more configurable and readable">
-      <option name="closed" value="true" />
-      <created>1740265241636</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1740265241636</updated>
+      <workItem from="1740830633063" duration="8170000" />
     </task>
     <task id="LOCAL-00029" summary="added animationData.js to make animation data more configurable and readable">
       <option name="closed" value="true" />
@@ -529,7 +518,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740843690142</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="added multiple guns">
+      <option name="closed" value="true" />
+      <created>1740851383163</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1740851383163</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -559,6 +556,7 @@
     <MESSAGE value="disabled debug" />
     <MESSAGE value="added weapons" />
     <MESSAGE value="transparent weapon images" />
-    <option name="LAST_COMMIT_MESSAGE" value="transparent weapon images" />
+    <MESSAGE value="added multiple guns" />
+    <option name="LAST_COMMIT_MESSAGE" value="added multiple guns" />
   </component>
 </project>
