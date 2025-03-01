@@ -6,11 +6,24 @@
 
 export async function toggleDuckingEffect(tokenDocument) {
     if (!game.user.isGM) return;
-    const token = canvas.tokens.get(tokenDocument.id);
 
-    if (!game.modules.get('succ')?.active) {
-        ui.notifications.error("You cannot execute this macro unless the SUCC module is active.");
-        return;
+    const token = canvas.tokens.get(tokenDocument.id);
+    const existingDuckingEffect = token.actor.effects.find(e => e.name === "Ducking");
+
+    if (token.document.flags?.levelsautocover?.ducking) {
+        if (!existingDuckingEffect) {
+            // Batch the updates into a single operation
+            if (!game.modules.get('succ')?.active) {
+                ui.notifications.error("You cannot execute this macro unless the SUCC module is active.");
+                return;
+            }
+            game.succ.addCondition('SKDpVPMxzY2vCeEJ', token);
+        }
+    } else {
+        if (!game.modules.get('succ')?.active) {
+            ui.notifications.error("You cannot execute this macro unless the SUCC module is active.");
+            return;
+        }
+        game.succ.removeCondition('SKDpVPMxzY2vCeEJ', token);
     }
-    game.succ.toggleCondition('SKDpVPMxzY2vCeEJ', token);
 }
