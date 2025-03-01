@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added ducking effect to make the canvas more readable">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added several guns">
       <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -133,15 +132,7 @@
       <workItem from="1740734265537" duration="13795000" />
       <workItem from="1740784865080" duration="12000" />
       <workItem from="1740830633063" duration="11196000" />
-      <workItem from="1740868632249" duration="895000" />
-    </task>
-    <task id="LOCAL-00033" summary="images">
-      <option name="closed" value="true" />
-      <created>1740321301380</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1740321301380</updated>
+      <workItem from="1740868632249" duration="1220000" />
     </task>
     <task id="LOCAL-00034" summary="images">
       <option name="closed" value="true" />
@@ -527,14 +518,21 @@
       <option name="project" value="LOCAL" />
       <updated>1740868067585</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="added several guns">
+      <option name="closed" value="true" />
+      <created>1740869553916</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1740869553916</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initial Commit" />
     <MESSAGE value="added await to make shure usedshots is setup correctly" />
     <MESSAGE value="comments" />
     <MESSAGE value="added reloading sounds" />
@@ -559,6 +557,7 @@
     <MESSAGE value="transparent weapon images" />
     <MESSAGE value="added multiple guns" />
     <MESSAGE value="added ducking effect to make the canvas more readable" />
-    <option name="LAST_COMMIT_MESSAGE" value="added ducking effect to make the canvas more readable" />
+    <MESSAGE value="added several guns" />
+    <option name="LAST_COMMIT_MESSAGE" value="added several guns" />
   </component>
 </project>
