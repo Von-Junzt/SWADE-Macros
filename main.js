@@ -2,6 +2,7 @@ import {sfxData} from "./lib/sfxData.js";
 import {animationData} from "./lib/animationData.js";
 import {repeatingWeapon, playWeaponReloadSfx} from "./macros/animations/repeatingWeapon.js";
 import {backlashCheck} from "./macros/setting_rules/backlash.js";
+import {toggleDuckingEffect} from "./macros/effects/toggleDuckingEffect.js";
 
 /**
  * Initialize the module
@@ -19,6 +20,11 @@ Hooks.once('ready', () => {
         sfxData
     };
 });
+
+/**
+ *
+ */
+Hooks.on("updateToken", toggleDuckingEffect);
 
 /**
  * initiate weapon animation and check for backlash
