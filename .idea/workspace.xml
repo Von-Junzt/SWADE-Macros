@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="disabled debug" />
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="disabled debug">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -127,14 +130,8 @@
       <workItem from="1740696200928" duration="22000" />
       <workItem from="1740696239571" duration="235000" />
       <workItem from="1740734265537" duration="13795000" />
-    </task>
-    <task id="LOCAL-00024" summary="added animationData.js to make animation data more configurable and readable">
-      <option name="closed" value="true" />
-      <created>1740250236329</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1740250236329</updated>
+      <workItem from="1740784865080" duration="12000" />
+      <workItem from="1740830633063" duration="2691000" />
     </task>
     <task id="LOCAL-00025" summary="added animationData.js to make animation data more configurable and readable">
       <option name="closed" value="true" />
@@ -520,7 +517,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740784341613</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="disabled debug">
+      <option name="closed" value="true" />
+      <created>1740784872034</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1740784872034</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
