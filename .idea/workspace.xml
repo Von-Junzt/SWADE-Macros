@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="disabled debug">
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added weapons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
     </list>
@@ -131,23 +131,7 @@
       <workItem from="1740696239571" duration="235000" />
       <workItem from="1740734265537" duration="13795000" />
       <workItem from="1740784865080" duration="12000" />
-      <workItem from="1740830633063" duration="2691000" />
-    </task>
-    <task id="LOCAL-00025" summary="added animationData.js to make animation data more configurable and readable">
-      <option name="closed" value="true" />
-      <created>1740251544531</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1740251544531</updated>
-    </task>
-    <task id="LOCAL-00026" summary="added animationData.js to make animation data more configurable and readable">
-      <option name="closed" value="true" />
-      <created>1740259514659</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1740259514659</updated>
+      <workItem from="1740830633063" duration="3962000" />
     </task>
     <task id="LOCAL-00027" summary="added animationData.js to make animation data more configurable and readable">
       <option name="closed" value="true" />
@@ -525,7 +509,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740784872034</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="added weapons">
+      <option name="closed" value="true" />
+      <created>1740839416134</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1740839416134</updated>
+    </task>
+    <task id="LOCAL-00075" summary="added weapons">
+      <option name="closed" value="true" />
+      <created>1740839426864</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1740839426864</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -553,6 +553,7 @@
     <MESSAGE value="added random fire sfx variations" />
     <MESSAGE value="fixed missing file endings, extended bolt_action.ogg" />
     <MESSAGE value="disabled debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="disabled debug" />
+    <MESSAGE value="added weapons" />
+    <option name="LAST_COMMIT_MESSAGE" value="added weapons" />
   </component>
 </project>
