@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="updated compendiums" />
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="updated compendiums">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -133,14 +136,7 @@
       <workItem from="1740868632249" duration="2285000" />
       <workItem from="1740871039286" duration="217000" />
       <workItem from="1740910398581" duration="1854000" />
-    </task>
-    <task id="LOCAL-00039" summary="comment">
-      <option name="closed" value="true" />
-      <created>1740420985888</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1740420985888</updated>
+      <workItem from="1740939706293" duration="3343000" />
     </task>
     <task id="LOCAL-00040" summary="comment">
       <option name="closed" value="true" />
@@ -526,7 +522,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740939087039</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="updated compendiums">
+      <option name="closed" value="true" />
+      <created>1740939726957</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1740939726957</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -559,5 +563,17 @@
     <MESSAGE value="changed m1 garand sounds" />
     <MESSAGE value="updated compendiums" />
     <option name="LAST_COMMIT_MESSAGE" value="updated compendiums" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/lib/sfxData.js</url>
+          <line>239</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
