@@ -134,14 +134,7 @@
       <workItem from="1740871039286" duration="217000" />
       <workItem from="1740910398581" duration="1854000" />
       <workItem from="1740939706293" duration="3959000" />
-    </task>
-    <task id="LOCAL-00041" summary="comment">
-      <option name="closed" value="true" />
-      <created>1740424295311</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1740424295311</updated>
+      <workItem from="1740957050523" duration="147000" />
     </task>
     <task id="LOCAL-00042" summary="comment">
       <option name="closed" value="true" />
@@ -527,7 +520,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740955114670</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="added guns">
+      <option name="closed" value="true" />
+      <created>1740957188463</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1740957188463</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -567,7 +568,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/lib/sfxData.js</url>
           <line>239</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
