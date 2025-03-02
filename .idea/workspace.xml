@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="updated compendiums">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
-    </list>
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added guns" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -136,15 +133,7 @@
       <workItem from="1740868632249" duration="2285000" />
       <workItem from="1740871039286" duration="217000" />
       <workItem from="1740910398581" duration="1854000" />
-      <workItem from="1740939706293" duration="3343000" />
-    </task>
-    <task id="LOCAL-00040" summary="comment">
-      <option name="closed" value="true" />
-      <created>1740422905116</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1740422905116</updated>
+      <workItem from="1740939706293" duration="3959000" />
     </task>
     <task id="LOCAL-00041" summary="comment">
       <option name="closed" value="true" />
@@ -530,14 +519,21 @@
       <option name="project" value="LOCAL" />
       <updated>1740939726957</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="added guns">
+      <option name="closed" value="true" />
+      <created>1740955114670</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1740955114670</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added reloading sounds" />
     <MESSAGE value="added reloading sounds and notifications" />
     <MESSAGE value="added animationData.js to make animation data more configurable and readable" />
     <MESSAGE value="images" />
@@ -562,7 +558,8 @@
     <MESSAGE value="added several guns" />
     <MESSAGE value="changed m1 garand sounds" />
     <MESSAGE value="updated compendiums" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated compendiums" />
+    <MESSAGE value="added guns" />
+    <option name="LAST_COMMIT_MESSAGE" value="added guns" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
