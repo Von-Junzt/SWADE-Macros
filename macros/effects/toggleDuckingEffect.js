@@ -9,8 +9,14 @@ export async function toggleDuckingEffect(tokenDocument) {
 
     const token = canvas.tokens.get(tokenDocument.id);
     const existingDuckingEffect = token.actor.effects.find(e => e.name === "Ducking");
+    const existingProneEffect = token.actor.effects.find(e => e.name === "Prone");
 
     if (token.document.flags?.levelsautocover?.ducking) {
+        if (existingProneEffect) {
+            ui.notifications.warn("You cannot apply both Ducking and Prone effects at the same time.");
+            return;
+        }
+
         if (!existingDuckingEffect) {
             // Batch the updates into a single operation
             if (!game.modules.get('succ')?.active) {
