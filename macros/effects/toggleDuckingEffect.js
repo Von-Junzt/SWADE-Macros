@@ -16,7 +16,6 @@ export async function toggleDuckingEffect(tokenDocument) {
             ui.notifications.warn("You cannot apply both Ducking and Prone effects at the same time.");
             return;
         }
-
         if (!existingDuckingEffect) {
             // Batch the updates into a single operation
             if (!game.modules.get('succ')?.active) {
