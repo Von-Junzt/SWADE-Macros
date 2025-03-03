@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added guns">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/gfx/weapons/submachine_guns/ak87su.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/gfx/weapons/submachine_guns/ak87su.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/gfx/weapons/submachine_guns/ak87su_small.webp" beforeDir="false" afterPath="$PROJECT_DIR$/assets/gfx/weapons/submachine_guns/ak87su_small.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,23 +138,7 @@
       <workItem from="1740939706293" duration="3959000" />
       <workItem from="1740957050523" duration="147000" />
       <workItem from="1740957711472" duration="13000" />
-      <workItem from="1740985546734" duration="721000" />
-    </task>
-    <task id="LOCAL-00043" summary="play sounds for all users with sequencer">
-      <option name="closed" value="true" />
-      <created>1740493458125</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1740493458125</updated>
-    </task>
-    <task id="LOCAL-00044" summary="used token.center correctly">
-      <option name="closed" value="true" />
-      <created>1740509367862</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1740509367862</updated>
+      <workItem from="1740985546734" duration="1770000" />
     </task>
     <task id="LOCAL-00045" summary="used token.center correctly">
       <option name="closed" value="true" />
@@ -535,7 +516,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740957719582</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="added guns">
+      <option name="closed" value="true" />
+      <created>1740989178488</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1740989178488</updated>
+    </task>
+    <task id="LOCAL-00093" summary="added guns">
+      <option name="closed" value="true" />
+      <created>1740993424976</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1740993424976</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -574,7 +571,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/lib/sfxData.js</url>
-          <line>174</line>
+          <line>176</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
