@@ -140,15 +140,7 @@
       <workItem from="1740957050523" duration="147000" />
       <workItem from="1740957711472" duration="13000" />
       <workItem from="1740985546734" duration="1770000" />
-      <workItem from="1740997264600" duration="1190000" />
-    </task>
-    <task id="LOCAL-00046" summary="used token.center correctly">
-      <option name="closed" value="true" />
-      <created>1740523014953</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1740523014953</updated>
+      <workItem from="1740997264600" duration="2486000" />
     </task>
     <task id="LOCAL-00047" summary="used token.center correctly">
       <option name="closed" value="true" />
@@ -534,7 +526,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740997275032</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="added guns">
+      <option name="closed" value="true" />
+      <created>1740998746863</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1740998746863</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -573,7 +573,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/lib/sfxData.js</url>
-          <line>191</line>
+          <line>175</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
