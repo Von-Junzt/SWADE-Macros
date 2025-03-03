@@ -36,7 +36,7 @@ export async function repeatingWeapon(br_message, weaponType) {
     let hitArray = filteredDice.map(die => die.result_text !== "Failure");
 
     // Validate targets and shots - early exit if validation fails
-    if (!validateTargetsAndShots(targets, filteredDice, usedShots, originalShots)) {
+    if (!validateTargetsAndShots(targets, filteredDice, usedShots, originalShots, sourceToken)) {
         return false;
     }
 
@@ -141,15 +141,30 @@ export async function repeatingWeapon(br_message, weaponType) {
 
                 // play the shot animation
                 if(shotAnimation) {
-                    new Sequence()
-                        .effect()
-                        .atLocation(muzzleFlashPoint)
-                        .stretchTo(target)
-                        .file(shotAnimation)
-                        .playbackRate(projectileVelocity)
-                        .scale(projectileSize)
-                        .missed(!isHit)
-                        .play()
+                    let seq = new Sequence();
+
+                    // if the weapon is silenced, don't play the muzzle flash
+                    if (!isSilenced) {
+                        seq.effect()
+                            .file("modules/vjpmacros/assets/gfx/projectiles/muzzle_flash_2.webp")
+                            .atLocation(muzzleFlashPoint)
+                            .scale(.5)
+                            .rotateTowards(target)
+                            .spriteRotation(ray.angle)
+                            .playbackRate(30);
+                    }
+
+                    // animate projectile
+                    seq.effect()
+                    .file("modules/vjpmacros/assets/gfx/projectiles/bullet_effect_200.webp")
+                    .atLocation(muzzleFlashPoint)
+                    .moveTowards(target)
+                    .moveSpeed(projectileVelocity)
+                    .scale(projectileSize)
+                    .missed(!isHit);
+
+                    // play sequence
+                    seq.play();
                 }
 
                 // if this is the last shot in the magazine, we test if there is an extra sfx specified for the last shot (e.g. M1 Garand)
@@ -300,7 +315,11 @@ export async function playWeaponReloadSfx(item) {
  * @param originalShots
  * @returns {boolean}
  */
-function validateTargetsAndShots(targets, filteredDice, usedShots, originalShots) {
+function validateTargetsAndShots(targets, filteredDice, usedShots, originalShots, sourceToken) {
+    if (targets.some(target => target === sourceToken)) {
+        console.error("You can't target yourself.");
+        return false;
+    }
     if (targets.length === 0) {
         console.error("No targets selected.");
         return false;
