@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added guns">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,15 +139,7 @@
       <workItem from="1740957050523" duration="147000" />
       <workItem from="1740957711472" duration="13000" />
       <workItem from="1740985546734" duration="1770000" />
-      <workItem from="1740997264600" duration="2486000" />
-    </task>
-    <task id="LOCAL-00047" summary="used token.center correctly">
-      <option name="closed" value="true" />
-      <created>1740524859378</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1740524859378</updated>
+      <workItem from="1740997264600" duration="2990000" />
     </task>
     <task id="LOCAL-00048" summary="used token.center correctly">
       <option name="closed" value="true" />
@@ -534,7 +525,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740998746863</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="added guns">
+      <option name="closed" value="true" />
+      <created>1741000141073</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1741000141073</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
