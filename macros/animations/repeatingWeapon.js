@@ -317,10 +317,12 @@ export async function playWeaponReloadSfx(item) {
  */
 function validateTargetsAndShots(targets, filteredDice, usedShots, originalShots, sourceToken) {
     if (targets.some(target => target === sourceToken)) {
+        ui.notifications.error("You can't target yourself.");
         console.error("You can't target yourself.");
         return false;
     }
     if (targets.length === 0) {
+        ui.notifications.error("No targets selected.");
         console.error("No targets selected.");
         return false;
     }
