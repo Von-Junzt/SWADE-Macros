@@ -14,7 +14,8 @@ Hooks.once('init', function() {
 /**
  * Setup objects to be available directly in Foundry
  */
-Hooks.once('ready', () => {
+Hooks.once('ready', async () => {
+    // Add the animationData and sfxData to the game object
     game.vjpmacros = {
         animationData,
         sfxData

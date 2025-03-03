@@ -84,6 +84,20 @@ export async function repeatingWeapon(br_message, weaponType) {
     ].filter(sound => sound !== undefined && sound !== null && sound !== "");
     await Sequencer.Preloader.preloadForClients(preloadSFXArray);
 
+    // Check if there are any misses in the hitArray
+    if (hitArray.includes(false)) {
+        // If there are misses, preload all ricochet sounds
+        const ricochetSounds = Array.from({length: 10}, (_, i) => {
+            const num = i + 1;
+            const formattedNum = num < 10 ? `0${num}` : `${num}`;
+            return `modules/vjpmacros/assets/sfx/ricochets/ricochet_${formattedNum}.ogg`;
+        });
+
+        preloadSFXArray.push(...ricochetSounds);
+    }
+
+    await Sequencer.Preloader.preloadForClients(preloadSFXArray);
+
     // if we are set now, we can set the animation data
     // let's get the correct rate of fire for the weapon to make it feel faster/slower and calculate the delay
     // to simulate mechanics like pump action, assault cannons that take significantly more time between shots, etc.
@@ -113,17 +127,17 @@ export async function repeatingWeapon(br_message, weaponType) {
             const casingOffsetDistance = canvas.grid.size * 2;    // offset distance for shell casing ejection
 
             // Use ray.angle directly because token art faces right
-            const muzzleFlashPoint = await calculateOffsetpoint(sourceToken, ray.angle, muzzleFlashOffsetDistance);
+            const muzzleFlashPoint = calculateOffsetpoint(sourceToken, ray.angle, muzzleFlashOffsetDistance);
 
             // We want to eject the casings perpendicular to the tokens pointing direction. For this we need to
             // calculate a perpendicular array angle (ray.angle + π/2)
             const perpRayAngle = ray.angle + Math.PI / 2;
 
             // Compute the casings ejection point based on the token's center
-            const casingEjectPoint = await calculateOffsetpoint(sourceToken, ray.angle, casingEjectPointOffsetDistance);
+            const casingEjectPoint = calculateOffsetpoint(sourceToken, ray.angle, casingEjectPointOffsetDistance);
 
             // Compute the casings target point based on the token's center
-            const casingTargetPoint = await calculateOffsetpoint(sourceToken, perpRayAngle, casingOffsetDistance);
+            const casingTargetPoint = calculateOffsetpoint(sourceToken, perpRayAngle, casingOffsetDistance);
 
             // get all the active user ids
             const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
@@ -274,7 +288,7 @@ export async function repeatingWeapon(br_message, weaponType) {
  * @param offsetDistance
  * @returns {Promise<{x: *, y: *}>}
  */
-async function calculateOffsetpoint(token, rayAngle, offsetDistance) {
+function calculateOffsetpoint(token, rayAngle, offsetDistance) {
     return {
         x: token.center.x + Math.cos(rayAngle) * offsetDistance,
         y: token.center.y + Math.sin(rayAngle) * offsetDistance,
