@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added guns">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,14 +140,7 @@
       <workItem from="1740957050523" duration="147000" />
       <workItem from="1740957711472" duration="13000" />
       <workItem from="1740985546734" duration="1770000" />
-    </task>
-    <task id="LOCAL-00045" summary="used token.center correctly">
-      <option name="closed" value="true" />
-      <created>1740510027318</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1740510027318</updated>
+      <workItem from="1740997264600" duration="1190000" />
     </task>
     <task id="LOCAL-00046" summary="used token.center correctly">
       <option name="closed" value="true" />
@@ -532,7 +526,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740993424976</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="added guns">
+      <option name="closed" value="true" />
+      <created>1740997275032</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1740997275032</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -571,7 +573,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/lib/sfxData.js</url>
-          <line>176</line>
+          <line>191</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
