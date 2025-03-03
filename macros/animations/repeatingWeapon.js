@@ -167,6 +167,14 @@ export async function repeatingWeapon(br_message, weaponType) {
                     seq.play();
                 }
 
+                // if no hit, play random ricochet sfx with a 25% chance
+                if(!isHit) {
+                    // Generate random number between 0 and 1, if less than 0.25 (25% chance), play ricochet sound
+                    if(Math.random() < 0.25) {
+                        playSoundForAllUsers(getRandomRicochetSound());
+                    }
+                }
+
                 // if this is the last shot in the magazine, we test if there is an extra sfx specified for the last shot (e.g. M1 Garand)
                 if(originalShots - shotsFired === 0 && sfxConfig.lastShotSFX) {
                     // Wait a small delay to make the last shot sound more natural after the regular shot sound
@@ -367,4 +375,17 @@ function getRandomFireSound(fireSounds) {
         return fireSounds[randomIndex];
     }
     return fireSounds;
+}
+
+/**
+ * Gets a random ricochet sound
+ * @returns {string}
+ */
+function getRandomRicochetSound() {
+    // Generate random number between 1-10
+    const randomNumber = Math.floor(Math.random() * 10) + 1;
+    // Format the number with leading zero if needed
+    const formattedNumber = randomNumber < 10 ? `0${randomNumber}` : randomNumber;
+    // Return the complete path
+    return `modules/vjpmacros/assets/sfx/ricochets/ricochet_${formattedNumber}.ogg`;
 }
