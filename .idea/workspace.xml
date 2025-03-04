@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added small percentage (25%) for ricochet sounds if miss">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
-    </list>
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added new weapons" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -144,14 +141,7 @@
       <workItem from="1741017426817" duration="13878000" />
       <workItem from="1741040537211" duration="1576000" />
       <workItem from="1741122735003" duration="3403000" />
-    </task>
-    <task id="LOCAL-00057" summary="refactored code, added backlash check for sprawlrunners">
-      <option name="closed" value="true" />
-      <created>1740688657441</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1740688657441</updated>
+      <workItem from="1741126657112" duration="34000" />
     </task>
     <task id="LOCAL-00058" summary="refactored code, added backlash check for sprawlrunners">
       <option name="closed" value="true" />
@@ -537,14 +527,21 @@
       <option name="project" value="LOCAL" />
       <updated>1741042955879</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="added new weapons">
+      <option name="closed" value="true" />
+      <created>1741126670254</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1741126670254</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added animationData.js to make animation data more configurable and readable" />
     <MESSAGE value="images" />
     <MESSAGE value="comment" />
     <MESSAGE value="play sounds for all users with sequencer" />
@@ -569,7 +566,8 @@
     <MESSAGE value="updated compendiums" />
     <MESSAGE value="added guns" />
     <MESSAGE value="added small percentage (25%) for ricochet sounds if miss" />
-    <option name="LAST_COMMIT_MESSAGE" value="added small percentage (25%) for ricochet sounds if miss" />
+    <MESSAGE value="added new weapons" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new weapons" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
