@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="changed weapon imgs">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/gfx/weapons/pistols/remington_roomsweeper.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/gfx/weapons/pistols/remington_roomsweeper.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/gfx/weapons/pistols/remington_roomsweeper_small.webp" beforeDir="false" afterPath="$PROJECT_DIR$/assets/gfx/weapons/pistols/remington_roomsweeper_small.webp" afterDir="false" />
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added multiple weapons">
       <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -151,15 +148,7 @@
       <workItem from="1741165479035" duration="341000" />
       <workItem from="1741190757790" duration="535000" />
       <workItem from="1741274543559" duration="3716000" />
-      <workItem from="1741284720431" duration="4257000" />
-    </task>
-    <task id="LOCAL-00062" summary="refactored code, added backlash check for sprawlrunners">
-      <option name="closed" value="true" />
-      <created>1740734871198</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1740734871199</updated>
+      <workItem from="1741284720431" duration="4715000" />
     </task>
     <task id="LOCAL-00063" summary="added sound preloading">
       <option name="closed" value="true" />
@@ -545,14 +534,21 @@
       <option name="project" value="LOCAL" />
       <updated>1741287795174</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="added multiple weapons">
+      <option name="closed" value="true" />
+      <created>1741293437103</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1741293437103</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added m1 garand and possibility to play a lastShotSfx" />
     <MESSAGE value="added lever-action shotguns and rifles" />
     <MESSAGE value="added bolt action rifles" />
     <MESSAGE value="added a randomisation for casing drop sounds" />
@@ -577,14 +573,15 @@
     <MESSAGE value="fixed typo" />
     <MESSAGE value="changed ultamax hmg sound" />
     <MESSAGE value="changed weapon imgs" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed weapon imgs" />
+    <MESSAGE value="added multiple weapons" />
+    <option name="LAST_COMMIT_MESSAGE" value="added multiple weapons" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/lib/sfxData.js</url>
-          <line>234</line>
+          <line>237</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
