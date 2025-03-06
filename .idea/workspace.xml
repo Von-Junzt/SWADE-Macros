@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="updated compendium files">
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="fixed typo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
     </list>
@@ -146,15 +146,8 @@
       <workItem from="1741122735003" duration="3403000" />
       <workItem from="1741126657112" duration="34000" />
       <workItem from="1741126742074" duration="120000" />
-      <workItem from="1741165479035" duration="11000" />
-    </task>
-    <task id="LOCAL-00059" summary="refactored code, added backlash check for sprawlrunners">
-      <option name="closed" value="true" />
-      <created>1740690446207</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1740690446207</updated>
+      <workItem from="1741165479035" duration="341000" />
+      <workItem from="1741190757790" duration="535000" />
     </task>
     <task id="LOCAL-00060" summary="refactored code, added backlash check for sprawlrunners">
       <option name="closed" value="true" />
@@ -540,14 +533,21 @@
       <option name="project" value="LOCAL" />
       <updated>1741126775682</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="fixed typo">
+      <option name="closed" value="true" />
+      <created>1741165498594</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1741165498594</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="comment" />
     <MESSAGE value="play sounds for all users with sequencer" />
     <MESSAGE value="used token.center correctly" />
     <MESSAGE value="added m1 garand and possibility to play a lastShotSfx" />
@@ -572,7 +572,8 @@
     <MESSAGE value="added small percentage (25%) for ricochet sounds if miss" />
     <MESSAGE value="added new weapons" />
     <MESSAGE value="updated compendium files" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated compendium files" />
+    <MESSAGE value="fixed typo" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed typo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
