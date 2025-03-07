@@ -148,14 +148,7 @@
       <workItem from="1741274543559" duration="3716000" />
       <workItem from="1741284720431" duration="4715000" />
       <workItem from="1741296471509" duration="170000" />
-    </task>
-    <task id="LOCAL-00064" summary="added sound preloading">
-      <option name="closed" value="true" />
-      <created>1740735283445</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1740735283445</updated>
+      <workItem from="1741383257285" duration="281000" />
     </task>
     <task id="LOCAL-00065" summary="added machine guns">
       <option name="closed" value="true" />
@@ -541,7 +534,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741296507497</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="added multiple weapons">
+      <option name="closed" value="true" />
+      <created>1741383536169</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1741383536169</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -582,6 +583,12 @@
           <url>file://$PROJECT_DIR$/lib/sfxData.js</url>
           <line>237</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/lib/sfxData.js</url>
+          <line>387</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
