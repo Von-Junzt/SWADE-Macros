@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added multiple weapons">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added multiple weapons" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -152,15 +150,7 @@
       <workItem from="1741296471509" duration="170000" />
       <workItem from="1741383257285" duration="281000" />
       <workItem from="1741384143714" duration="626000" />
-      <workItem from="1741443076516" duration="701000" />
-    </task>
-    <task id="LOCAL-00067" summary="added assault cannons">
-      <option name="closed" value="true" />
-      <created>1740779067926</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1740779067926</updated>
+      <workItem from="1741443076516" duration="1315000" />
     </task>
     <task id="LOCAL-00068" summary="added assault cannons">
       <option name="closed" value="true" />
@@ -546,7 +536,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741384161196</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="added multiple weapons">
+      <option name="closed" value="true" />
+      <created>1741447526021</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1741447526023</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

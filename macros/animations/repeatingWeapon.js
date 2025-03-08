@@ -221,10 +221,10 @@ export async function repeatingWeapon(br_message, weaponType) {
                 }
 
                 // delay between shots
-                await new Promise(resolve => setTimeout(resolve, fireRateDelay));
+                await new Sequence().wait(fireRateDelay).play();
             }
             // delay between targets
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Sequence().wait(500).play();
         }
     }
     // Execute the function
