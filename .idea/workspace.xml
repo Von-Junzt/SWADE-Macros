@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added multiple weapons" />
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="changed grenade model" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -152,23 +152,7 @@
       <workItem from="1741384143714" duration="626000" />
       <workItem from="1741443076516" duration="1315000" />
       <workItem from="1741471474352" duration="1631000" />
-      <workItem from="1741528934830" duration="3702000" />
-    </task>
-    <task id="LOCAL-00072" summary="disabled debug">
-      <option name="closed" value="true" />
-      <created>1740784341613</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1740784341613</updated>
-    </task>
-    <task id="LOCAL-00073" summary="disabled debug">
-      <option name="closed" value="true" />
-      <created>1740784872034</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1740784872034</updated>
+      <workItem from="1741528934830" duration="4109000" />
     </task>
     <task id="LOCAL-00074" summary="added weapons">
       <option name="closed" value="true" />
@@ -546,14 +530,29 @@
       <option name="project" value="LOCAL" />
       <updated>1741532424373</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="changed grenade model">
+      <option name="closed" value="true" />
+      <created>1741535188157</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1741535188157</updated>
+    </task>
+    <task id="LOCAL-00122" summary="changed grenade model">
+      <option name="closed" value="true" />
+      <created>1741535210300</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1741535210300</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added lever-action shotguns and rifles" />
     <MESSAGE value="added bolt action rifles" />
     <MESSAGE value="added a randomisation for casing drop sounds" />
     <MESSAGE value="refactored code, added backlash check for sprawlrunners" />
@@ -578,7 +577,8 @@
     <MESSAGE value="changed ultamax hmg sound" />
     <MESSAGE value="changed weapon imgs" />
     <MESSAGE value="added multiple weapons" />
-    <option name="LAST_COMMIT_MESSAGE" value="added multiple weapons" />
+    <MESSAGE value="changed grenade model" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed grenade model" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
