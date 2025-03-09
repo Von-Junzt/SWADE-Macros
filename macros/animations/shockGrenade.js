@@ -1,3 +1,5 @@
+// noinspection JSAnnotator
+
 const sourceToken = args[1].sourceToken; // the token that rolled the item
 const lastTemplate = canvas.templates.placeables[canvas.templates.placeables.length - 1]; // the last template created
 const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
@@ -23,3 +25,13 @@ await new Sequence()
     .zIndex(2)
     .waitUntilFinished(-400)
     .play()
+
+if (!game.modules.get('succ')?.active) {
+    ui.notifications.error("You cannot execute the rest of this macro unless the SUCC module is active.");
+    return;
+}
+
+// Iterate through the targets Set
+for (const token of lastTemplate.targets) {
+    game.succ.addCondition('stunned', [token]);
+}
