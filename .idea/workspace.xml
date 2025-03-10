@@ -156,15 +156,7 @@
       <workItem from="1741443076516" duration="1315000" />
       <workItem from="1741471474352" duration="1631000" />
       <workItem from="1741528934830" duration="7827000" />
-      <workItem from="1741631325179" duration="1018000" />
-    </task>
-    <task id="LOCAL-00076" summary="transparent weapon images">
-      <option name="closed" value="true" />
-      <created>1740843690142</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1740843690142</updated>
+      <workItem from="1741631325179" duration="1968000" />
     </task>
     <task id="LOCAL-00077" summary="added multiple guns">
       <option name="closed" value="true" />
@@ -550,7 +542,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741632967988</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary="updated weapon and macro compendiums">
+      <option name="closed" value="true" />
+      <created>1741633870370</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1741633870370</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
