@@ -1,4 +1,5 @@
-import {weaponEnhancements, getEnhancementType} from "../../lib/weaponEnhancements.js";
+import {enhancementsData, getEnhancementType} from "../../lib/enhancementsData.js";
+import {playWeaponReloadSfx} from "../animations/repeatingWeapon.js";
 
 export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
     constructor(item) {
@@ -79,8 +80,8 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
         const listItems = enhancements.map((e, i) => {
             // Try to get the enhancement description if available
             let description = "No description available";
-            if (e.enhancementType && weaponEnhancements[e.enhancementType]) {
-                description = weaponEnhancements[e.enhancementType].description;
+            if (e.enhancementType && enhancementsData[e.enhancementType]) {
+                description = enhancementsData[e.enhancementType].description;
             }
 
             return `
@@ -131,8 +132,8 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
         enhancements.push(enhancement);
 
         // Apply the enhancement effect if it's a recognized type
-        if (enhancementType && weaponEnhancements[enhancementType]) {
-            const updatedData = weaponEnhancements[enhancementType].apply(item);
+        if (enhancementType && enhancementsData[enhancementType]) {
+            const updatedData = enhancementsData[enhancementType].apply(item);
             if (Object.keys(updatedData).length > 0) {
                 await item.update(updatedData);
             }
@@ -156,8 +157,8 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
         enhancements.splice(index, 1);
 
         // Revert the enhancement effect if it's a recognized type
-        if (enhancement.enhancementType && weaponEnhancements[enhancement.enhancementType]) {
-            const updatedData = weaponEnhancements[enhancement.enhancementType].remove(item);
+        if (enhancement.enhancementType && enhancementsData[enhancement.enhancementType]) {
+            const updatedData = enhancementsData[enhancement.enhancementType].remove(item);
             if (Object.keys(updatedData).length > 0) {
                 await item.update(updatedData);
             }
