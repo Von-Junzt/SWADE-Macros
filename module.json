@@ -18,7 +18,7 @@
   "packs": [
     {
       "name": "von-junzt-premade-items",
-      "label": "Von Junzt Premade Items",
+      "label": "Items",
       "path": "packs/von-junzt-premade-items",
       "type": "Item",
       "ownership": {
@@ -29,8 +29,32 @@
       "flags": {}
     },
     {
+      "name": "von-junzt-premade-weapons",
+      "label": "Weapons",
+      "path": "packs/von-junzt-premade-weapons",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "swade",
+      "flags": {}
+    },
+    {
+      "name": "von-junzt-premade-weapon-enhancements",
+      "label": "Weapon Enhancements",
+      "path": "packs/von-junzt-premade-weapon-enhancements",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "swade",
+      "flags": {}
+    },
+    {
       "name": "von-junzt-premade-macros",
-      "label": "Von Junzt Premade Macros",
+      "label": "Macros",
 
       "path": "packs/von-junzt-premade-macros",
       "type": "Macro",
@@ -49,6 +73,8 @@
       "color": "#3f8230",
       "packs": [
         "von-junzt-premade-items",
+        "von-junzt-premade-weapons",
+        "von-junzt-premade-weapon-enhancements",
         "von-junzt-premade-macros"
       ]
     }

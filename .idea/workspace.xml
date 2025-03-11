@@ -7,7 +7,7 @@
     <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added weapon modification system">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/enhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/enhancementsData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/module.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,15 +161,7 @@
       <workItem from="1741708768992" duration="1280000" />
       <workItem from="1741710460016" duration="7302000" />
       <workItem from="1741726781535" duration="107000" />
-      <workItem from="1741726897367" duration="6150000" />
-    </task>
-    <task id="LOCAL-00083" summary="added several guns">
-      <option name="closed" value="true" />
-      <created>1740870785038</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1740870785038</updated>
+      <workItem from="1741726897367" duration="9857000" />
     </task>
     <task id="LOCAL-00084" summary="changed m1 garand sounds">
       <option name="closed" value="true" />
@@ -555,7 +547,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741731005739</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="added weapon modification system">
+      <option name="closed" value="true" />
+      <created>1741733233932</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1741733233932</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
