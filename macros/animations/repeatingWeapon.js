@@ -62,7 +62,7 @@ export async function repeatingWeapon(br_message, weaponType) {
 
     // sfx config
     // Check if weapon is silenced through either method
-    const isSilenced = item.system?.notes?.toLowerCase().includes("silenced");
+    const isSilenced = item.flags?.vjpmacros?.enhancements?.some(enhancement => enhancement?.enhancementType === "suppressor") || item.system?.notes?.toLowerCase().includes("silenced");
     // Default fallback sound
     const defaultFireSound = "modules/vjpmacros/assets/sfx/weapons/firearm/ak105_fire_01.wav";
     // Get appropriate sound based on silenced status

@@ -1,5 +1,5 @@
 import {enhancementsData, getEnhancementType} from "../../lib/enhancementsData.js";
-import {playWeaponReloadSfx} from "../animations/repeatingWeapon.js";
+import {createChatMessage} from "../helpers/helpers.js";
 
 export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
     constructor(item) {
@@ -76,7 +76,7 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
      * Generate the HTML content for the dialog based on current enhancements.
      */
     static _getContent(item) {
-        const enhancements = item.getFlag('swade', 'enhancements') || [];
+        const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
         const listItems = enhancements.map((e, i) => {
             // Try to get the enhancement description if available
             let description = "No description available";
@@ -94,7 +94,7 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
         }).join('');
 
         return `
-    <div id="enhancement-dialog-container" class="swade-weapon-enhancements">
+    <div id="enhancement-dialog-container" class="vjpmacros-weapon-enhancements">
       <h3>Current Enhancements</h3>
       <ul class="enhancements-list" style="list-style: none; padding: 0;">${listItems}</ul>
       <div id="enhancement-drop-zone" style="border: 2px dashed #ccc; padding: 15px; text-align: center; margin-top: 10px; border-radius: 4px;">Drag Items Here to Add</div>
@@ -105,7 +105,7 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
      * Add a new enhancement to the item, but only if it doesn't already exist.
      */
     static async addEnhancement(item, enhancementItem) {
-        const enhancements = item.getFlag('swade', 'enhancements') || [];
+        const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
 
         // Check if this enhancement already exists in the list by comparing UUIDs
         const exists = enhancements.some(e => e.uuid === enhancementItem.uuid);
@@ -113,6 +113,20 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
         if (exists) {
             // If enhancement already exists, show a notification and don't add it
             ui.notifications.warn(`${enhancementItem.name} is already attached to this weapon.`);
+            return;
+        }
+
+        // Check if an enhancement of the same category already exists
+        const sameCategory = await Promise.all(enhancements.map(async e => {
+            // Fetch the existing enhancement item
+            const existingItem = await fromUuid(e.uuid);
+            console.log(existingItem);
+            console.log(enhancementItem.system.category);
+            return existingItem?.system?.category === enhancementItem.system?.category;
+        }));
+
+        if (sameCategory.some(Boolean)) {
+            ui.notifications.warn(`An enhancement of category "${enhancementItem.system.category}" is already attached to this weapon.`);
             return;
         }
 
@@ -133,20 +147,31 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
 
         // Apply the enhancement effect if it's a recognized type
         if (enhancementType && enhancementsData[enhancementType]) {
-            const updatedData = enhancementsData[enhancementType].apply(item);
+            const updatedData = enhancementsData[enhancementType].apply(item, enhancementItem);
             if (Object.keys(updatedData).length > 0) {
                 await item.update(updatedData);
             }
         }
 
-        return item.setFlag('swade', 'enhancements', enhancements);
+        // Play sound effect
+        new Sequence()
+            .sound()
+            .file("modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg")
+            .volume(0.8)
+            .play();
+
+        // Create a chat message
+        const msgText = `<strong>${enhancementItem.name}</strong> has been added to <strong>${item.actor.name}'s</strong> <strong>${item.name}</strong>`;
+        createChatMessage(msgText);
+
+        return item.setFlag('vjpmacros', 'enhancements', enhancements);
     }
 
     /**
      * Remove an enhancement by its index.
      */
     static async removeEnhancement(item, index) {
-        const enhancements = item.getFlag('swade', 'enhancements') || [];
+        const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
 
         if (index < 0 || index >= enhancements.length) return;
 
@@ -158,12 +183,23 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
 
         // Revert the enhancement effect if it's a recognized type
         if (enhancement.enhancementType && enhancementsData[enhancement.enhancementType]) {
-            const updatedData = enhancementsData[enhancement.enhancementType].remove(item);
+            const updatedData = enhancementsData[enhancement.enhancementType].remove(item, enhancement);
             if (Object.keys(updatedData).length > 0) {
                 await item.update(updatedData);
             }
         }
 
-        return item.setFlag('swade', 'enhancements', enhancements);
+        // Play sound effect
+        new Sequence()
+            .sound()
+            .file("modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg")
+            .volume(0.8)
+            .play();
+
+        // Create a chat message
+        const msgText = `<strong>${enhancement.name}</strong> has been removed from <strong>${item.actor.name}'s</strong> <strong>${item.name}</strong>`;
+        createChatMessage(msgText);
+
+        return item.setFlag('vjpmacros', 'enhancements', enhancements);
     }
 }

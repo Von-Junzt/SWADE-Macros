@@ -31,7 +31,7 @@ Hooks.on("updateToken", toggleDuckingEffect);
 // Hook: Inject a "Manage Enhancements" button into weapon item sheets
 Hooks.on('getItemSheetHeaderButtons', function (sheet, buttons) {
     // Only modify sheets for items of type "weapon"
-    if (sheet.document.type !== 'weapon') return;
+    if (sheet.document.system.type !== 'weapon') return;
 
     buttons.unshift({
         class: 'manage-enhancements',
