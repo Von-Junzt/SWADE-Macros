@@ -3,6 +3,7 @@ import {animationData} from "./lib/animationData.js";
 import {repeatingWeapon, playWeaponReloadSfx} from "./macros/animations/repeatingWeapon.js";
 import {backlashCheck} from "./macros/setting_rules/backlash.js";
 import {toggleDuckingEffect} from "./macros/effects/toggleDuckingEffect.js";
+import {WeaponEnhancementDialog} from "./macros/weapon_enhancements/weaponEnhancementDialog.js";
 
 /**
  * Initialize the module
@@ -23,9 +24,22 @@ Hooks.once('ready', async () => {
 });
 
 /**
- *
+ * Adds a visual effect when a token is ducked
  */
 Hooks.on("updateToken", toggleDuckingEffect);
+
+// Hook: Inject a "Manage Enhancements" button into weapon item sheets
+Hooks.on('getItemSheetHeaderButtons', function (sheet, buttons) {
+    // Only modify sheets for items of type "weapon"
+    if (sheet.document.type !== 'weapon') return;
+
+    buttons.unshift({
+        class: 'manage-enhancements',
+        label: 'Enhancements',
+        icon: 'fas fa-tools', // You can choose an appropriate icon
+        onclick: () => new WeaponEnhancementDialog(sheet.document).render({force: true})
+    });
+});
 
 /**
  * initiate weapon animation and check for backlash
