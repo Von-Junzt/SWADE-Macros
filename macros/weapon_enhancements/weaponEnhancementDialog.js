@@ -1,4 +1,4 @@
-import {weaponEnhancements} from "../../lib/weaponEnhancements.js";
+import {weaponEnhancements, getEnhancementType} from "../../lib/weaponEnhancements.js";
 
 export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
     constructor(item) {
