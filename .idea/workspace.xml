@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added weapon modification system">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/enhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/enhancementsData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/sfxData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sfxData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,15 +161,7 @@
       <workItem from="1741708768992" duration="1280000" />
       <workItem from="1741710460016" duration="7302000" />
       <workItem from="1741726781535" duration="107000" />
-      <workItem from="1741726897367" duration="3975000" />
-    </task>
-    <task id="LOCAL-00082" summary="added several guns">
-      <option name="closed" value="true" />
-      <created>1740869553916</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1740869553916</updated>
+      <workItem from="1741726897367" duration="6150000" />
     </task>
     <task id="LOCAL-00083" summary="added several guns">
       <option name="closed" value="true" />
@@ -553,7 +547,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741730884540</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="added weapon modification system">
+      <option name="closed" value="true" />
+      <created>1741731005739</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1741731005739</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
