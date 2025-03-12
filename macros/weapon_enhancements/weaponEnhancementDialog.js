@@ -1,4 +1,4 @@
-import {enhancementsData, getEnhancementType} from "../../lib/enhancementsData.js";
+import {enhancementsData, getEnhancementType, isEnhancementCompatible} from "../../lib/enhancementsData.js";
 import {createChatMessage} from "../helpers/helpers.js";
 
 export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
@@ -125,13 +125,20 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
             return existingItem?.system?.category === enhancementItem.system?.category;
         }));
 
+        // Determine the enhancement type
+        const enhancementType = getEnhancementType(enhancementItem);
+
+        // Check if the enhancement is compatible with this weapon
+        if (enhancementType && !isEnhancementCompatible(enhancementType, item)) {
+            ui.notifications.warn(`${enhancementItem.name} is not compatible with ${item.name}.`);
+            return;
+        }
+
         if (sameCategory.some(Boolean)) {
             ui.notifications.warn(`An enhancement of category "${enhancementItem.system.category}" is already attached to this weapon.`);
             return;
         }
 
-        // Determine the enhancement type
-        const enhancementType = getEnhancementType(enhancementItem);
 
         // Create the enhancement entry
         const enhancement = {
