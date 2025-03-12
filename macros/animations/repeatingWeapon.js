@@ -61,13 +61,13 @@ export async function repeatingWeapon(br_message, weaponType) {
     });
 
     // sfx config
-    // Check if weapon is silenced through either method
-    const isSilenced = item.flags?.vjpmacros?.enhancements?.some(enhancement => enhancement?.enhancementType === "suppressor") || item.system?.notes?.toLowerCase().includes("silenced");
+    // Check if weapon is sound suppressed through either method
+    const isSuppressed = item.flags?.vjpmacros?.enhancements?.some(enhancement => enhancement?.enhancementType === "suppressor") || item.system?.notes?.toLowerCase().includes("suppressor");
     // Default fallback sound
     const defaultFireSound = "modules/vjpmacros/assets/sfx/weapons/firearm/ak105_fire_01.wav";
-    // Get appropriate sound based on silenced status
-    const sfxToPlay = isSilenced
-        ? (sfxConfig?.silencedFireSFX || sfxConfig?.fireSFX || defaultFireSound)
+    // Get appropriate sound based on suppressed status
+    const sfxToPlay = isSuppressed
+        ? (sfxConfig?.suppressedFireSFX || sfxConfig?.fireSFX || defaultFireSound)
         : (sfxConfig?.fireSFX || defaultFireSound);
     const casingDropSfx = sfxConfig.casingDropSFX; // the sound effect for the casing drop
     const casingDropSfxDelay = sfxConfig.casingDropSfxDelay || 400; // e.g. lever-action guns need this delay
@@ -157,8 +157,8 @@ export async function repeatingWeapon(br_message, weaponType) {
                 if(shotAnimation) {
                     let seq = new Sequence();
 
-                    // if the weapon is silenced, don't play the muzzle flash
-                    if (!isSilenced) {
+                    // if the weapon is sound suppressed, don't play the muzzle flash
+                    if (!isSuppressed) {
                         seq.effect()
                             .file("modules/vjpmacros/assets/gfx/projectiles/muzzle_flash_2.webp")
                             .atLocation(muzzleFlashPoint)
@@ -256,7 +256,7 @@ export async function repeatingWeapon(br_message, weaponType) {
             // Weapon Configuration
             weaponType,
             itemName: item.name,
-            isSilenced,
+            isSuppressed: isSuppressed,
 
             // Animation Settings
             fireRateDelay,
