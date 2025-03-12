@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added weapon modification system">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/enhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/enhancementsData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/module.json" afterDir="false" />
-    </list>
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added weapon modification system" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -161,15 +157,7 @@
       <workItem from="1741708768992" duration="1280000" />
       <workItem from="1741710460016" duration="7302000" />
       <workItem from="1741726781535" duration="107000" />
-      <workItem from="1741726897367" duration="9857000" />
-    </task>
-    <task id="LOCAL-00084" summary="changed m1 garand sounds">
-      <option name="closed" value="true" />
-      <created>1740871143396</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1740871143396</updated>
+      <workItem from="1741726897367" duration="10097000" />
     </task>
     <task id="LOCAL-00085" summary="updated compendiums">
       <option name="closed" value="true" />
@@ -555,7 +543,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741733233932</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="added weapon modification system">
+      <option name="closed" value="true" />
+      <created>1741737068506</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1741737068506</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
