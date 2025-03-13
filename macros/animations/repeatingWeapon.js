@@ -301,7 +301,7 @@ function calculateOffsetpoint(token, rayAngle, offsetDistance) {
  * @param item
  * @returns {Promise<*>}
  */
-async function getWeaponSfxConfig(item) {
+export async function getWeaponSfxConfig(item) {
     // Get the weapon name in lowercase and find a matching key in sfxData if it exists, otherwise use the full weapon name
     const weaponName = item.name.toLowerCase();
     const matchingKey = Object.keys(sfxData).find(key => weaponName.includes(key));

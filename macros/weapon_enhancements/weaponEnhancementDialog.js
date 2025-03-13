@@ -161,9 +161,17 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
         }
 
         // Play sound effect
+        let sfxToPlay = enhancementsData[enhancementType]?.sfxToPlay || "modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg";
+
+        // If sfxToPlay is a function, call it with the appropriate parameter:
+        if (typeof sfxToPlay === "function") {
+            sfxToPlay = await sfxToPlay(item);
+        }
+
+        console.log(sfxToPlay);
         new Sequence()
             .sound()
-            .file("modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg")
+            .file(sfxToPlay)
             .volume(0.8)
             .play();
 
@@ -196,10 +204,18 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
             }
         }
 
-        // Play sound effect
+        // play a sound
+        let sfxToPlay = enhancementsData[enhancement.enhancementType]?.sfxToPlay || "modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg";
+
+        // If sfxToPlay is a function, call it with the stored enhancement data.
+        if (typeof sfxToPlay === "function") {
+            sfxToPlay = await sfxToPlay(item);
+        }
+
+        console.log(sfxToPlay);
         new Sequence()
             .sound()
-            .file("modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg")
+            .file(sfxToPlay)
             .volume(0.8)
             .play();
 
