@@ -25,7 +25,6 @@ Hooks.once('ready', async () => {
 // add a visual effect for the ducking effect
 Hooks.on("updateToken", toggleDuckingEffect);
 
-// Hook: Inject a "Manage Enhancements" button into weapon item sheets
 Hooks.on('getItemSheetHeaderButtons', function (sheet, buttons) {
     // Only modify sheets for items of type "weapon"
     if (sheet.document.type !== 'weapon') return;
@@ -35,20 +34,28 @@ Hooks.on('getItemSheetHeaderButtons', function (sheet, buttons) {
         label: 'Enhancements',
         icon: 'fas fa-tools',
         onclick: () => {
-            // Check if dialog is already open for this item
+            // Check if a dialog is already open for this item
             if (openEnhancementDialogs.has(sheet.document.id)) {
-                // If it exists, bring it to front instead of creating a new one
-                openEnhancementDialogs.get(sheet.document.id).bringToFront();
+                const dialog = openEnhancementDialogs.get(sheet.document.id);
+                // Check if the dialog's element exists before calling bringToFront()
+                if (dialog.element) {
+                    dialog.bringToFront();
+                } else {
+                    // If the dialog is closed or its element is missing, re-render it
+                    dialog.render({ force: true });
+                }
             } else {
                 // Create a new dialog and track it
                 const dialog = new WeaponEnhancementDialog(sheet.document);
-                dialog.render({force: true});
+                dialog.render({ force: true });
                 openEnhancementDialogs.set(sheet.document.id, dialog);
 
-                // Remove from tracking when closed
-                dialog.options.window.close = () => {
+                // Store the original close function.
+                const originalClose = dialog.close.bind(dialog);
+                // Override the close method to ensure proper cleanup.
+                dialog.options.window.close = async () => {
                     openEnhancementDialogs.delete(sheet.document.id);
-                    return true; // Allow the window to close
+                    return await originalClose();
                 };
             }
         }
