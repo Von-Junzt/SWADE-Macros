@@ -118,6 +118,10 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
         // Determine the mounting point from the enhancement item.
         const mountingPoint = enhancementItem.system.category;
+        if(!mountingPoint || mountingPoint === "") {
+            console.error("Unable to add enhancement, mounting point is not set.");
+            return;
+        }
 
         // Determine the enhancement type using the matcher.
         const enhancementType = Object.keys(weaponEnhancementsData).find(key => {
