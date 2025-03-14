@@ -1,7 +1,7 @@
-import {enhancementsData, getEnhancementType, isEnhancementCompatible} from "../../lib/enhancementsData.js";
+import {weaponEnhancementsData, getEnhancementType, isEnhancementCompatible} from "../../lib/weaponEnhancementsData.js";
 import {createChatMessage} from "../helpers/helpers.js";
 
-export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
+export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
     constructor(item) {
         // Get the item sheet if it's open
         const itemSheet = Object.values(ui.windows).find(w => w.object?.id === item.id);
@@ -9,7 +9,7 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
         // Create base options
         const options = {
             window: { title: `Enhancements for ${item.name}` },
-            content: WeaponEnhancementDialog._getContent(item),
+            content: EnhancementsDialog._getContent(item),
             buttons: [{ label: "Close", callback: () => {} }]
         };
 
@@ -26,10 +26,7 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
         this.item = item;
     }
 
-    /**
-     * Override _onRender to bind drag-and-drop and click events.
-     * This method is called after every render of the dialog.
-     */
+    // override _onRender to add drag and drop functionality
     _onRender(...args) {
         super._onRender(...args);
         const html = $(this.element);
@@ -50,7 +47,7 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
                     if (data?.type !== 'Item') return;
                     const droppedItem = await fromUuid(data.uuid);
                     if (!droppedItem) return;
-                    await WeaponEnhancementDialog.addEnhancement(self.item, droppedItem);
+                    await EnhancementsDialog.addEnhancement(self.item, droppedItem);
                     // Update the dialog's content without reassigning options.content
                     self._updateContent();
                 }
@@ -61,17 +58,17 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
         html.find('.remove-enhancement').click(async ev => {
             const li = ev.currentTarget.closest('.enhancement');
             const index = Number(li.dataset.index);
-            await WeaponEnhancementDialog.removeEnhancement(self.item, index);
+            await EnhancementsDialog.removeEnhancement(self.item, index);
             // Update the dialog's content after removal
             self._updateContent();
         });
     }
 
-    /**
-     * Update the dialog's dynamic content by replacing the content container in the DOM.
-     */
+
+    // Update the dialog's dynamic content by replacing the content container in the DOM.
+
     _updateContent() {
-        const newContent = WeaponEnhancementDialog._getContent(this.item);
+        const newContent = EnhancementsDialog._getContent(this.item);
         // We need to wrap this.element with $() to use jQuery methods
         const container = $(this.element).find('#enhancement-dialog-container');
         if (container.length > 0) {
@@ -84,16 +81,16 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
         this._onRender();
     }
 
-    /**
-     * Generate the HTML content for the dialog based on current enhancements.
-     */
+
+    // Generate the HTML content for the dialog based on current enhancements.
+
     static _getContent(item) {
         const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
         const listItems = enhancements.map((e, i) => {
             // Try to get the enhancement description if available
             let description = "No description available";
-            if (e.enhancementType && enhancementsData[e.enhancementType]) {
-                description = enhancementsData[e.enhancementType].description;
+            if (e.enhancementType && weaponEnhancementsData[e.enhancementType]) {
+                description = weaponEnhancementsData[e.enhancementType].description;
             }
 
             return `
@@ -113,11 +110,20 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
     </div>`;
     }
 
-    /**
-     * Add a new enhancement to the item, but only if it doesn't already exist.
-     */
+
+    // Add a new enhancement to the item, but only if it doesn't already exist.
+
     static async addEnhancement(item, enhancementItem) {
         const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
+
+        // Determine the enhancement type
+        const enhancementType = getEnhancementType(enhancementItem);
+
+        // Check if this is a valid enhancement type
+        if (!enhancementType || !weaponEnhancementsData[enhancementType]) {
+            ui.notifications.warn(`${enhancementItem.name} is not a valid enhancement.`);
+            return;
+        }
 
         // Check if this enhancement already exists in the list by comparing UUIDs
         const exists = enhancements.some(e => e.uuid === enhancementItem.uuid);
@@ -137,8 +143,7 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
             return existingItem?.system?.category === enhancementItem.system?.category;
         }));
 
-        // Determine the enhancement type
-        const enhancementType = getEnhancementType(enhancementItem);
+
 
         // Check if the enhancement is compatible with this weapon
         if (enhancementType && !isEnhancementCompatible(enhancementType, item)) {
@@ -165,15 +170,15 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
         enhancements.push(enhancement);
 
         // Apply the enhancement effect if it's a recognized type
-        if (enhancementType && enhancementsData[enhancementType]) {
-            const updatedData = enhancementsData[enhancementType].apply(item, enhancementItem);
+        if (enhancementType && weaponEnhancementsData[enhancementType]) {
+            const updatedData = weaponEnhancementsData[enhancementType].apply(item, enhancementItem);
             if (Object.keys(updatedData).length > 0) {
                 await item.update(updatedData);
             }
         }
 
         // Play sound effect
-        let sfxToPlay = enhancementsData[enhancementType]?.sfxToPlay || "modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg";
+        let sfxToPlay = weaponEnhancementsData[enhancementType]?.sfxToPlay || "modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg";
 
         // If sfxToPlay is a function, call it with the appropriate parameter:
         if (typeof sfxToPlay === "function") {
@@ -194,9 +199,9 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
         return item.setFlag('vjpmacros', 'enhancements', enhancements);
     }
 
-    /**
-     * Remove an enhancement by its index.
-     */
+
+    // Remove an enhancement by its index.
+
     static async removeEnhancement(item, index) {
         const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
 
@@ -209,15 +214,15 @@ export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
         enhancements.splice(index, 1);
 
         // Revert the enhancement effect if it's a recognized type
-        if (enhancement.enhancementType && enhancementsData[enhancement.enhancementType]) {
-            const updatedData = enhancementsData[enhancement.enhancementType].remove(item, enhancement);
+        if (enhancement.enhancementType && weaponEnhancementsData[enhancement.enhancementType]) {
+            const updatedData = weaponEnhancementsData[enhancement.enhancementType].remove(item, enhancement);
             if (Object.keys(updatedData).length > 0) {
                 await item.update(updatedData);
             }
         }
 
         // play a sound
-        let sfxToPlay = enhancementsData[enhancement.enhancementType]?.sfxToPlay || "modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg";
+        let sfxToPlay = weaponEnhancementsData[enhancement.enhancementType]?.sfxToPlay || "modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg";
 
         // If sfxToPlay is a function, call it with the stored enhancement data.
         if (typeof sfxToPlay === "function") {

@@ -3,7 +3,7 @@ import {animationData} from "./lib/animationData.js";
 import {repeatingWeapon, playWeaponReloadSfx} from "./macros/animations/repeatingWeapon.js";
 import {backlashCheck} from "./macros/setting_rules/backlash.js";
 import {toggleDuckingEffect} from "./macros/effects/toggleDuckingEffect.js";
-import {WeaponEnhancementDialog} from "./macros/weapon_enhancements/weaponEnhancementDialog.js";
+import {EnhancementsDialog} from "./macros/enhancements/enhancementsDialog.js";
 
 // Track open enhancement dialogs
 const openEnhancementDialogs = new Map();
@@ -46,7 +46,7 @@ Hooks.on('getItemSheetHeaderButtons', function (sheet, buttons) {
                 }
             } else {
                 // Create a new dialog and track it
-                const dialog = new WeaponEnhancementDialog(sheet.document);
+                const dialog = new EnhancementsDialog(sheet.document);
                 dialog.render({ force: true });
                 openEnhancementDialogs.set(sheet.document.id, dialog);
 
@@ -72,7 +72,7 @@ Hooks.on("renderItemSheet", (app, html, data) => {
             // Small delay to ensure the sheet is fully rendered and positioned
             setTimeout(() => {
                 // Open the enhancement dialog and store the reference
-                const dialog = new WeaponEnhancementDialog(item);
+                const dialog = new EnhancementsDialog(item);
                 dialog.render(true);
                 openEnhancementDialogs.set(item.id, dialog);
 
