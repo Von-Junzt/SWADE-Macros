@@ -1,4 +1,4 @@
-import {weaponEnhancementsData, getEnhancementType, isEnhancementCompatible} from "../../lib/weaponEnhancementsData.js";
+import {weaponEnhancementsData, isEnhancementCompatible} from "../../lib/weaponEnhancementsData.js";
 import {createChatMessage} from "../helpers/helpers.js";
 
 export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
@@ -8,7 +8,9 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
         // Create base options
         const options = {
-            window: { title: `Enhancements for ${item.name}` },
+            window: {
+                title: `Enhancements for ${item.name}`
+            },
             content: EnhancementsDialog._getContent(item),
             buttons: [{ label: "Close", callback: () => {} }]
         };
@@ -83,7 +85,6 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
 
     // Generate the HTML content for the dialog based on current enhancements.
-
     static _getContent(item) {
         const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
         const listItems = enhancements.map((e, i) => {
@@ -115,76 +116,61 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
     static async addEnhancement(item, enhancementItem) {
         const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
+        // Determine the mounting point from the enhancement item.
+        const mountingPoint = enhancementItem.system.category;
 
-        // Determine the enhancement type
-        const enhancementType = getEnhancementType(enhancementItem);
+        // Determine the enhancement type using the matcher.
+        const enhancementType = Object.keys(weaponEnhancementsData).find(key => {
+            const enhancementData = weaponEnhancementsData[key];
+            return typeof enhancementData.matcher === "function" && enhancementData.matcher(enhancementItem);
+        });
 
-        // Check if this is a valid enhancement type
-        if (!enhancementType || !weaponEnhancementsData[enhancementType]) {
-            ui.notifications.warn(`${enhancementItem.name} is not a valid enhancement.`);
+        // Check if this enhancement already exists (by UUID).
+        if (enhancements.some(e => e.uuid === enhancementItem.uuid)) return;
+
+        // If no valid enhancement type is found, warn and exit.
+        if (!enhancementType) {
+            ui.notifications.warn(`${enhancementItem.name} is not a recognized enhancement.`);
             return;
         }
 
-        // Check if this enhancement already exists in the list by comparing UUIDs
-        const exists = enhancements.some(e => e.uuid === enhancementItem.uuid);
-
-        if (exists) {
-            // If enhancement already exists, show a notification and don't add it
-            ui.notifications.warn(`${enhancementItem.name} is already attached to this weapon.`);
+        // Check if the enhancement is compatible with the weapon.
+        if (!isEnhancementCompatible(enhancementItem, item)) {
+            ui.notifications.warn(`${enhancementItem.name} is not compatible with ${item.name} or no valid enhancement.`);
             return;
         }
 
-        // Check if an enhancement of the same category already exists
-        const sameCategory = await Promise.all(enhancements.map(async e => {
-            // Fetch the existing enhancement item
-            const existingItem = await fromUuid(e.uuid);
-            console.log(existingItem);
-            console.log(enhancementItem.system.category);
-            return existingItem?.system?.category === enhancementItem.system?.category;
-        }));
-
-
-
-        // Check if the enhancement is compatible with this weapon
-        if (enhancementType && !isEnhancementCompatible(enhancementType, item)) {
-            ui.notifications.warn(`${enhancementItem.name} is not compatible with ${item.name}.`);
+        // Prevent adding another enhancement if the mounting point is already in use.
+        if (enhancements.some(e => e.mountingPoint === mountingPoint)) {
+            ui.notifications.warn(`An enhancement for mounting point "${mountingPoint}" is already attached to this weapon.`);
             return;
         }
 
-        if (sameCategory.some(Boolean)) {
-            ui.notifications.warn(`An enhancement of category "${enhancementItem.system.category}" is already attached to this weapon.`);
-            return;
-        }
-
-
-        // Create the enhancement entry
+        // Create the enhancement entry, storing both the computed enhancement type and mounting point.
         const enhancement = {
             name: enhancementItem.name,
             img: enhancementItem.img,
             id: enhancementItem.id,
             uuid: enhancementItem.uuid,
-            enhancementType: enhancementType  // Store the enhancement type
+            enhancementType: enhancementType,
+            mountingPoint: mountingPoint
         };
 
-        // Add the enhancement to the list
         enhancements.push(enhancement);
 
-        // Apply the enhancement effect if it's a recognized type
-        if (enhancementType && weaponEnhancementsData[enhancementType]) {
+        // Apply the enhancement effect using the enhancementType.
+        if (weaponEnhancementsData[enhancementType]) {
             const updatedData = weaponEnhancementsData[enhancementType].apply(item, enhancementItem);
             if (Object.keys(updatedData).length > 0) {
                 await item.update(updatedData);
             }
         }
 
-        // Play sound effect
+        // Play sound effect.
         let sfxToPlay = weaponEnhancementsData[enhancementType]?.sfxToPlay || "modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg";
-
-        // If sfxToPlay is a function, call it with the appropriate parameter:
         if (typeof sfxToPlay === "function") {
             sfxToPlay = await sfxToPlay(item);
         }
-
         console.log(sfxToPlay);
         new Sequence()
             .sound()
@@ -192,7 +178,7 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
             .volume(0.8)
             .play();
 
-        // Create a chat message
+        // Create a chat message.
         const msgText = `<strong>${enhancementItem.name}</strong> has been added to <strong>${item.actor.name}'s</strong> <strong>${item.name}</strong>`;
         createChatMessage(msgText);
 
@@ -200,8 +186,8 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
     }
 
 
-    // Remove an enhancement by its index.
 
+    // Remove an enhancement by its index.
     static async removeEnhancement(item, index) {
         const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
 
