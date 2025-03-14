@@ -5,16 +5,15 @@ import {backlashCheck} from "./macros/setting_rules/backlash.js";
 import {toggleDuckingEffect} from "./macros/effects/toggleDuckingEffect.js";
 import {WeaponEnhancementDialog} from "./macros/weapon_enhancements/weaponEnhancementDialog.js";
 
-/**
- * Initialize the module
- */
+// Track open enhancement dialogs
+const openEnhancementDialogs = new Map();
+
+// initialize the macros
 Hooks.once('init', function() {
     console.warn('VON JUNZT SWADE MACROS LOADED');
 });
 
-/**
- * Setup objects to be available directly in Foundry
- */
+// Setup objects to be available directly in Foundry
 Hooks.once('ready', async () => {
     // Add the animationData and sfxData to the game object
     game.vjpmacros = {
@@ -23,27 +22,74 @@ Hooks.once('ready', async () => {
     };
 });
 
-/**
- * Adds a visual effect when a token is ducked
- */
+// add a visual effect for the ducking effect
 Hooks.on("updateToken", toggleDuckingEffect);
 
 // Hook: Inject a "Manage Enhancements" button into weapon item sheets
 Hooks.on('getItemSheetHeaderButtons', function (sheet, buttons) {
     // Only modify sheets for items of type "weapon"
-    if (sheet.document.system.type !== 'weapon') return;
+    if (sheet.document.type !== 'weapon') return;
 
     buttons.unshift({
         class: 'manage-enhancements',
         label: 'Enhancements',
-        icon: 'fas fa-tools', // You can choose an appropriate icon
-        onclick: () => new WeaponEnhancementDialog(sheet.document).render({force: true})
+        icon: 'fas fa-tools',
+        onclick: () => {
+            // Check if dialog is already open for this item
+            if (openEnhancementDialogs.has(sheet.document.id)) {
+                // If it exists, bring it to front instead of creating a new one
+                openEnhancementDialogs.get(sheet.document.id).bringToFront();
+            } else {
+                // Create a new dialog and track it
+                const dialog = new WeaponEnhancementDialog(sheet.document);
+                dialog.render({force: true});
+                openEnhancementDialogs.set(sheet.document.id, dialog);
+
+                // Remove from tracking when closed
+                dialog.options.window.close = () => {
+                    openEnhancementDialogs.delete(sheet.document.id);
+                    return true; // Allow the window to close
+                };
+            }
+        }
     });
 });
 
-/**
- * initiate weapon animation and check for backlash
- */
+// Register a hook that fires when item sheets are rendered
+Hooks.on("renderItemSheet", (app, html, data) => {
+    // Check if this is a weapon
+    const item = app.object;
+    if (item.type === "weapon") {
+        // Check if we already have a dialog open for this item
+        if (!openEnhancementDialogs.has(item.id)) {
+            // Small delay to ensure the sheet is fully rendered and positioned
+            setTimeout(() => {
+                // Open the enhancement dialog and store the reference
+                const dialog = new WeaponEnhancementDialog(item);
+                dialog.render(true);
+                openEnhancementDialogs.set(item.id, dialog);
+
+                // Remove from tracking when closed
+                dialog.options.window.close = () => {
+                    openEnhancementDialogs.delete(item.id);
+                    return true; // Allow the window to close
+                };
+            }, 100);
+        }
+    }
+});
+
+// Also hook into sheet close to clean up our tracking
+Hooks.on("closeItemSheet", (app) => {
+    const item = app.object;
+    if (openEnhancementDialogs.has(item.id)) {
+        const dialog = openEnhancementDialogs.get(item.id);
+        dialog.close();
+        openEnhancementDialogs.delete(item.id);
+    }
+});
+
+// initiate weapon animation and check for backlash
 Hooks.on('BRSW-RollItem', async (br_message, html) => {
     const item = br_message.item;
     // check if item is a weapon and if it's included in the animationData
@@ -69,9 +115,7 @@ Hooks.on('BRSW-RollItem', async (br_message, html) => {
     }
 });
 
-/**
- * Play the reload animation for the given item
- */
+// Play the reload animation for the given item
 Hooks.on('swadeReloadWeapon', async (item, reloaded) => {
     if(reloaded) {
         await playWeaponReloadSfx(item);

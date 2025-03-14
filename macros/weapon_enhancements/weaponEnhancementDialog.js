@@ -3,14 +3,26 @@ import {createChatMessage} from "../helpers/helpers.js";
 
 export class WeaponEnhancementDialog extends foundry.applications.api.DialogV2 {
     constructor(item) {
-        super({
+        // Get the item sheet if it's open
+        const itemSheet = Object.values(ui.windows).find(w => w.object?.id === item.id);
+
+        // Create base options
+        const options = {
             window: { title: `Enhancements for ${item.name}` },
             content: WeaponEnhancementDialog._getContent(item),
-            buttons: [
-                { label: "Close", callback: () => {} }
-            ]
-            // DialogV2 automatically includes a close [X] button in the header.
-        });
+            buttons: [{ label: "Close", callback: () => {} }]
+        };
+
+        // Add position if we have an item sheet
+        if (itemSheet) {
+            // DialogV2 might expect position as a direct property
+            options.position = {
+                left: itemSheet.position.left + itemSheet.position.width + 10,
+                top: itemSheet.position.top
+            };
+        }
+
+        super(options);
         this.item = item;
     }
 
