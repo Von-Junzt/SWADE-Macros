@@ -8,6 +8,7 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
         // Create base options
         const options = {
+            width: 1000,
             window: {
                 title: `Enhancements for ${item.name}`
             },
@@ -97,8 +98,10 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
             return `
       <li class="enhancement" data-index="${i}" style="display: flex; align-items: center; margin-bottom: 5px;" title="${description}">
         <img src="${e.img}" width="24" height="24" style="margin-right: 8px;" />
-        <span style="flex-grow: 1;">${e.name}</span>
-        <a class="remove-enhancement" style="cursor: pointer;"><i class="fas fa-trash"></i></a>
+        <span style="flex-grow: 1;">
+          ${e.name} <em style="font-size: 0.8em; color: #888;">(${e.mountingPoint})</em>
+        </span>
+        <a class="remove-enhancement" style="margin-left: 15px; cursor: pointer;"><i class="fas fa-trash"></i></a>
       </li>
     `;
         }).join('');
