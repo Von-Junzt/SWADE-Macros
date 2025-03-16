@@ -17,18 +17,6 @@
   ],
   "packs": [
     {
-      "name": "von-junzt-premade-items",
-      "label": "Items",
-      "path": "packs/von-junzt-premade-items",
-      "type": "Item",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      },
-      "system": "swade",
-      "flags": {}
-    },
-    {
       "name": "von-junzt-premade-weapons",
       "label": "Weapons",
       "path": "packs/von-junzt-premade-weapons",
@@ -72,7 +60,6 @@
       "sorting": "m",
       "color": "#3f8230",
       "packs": [
-        "von-junzt-premade-items",
         "von-junzt-premade-weapons",
         "von-junzt-premade-weapon-enhancements",
         "von-junzt-premade-macros"

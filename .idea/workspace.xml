@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added gas vent system">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/enhancements/enhancementsDialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/macros/enhancements/enhancementsDialog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/module.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vjpmacros.css" beforeDir="false" afterPath="$PROJECT_DIR$/vjpmacros.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,15 +173,7 @@
       <workItem from="1741989222055" duration="2729000" />
       <workItem from="1742071095837" duration="6768000" />
       <workItem from="1742107545070" duration="8281000" />
-      <workItem from="1742143992713" duration="2935000" />
-    </task>
-    <task id="LOCAL-00101" summary="added guns">
-      <option name="closed" value="true" />
-      <created>1741037879327</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1741037879327</updated>
+      <workItem from="1742143992713" duration="3640000" />
     </task>
     <task id="LOCAL-00102" summary="added guns">
       <option name="closed" value="true" />
@@ -570,7 +559,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742134014517</updated>
     </task>
-    <option name="localTasksCounter" value="150" />
+    <task id="LOCAL-00150" summary="added gas vent system">
+      <option name="closed" value="true" />
+      <created>1742147125570</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
+      <option name="project" value="LOCAL" />
+      <updated>1742147125570</updated>
+    </task>
+    <option name="localTasksCounter" value="151" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
