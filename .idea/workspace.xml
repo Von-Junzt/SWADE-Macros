@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added several enhancements">
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added gas vent system">
+      <change afterPath="$PROJECT_DIR$/vjpmacros.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/module.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,15 +173,8 @@
       <workItem from="1741962010186" duration="3263000" />
       <workItem from="1741969217426" duration="7214000" />
       <workItem from="1741989222055" duration="2729000" />
-      <workItem from="1742071095837" duration="6283000" />
-    </task>
-    <task id="LOCAL-00099" summary="added guns">
-      <option name="closed" value="true" />
-      <created>1741028781008</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1741028781008</updated>
+      <workItem from="1742071095837" duration="6768000" />
+      <workItem from="1742107545070" duration="1859000" />
     </task>
     <task id="LOCAL-00100" summary="added guns">
       <option name="closed" value="true" />
@@ -566,14 +560,21 @@
       <option name="project" value="LOCAL" />
       <updated>1742078937003</updated>
     </task>
-    <option name="localTasksCounter" value="148" />
+    <task id="LOCAL-00148" summary="added gas vent system">
+      <option name="closed" value="true" />
+      <created>1742080304042</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1742080304042</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="disabled debug" />
     <MESSAGE value="added weapons" />
     <MESSAGE value="transparent weapon images" />
     <MESSAGE value="added multiple guns" />
@@ -598,7 +599,8 @@
     <MESSAGE value="weapon enhancement sheet now renders automatically" />
     <MESSAGE value="made logic more sturdy, added check for mounting points" />
     <MESSAGE value="added several enhancements" />
-    <option name="LAST_COMMIT_MESSAGE" value="added several enhancements" />
+    <MESSAGE value="added gas vent system" />
+    <option name="LAST_COMMIT_MESSAGE" value="added gas vent system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

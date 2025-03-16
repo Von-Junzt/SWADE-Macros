@@ -1,0 +1,9 @@
+#tooltip-description {
+    width: auto !important;
+    min-width: 14rem !important;
+    max-width: 30rem !important;
+    height: auto !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+}
