@@ -81,7 +81,7 @@
   ],
   "socket" : true,
   "styles": [
-    "css/vjpmacros.css"
+    "vjpmacros.css"
   ],
   "esmodules": [
     "main.js"

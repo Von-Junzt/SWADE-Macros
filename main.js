@@ -27,23 +27,19 @@ Hooks.on("updateToken", toggleDuckingEffect);
 
 // Register a hook that fires when item sheets are rendered
 Hooks.on("renderItemSheet", (app, html, data) => {
-    // Check if this is a weapon and also if the weapontype is in the animationData
     const item = app.object;
+    // open only when the item is a weapon and the weapon type is defined in the animationData
     const weaponType = getWeaponType(item);
     if (item.type === "weapon" && weaponType) {
-        // Check if we already have a dialog open for this item
+        // Auto-open the enhancements dialog if not already open
         if (!openEnhancementDialogs.has(item.id)) {
-            // Small delay to ensure the sheet is fully rendered and positioned
             setTimeout(() => {
-                // Open the enhancement dialog and store the reference
                 const dialog = new EnhancementsDialog(item);
                 dialog.render(true);
                 openEnhancementDialogs.set(item.id, dialog);
-
-                // Remove from tracking when closed
                 dialog.options.window.close = () => {
                     openEnhancementDialogs.delete(item.id);
-                    return true; // Allow the window to close
+                    return true;
                 };
             }, 100);
         }
@@ -57,6 +53,43 @@ Hooks.on("closeItemSheet", (app) => {
         const dialog = openEnhancementDialogs.get(item.id);
         dialog.close();
         openEnhancementDialogs.delete(item.id);
+    }
+});
+
+// Fallback Button via Header Buttons Hook
+Hooks.on('getItemSheetHeaderButtons', (sheet, buttons) => {
+    const item = sheet.item;
+    const weaponType = getWeaponType(item);
+    if (item.type === "weapon" && weaponType) {
+        buttons.unshift({
+            class: 'open-enhancements-dialog',
+            label: 'Weapon Enhancements',
+            icon: 'fas fa-wrench',
+            onclick: () => {
+                // Check if a dialog is already open for this item.
+                if (openEnhancementDialogs.has(item.id)) {
+                    const dialog = openEnhancementDialogs.get(item.id);
+                    // If the dialog is rendered, bring it to front.
+                    if (dialog && dialog.rendered) {
+                        dialog.bringToFront();
+                        return;
+                    } else {
+                        // Otherwise, remove the stale reference.
+                        openEnhancementDialogs.delete(item.id);
+                    }
+                }
+                // Open a new enhancements dialog.
+                const dialog = new EnhancementsDialog(item);
+                dialog.render(true);
+                openEnhancementDialogs.set(item.id, dialog);
+                // Override the dialog's close method to clean up when it closes.
+                const originalClose = dialog.close.bind(dialog);
+                dialog.close = async function(...args) {
+                    openEnhancementDialogs.delete(item.id);
+                    await originalClose(...args);
+                };
+            }
+        });
     }
 });
 

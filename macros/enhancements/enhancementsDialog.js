@@ -9,6 +9,7 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         // Create base options
         const options = {
             width: 1000,
+            classes: ["vjpmacros-enhancements-dialog"],
             window: {
                 title: `Enhancements for ${item.name}`
             },
