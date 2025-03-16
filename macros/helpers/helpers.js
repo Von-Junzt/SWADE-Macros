@@ -1,9 +1,4 @@
-/**
- * Play a sound for all users
- * @param file
- * @param delay
- * @returns {Promise<void>}
- */
+// Play a sound for all users
 export async function playSoundForAllUsers(file, delay) {
     // get all the active user ids
     const delayIntervall = delay || 0;
@@ -16,11 +11,7 @@ export async function playSoundForAllUsers(file, delay) {
         .play();
 }
 
-/**
- * Create a chat message for all users
- * @param msgText string
- * @returns {Promise<void>}
- */
+// Create a chat message for all users
 export async function createChatMessage(msgText) {
     ChatMessage.create({
         content: msgText,

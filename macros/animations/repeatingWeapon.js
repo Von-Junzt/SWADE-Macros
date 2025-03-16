@@ -2,12 +2,8 @@ import {animationData} from "../../lib/animationData.js";
 import {sfxData} from "../../lib/sfxData.js";
 import {createChatMessage,playSoundForAllUsers} from "../helpers/helpers.js";
 
-/**
- * Play firing sound and animation for the given weapon
- * @param br_message
- * @param weaponType
- * @returns {Promise<boolean>}
- */
+
+// Play firing sound and animation for the given weapon
 export async function repeatingWeapon(br_message, weaponType) {
     // item and roll setup
     const usedShots = br_message.render_data?.used_shots; // the used shots for the roll
@@ -281,13 +277,8 @@ export async function repeatingWeapon(br_message, weaponType) {
     return true;
 }
 
-/**
- * Calculates the offset point for a given ray angle and distance from a token.
- * @param token
- * @param rayAngle
- * @param offsetDistance
- * @returns {Promise<{x: *, y: *}>}
- */
+
+// Calculates the offset point for a given ray angle and distance from a token.
 function calculateOffsetpoint(token, rayAngle, offsetDistance) {
     return {
         x: token.center.x + Math.cos(rayAngle) * offsetDistance,
@@ -296,11 +287,8 @@ function calculateOffsetpoint(token, rayAngle, offsetDistance) {
 }
 
 
-/**
- * Get the weapon sfx config for the given item
- * @param item
- * @returns {Promise<*>}
- */
+
+// Get the weapon sfx config for the given item
 export async function getWeaponSfxConfig(item) {
     // Get the weapon name in lowercase and find a matching key in sfxData if it exists, otherwise use the full weapon name
     const weaponName = item.name.toLowerCase();
@@ -311,11 +299,8 @@ export async function getWeaponSfxConfig(item) {
     return sfxData[weaponSfxID];
 }
 
-/**
- * Play the reload animation for the given item
- * @param item
- * @returns {Promise<void>}
- */
+
+// Play the reload animation for the given item
 export async function playWeaponReloadSfx(item) {
     const msgText = `<strong>${item.parent.name}</strong> reloaded his weapon; <strong>${item.name}</strong>.`
     await createChatMessage(msgText);
@@ -329,14 +314,7 @@ export async function playWeaponReloadSfx(item) {
     await playSoundForAllUsers(sfxToPlay);
 }
 
-/**
- * Validate targets and shots
- * @param targets
- * @param filteredDice
- * @param usedShots
- * @param originalShots
- * @returns {boolean}
- */
+// Validate targets and shots
 function validateTargetsAndShots(targets, filteredDice, usedShots, originalShots, sourceToken) {
     if (targets.some(target => target === sourceToken)) {
         ui.notifications.error("You can't target yourself.");
@@ -363,11 +341,8 @@ function validateTargetsAndShots(targets, filteredDice, usedShots, originalShots
     return true;
 }
 
-/**
- * Get the random shell drop sound
- * @param baseSoundPath
- * @returns {string}
- */
+// Get the random shell drop sound
+
 function getRandomShellDropSound(baseSoundPath) {
     // Extract the base path by removing the _01.wav (or similar) ending
     const basePath = baseSoundPath.replace(/_0\d\.\w+$/, '');
@@ -378,11 +353,8 @@ function getRandomShellDropSound(baseSoundPath) {
     return `${basePath}_0${randomSuffix}.${fileExtension}`;
 }
 
-/**
- * Gets a random firing sound from either a single sound or array of sounds
- * @param {string|string[]} fireSounds - Single sound path or array of sound paths
- * @returns {string} - The selected sound path
- */
+// Gets a random firing sound from either a single sound or array of sounds
+
 function getRandomFireSound(fireSounds) {
     if (Array.isArray(fireSounds)) {
         const randomIndex = Math.floor(Math.random() * fireSounds.length);
@@ -391,10 +363,7 @@ function getRandomFireSound(fireSounds) {
     return fireSounds;
 }
 
-/**
- * Gets a random ricochet sound
- * @returns {string}
- */
+// Gets a random ricochet sound
 function getRandomRicochetSound() {
     // Generate random number between 1-10
     const randomNumber = Math.floor(Math.random() * 10) + 1;
