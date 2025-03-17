@@ -1,4 +1,4 @@
-import {weaponEnhancementsData, isEnhancementCompatible} from "../../lib/weaponEnhancementsData.js";
+import {weaponEnhancementsData, isEnhancementCompatible, calculateNoticeRollModAdjustment} from "../../lib/weaponEnhancementsData.js";
 import {createChatMessage} from "../helpers/helpers.js";
 
 export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
@@ -117,7 +117,6 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
 
     // Add a new enhancement to the item, but only if it doesn't already exist.
-
     static async addEnhancement(item, enhancementItem) {
         const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
         // Determine the mounting point from the enhancement item.
@@ -169,6 +168,15 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         // Apply the enhancement effect using the enhancementType.
         if (weaponEnhancementsData[enhancementType]) {
             const updatedData = weaponEnhancementsData[enhancementType].apply(item, enhancementItem);
+
+            // Apply notice roll mod adjustment
+            const noticeRollMod = weaponEnhancementsData[enhancementType].noticeRollMod;
+            const adjustedNoticeRollMod = calculateNoticeRollModAdjustment(item, noticeRollMod, false);
+            console.warn("noticerollmod: ", noticeRollMod);
+            if (adjustedNoticeRollMod !== null) {
+                updatedData["system.additionalStats.noticeRollMod.value"] = adjustedNoticeRollMod;
+            }
+
             if (Object.keys(updatedData).length > 0) {
                 await item.update(updatedData);
             }
@@ -210,6 +218,14 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         // Revert the enhancement effect if it's a recognized type
         if (enhancement.enhancementType && weaponEnhancementsData[enhancement.enhancementType]) {
             const updatedData = weaponEnhancementsData[enhancement.enhancementType].remove(item, enhancement);
+
+            // Apply notice roll mod adjustment
+            const noticeRollMod = weaponEnhancementsData[enhancement.enhancementType].noticeRollMod;
+            const adjustedNoticeRollMod = calculateNoticeRollModAdjustment(item, noticeRollMod, true);
+            if (adjustedNoticeRollMod !== null) {
+                updatedData["system.additionalStats.noticeRollMod.value"] = adjustedNoticeRollMod;
+            }
+
             if (Object.keys(updatedData).length > 0) {
                 await item.update(updatedData);
             }

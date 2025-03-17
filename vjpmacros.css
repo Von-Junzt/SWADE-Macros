@@ -1,3 +1,8 @@
 .vjpmacros-enhancements-dialog .window-content {
     min-width: 400px;
 }
+
+.chat-card .item-description {
+    max-height: none !important;
+    overflow: visible !important;
+}
