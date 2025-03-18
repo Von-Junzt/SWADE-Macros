@@ -170,7 +170,19 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
             const updatedData = weaponEnhancementsData[enhancementType].apply(item, enhancementItem);
 
             // Apply notice roll mod adjustment
-            const noticeRollMod = weaponEnhancementsData[enhancementType].noticeRollMod;
+            let noticeRollMod = weaponEnhancementsData[enhancementType].noticeRollMod;
+
+            // make shure noticeRollMod is not null
+            if(!item.system.additionalStats.noticeRollMod) {
+                const mergedStats = foundry.utils.mergeObject(item.system.additionalStats || {}, {
+                    value: 0, label: "Notice Roll Mod", dtype : "Number"
+                });
+
+                // Update the item with the merged stat object
+                await item.update({ "system.additionalStats.noticeRollMod": mergedStats });
+                console.warn("Notice Roll Mod added to item: ", item.name);
+            }
+
             const adjustedNoticeRollMod = calculateNoticeRollModAdjustment(item, noticeRollMod, false);
             console.warn("noticerollmod: ", noticeRollMod);
             if (adjustedNoticeRollMod !== null) {
