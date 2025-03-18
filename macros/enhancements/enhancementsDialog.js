@@ -1,4 +1,4 @@
-import {weaponEnhancementsData, isEnhancementCompatible, calculateNoticeRollModAdjustment} from "../../lib/weaponEnhancementsData.js";
+import {weaponEnhancementsData, isEnhancementCompatible, calculateNoticeRollModAdjustment, addToNotes, removeFromNotes} from "../../lib/weaponEnhancementsData.js";
 import {createChatMessage} from "../helpers/helpers.js";
 
 export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
@@ -14,7 +14,10 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
                 title: `Enhancements for ${item.name}`
             },
             content: EnhancementsDialog._getContent(item),
-            buttons: [{ label: "Close", callback: () => {} }]
+            buttons: [{
+                label: "Close", callback: () => {
+                }
+            }]
         };
 
         // Add position if we have an item sheet
@@ -120,7 +123,7 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         const mountingPoint = enhancementItem.system.category;
 
         // Check if mounting point is set.
-        if(!mountingPoint || mountingPoint === "") {
+        if (!mountingPoint || mountingPoint === "") {
             console.error("Unable to add enhancement, mounting point is not set.");
             return;
         }
@@ -175,22 +178,30 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
             let noticeRollMod = weaponEnhancementsData[enhancementType].noticeRollMod;
 
             // make shure noticeRollMod programmatically enabled if not already present
-            if(!item.system.additionalStats.noticeRollMod) {
+            if (!item.system.additionalStats.noticeRollMod) {
                 const mergedStats = foundry.utils.mergeObject(item.system.additionalStats || {}, {
-                    value: 0, label: "Notice Roll Mod", dtype : "Number"
+                    value: 0, label: "Notice Roll Mod", dtype: "Number"
                 });
 
                 // Update the item with the merged stat object
-                await item.update({ "system.additionalStats.noticeRollMod": mergedStats });
+                await item.update({"system.additionalStats.noticeRollMod": mergedStats});
                 console.warn("Notice Roll Mod added to item: ", item.name);
             }
 
             // Calculate and apply the adjusted notice roll mod
             const adjustedNoticeRollMod = calculateNoticeRollModAdjustment(item, noticeRollMod, false);
-            console.warn("noticerollmod: ", noticeRollMod);
+
+            // Update the item with the adjusted notice roll mod
             if (adjustedNoticeRollMod !== null) {
                 updatedData["system.additionalStats.noticeRollMod.value"] = adjustedNoticeRollMod;
             }
+
+            // Update the items notes with the adjusted notice roll mod
+            const originalUpdate = updatedData["system.notes"] || item.system?.notes || "";
+            updatedData["system.notes"] = EnhancementsDialog.updateNoticeModNotes(
+                originalUpdate,
+                adjustedNoticeRollMod
+            );
 
             if (Object.keys(updatedData).length > 0) {
                 await item.update(updatedData);
@@ -216,8 +227,6 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         return item.setFlag('vjpmacros', 'enhancements', enhancements);
     }
 
-
-
     // Remove an enhancement by its index.
     static async removeEnhancement(item, index) {
         const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
@@ -240,6 +249,14 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
             if (adjustedNoticeRollMod !== null) {
                 updatedData["system.additionalStats.noticeRollMod.value"] = adjustedNoticeRollMod;
             }
+
+            // Update the items notes with the adjusted notice roll mod
+            // Use the updated notes that already have the enhancement text removed
+            const originalUpdate = updatedData["system.notes"] || item.system?.notes || "";
+            updatedData["system.notes"] = EnhancementsDialog.updateNoticeModNotes(
+                originalUpdate,
+                adjustedNoticeRollMod
+            );
 
             if (Object.keys(updatedData).length > 0) {
                 await item.update(updatedData);
@@ -267,4 +284,29 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
         return item.setFlag('vjpmacros', 'enhancements', enhancements);
     }
+
+    // Update the notice roll mod notes in the item's system.additionalStats.notes
+    static updateNoticeModNotes(currentNotes, totalMod) {
+        // Remove any existing notice mod entries using regex
+        let updatedNotes = currentNotes.replace(/,?\s*Notice:\s*[-+]?\d+/g, '');
+        // Clean up any potential double commas or starting/ending commas
+        updatedNotes = updatedNotes.replace(/,\s*,/g, ',').replace(/^,\s*/, '').replace(/,\s*$/, '');
+
+        // If the totalMod is 0, don't add any notice mod text
+        if (totalMod === 0) {
+            return updatedNotes;
+        }
+
+        // Format the notice mod text
+        const noticeText = `Notice: ${totalMod}`;
+
+        // If there are no notes left, just return the new notice mod
+        if (!updatedNotes || updatedNotes === "") {
+            return noticeText;
+        }
+
+        // Place the notice mod at the beginning, followed by the rest of the notes
+        return `${noticeText}, ${updatedNotes}`;
+    }
 }
+
