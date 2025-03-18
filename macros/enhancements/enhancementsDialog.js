@@ -19,7 +19,6 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
         // Add position if we have an item sheet
         if (itemSheet) {
-            // DialogV2 might expect position as a direct property
             options.position = {
                 left: itemSheet.position.left + itemSheet.position.width + 10,
                 top: itemSheet.position.top
@@ -70,7 +69,6 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
 
     // Update the dialog's dynamic content by replacing the content container in the DOM.
-
     _updateContent() {
         const newContent = EnhancementsDialog._getContent(this.item);
         // We need to wrap this.element with $() to use jQuery methods
@@ -116,15 +114,19 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
     }
 
 
-    // Add a new enhancement to the item, but only if it doesn't already exist.
+    // Add a new enhancement to the item
     static async addEnhancement(item, enhancementItem) {
-        const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
         // Determine the mounting point from the enhancement item.
         const mountingPoint = enhancementItem.system.category;
+
+        // Check if mounting point is set.
         if(!mountingPoint || mountingPoint === "") {
             console.error("Unable to add enhancement, mounting point is not set.");
             return;
         }
+
+        // Get the existing enhancements.
+        const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
 
         // Determine the enhancement type using the matcher.
         const enhancementType = Object.keys(weaponEnhancementsData).find(key => {
@@ -132,14 +134,14 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
             return typeof enhancementData.matcher === "function" && enhancementData.matcher(enhancementItem);
         });
 
-        // Check if this enhancement already exists (by UUID).
-        if (enhancements.some(e => e.uuid === enhancementItem.uuid)) return;
-
         // If no valid enhancement type is found, warn and exit.
         if (!enhancementType) {
             ui.notifications.warn(`${enhancementItem.name} is not a recognized enhancement.`);
             return;
         }
+
+        // Check if this enhancement already exists in the enhancements list.
+        if (enhancements.some(e => e.uuid === enhancementItem.uuid)) return;
 
         // Check if the enhancement is compatible with the weapon.
         if (!isEnhancementCompatible(enhancementItem, item)) {
@@ -172,7 +174,7 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
             // Apply notice roll mod adjustment
             let noticeRollMod = weaponEnhancementsData[enhancementType].noticeRollMod;
 
-            // make shure noticeRollMod is not null
+            // make shure noticeRollMod programmatically enabled if not already present
             if(!item.system.additionalStats.noticeRollMod) {
                 const mergedStats = foundry.utils.mergeObject(item.system.additionalStats || {}, {
                     value: 0, label: "Notice Roll Mod", dtype : "Number"
@@ -183,6 +185,7 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
                 console.warn("Notice Roll Mod added to item: ", item.name);
             }
 
+            // Calculate and apply the adjusted notice roll mod
             const adjustedNoticeRollMod = calculateNoticeRollModAdjustment(item, noticeRollMod, false);
             console.warn("noticerollmod: ", noticeRollMod);
             if (adjustedNoticeRollMod !== null) {
