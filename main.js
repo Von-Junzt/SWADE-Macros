@@ -4,7 +4,7 @@ import {repeatingWeapon, playWeaponReloadSfx} from "./macros/animations/repeatin
 import {backlashCheck} from "./macros/setting_rules/backlash.js";
 import {toggleDuckingEffect} from "./macros/effects/toggleDuckingEffect.js";
 import {EnhancementsDialog} from "./macros/enhancements/enhancementsDialog.js";
-import {globalActions} from "./lib/gobalActions.js";
+import {globalActions} from "./lib/gobalActionsData.js";
 
 // Track open enhancement dialogs
 const openEnhancementDialogs = new Map();

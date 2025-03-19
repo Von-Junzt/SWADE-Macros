@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added notice roll to item.notes">
-      <change afterPath="$PROJECT_DIR$/lib/gobalActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-    </list>
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added global actions to overwrite standard brsw cover actions so that they are added automatically when the effect is on the actor" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -178,15 +173,7 @@
       <workItem from="1742143992713" duration="7109000" />
       <workItem from="1742226565936" duration="5564000" />
       <workItem from="1742318861027" duration="3394000" />
-      <workItem from="1742371564792" duration="2523000" />
-    </task>
-    <task id="LOCAL-00109" summary="changed ultamax hmg sound">
-      <option name="closed" value="true" />
-      <created>1741275144221</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1741275144222</updated>
+      <workItem from="1742371564792" duration="2825000" />
     </task>
     <task id="LOCAL-00110" summary="changed weapon imgs">
       <option name="closed" value="true" />
@@ -572,14 +559,21 @@
       <option name="project" value="LOCAL" />
       <updated>1742323065655</updated>
     </task>
-    <option name="localTasksCounter" value="158" />
+    <task id="LOCAL-00158" summary="added global actions to overwrite standard brsw cover actions so that they are added automatically when the effect is on the actor">
+      <option name="closed" value="true" />
+      <created>1742374621569</created>
+      <option name="number" value="00158" />
+      <option name="presentableId" value="LOCAL-00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1742374621569</updated>
+    </task>
+    <option name="localTasksCounter" value="159" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed m1 garand sounds" />
     <MESSAGE value="updated compendiums" />
     <MESSAGE value="added guns" />
     <MESSAGE value="added small percentage (25%) for ricochet sounds if miss" />
@@ -604,7 +598,8 @@
     <MESSAGE value="made shure noticeRollMod is programmatically enabled if undefined before calculating" />
     <MESSAGE value="rearranged early return logic" />
     <MESSAGE value="added notice roll to item.notes" />
-    <option name="LAST_COMMIT_MESSAGE" value="added notice roll to item.notes" />
+    <MESSAGE value="added global actions to overwrite standard brsw cover actions so that they are added automatically when the effect is on the actor" />
+    <option name="LAST_COMMIT_MESSAGE" value="added global actions to overwrite standard brsw cover actions so that they are added automatically when the effect is on the actor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
