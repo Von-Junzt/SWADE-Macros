@@ -5,6 +5,7 @@ import {backlashCheck} from "./macros/setting_rules/backlash.js";
 import {toggleDuckingEffect} from "./macros/effects/toggleDuckingEffect.js";
 import {EnhancementsDialog} from "./macros/enhancements/enhancementsDialog.js";
 import {globalActions} from "./lib/gobalActionsData.js";
+import {enhancementActions} from "./lib/enhancementActionsData.js";
 
 // Track open enhancement dialogs
 const openEnhancementDialogs = new Map();
@@ -24,6 +25,7 @@ Hooks.once('ready', async () => {
 
     // add global actions
     game.brsw.add_actions(globalActions);
+    game.brsw.add_actions(enhancementActions);
     console.warn('VJP Macros: Global actions added');
 });
 

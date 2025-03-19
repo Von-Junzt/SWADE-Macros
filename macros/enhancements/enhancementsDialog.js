@@ -292,8 +292,8 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         // Clean up any potential double commas or starting/ending commas
         updatedNotes = updatedNotes.replace(/,\s*,/g, ',').replace(/^,\s*/, '').replace(/,\s*$/, '');
 
-        // If the totalMod is 0, don't add any notice mod text
-        if (totalMod === 0) {
+        // If the totalMod is 0 or null, don't add any notice mod text
+        if (totalMod === 0 || totalMod === null) {
             return updatedNotes;
         }
 
