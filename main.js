@@ -4,13 +4,14 @@ import {repeatingWeapon, playWeaponReloadSfx} from "./macros/animations/repeatin
 import {backlashCheck} from "./macros/setting_rules/backlash.js";
 import {toggleDuckingEffect} from "./macros/effects/toggleDuckingEffect.js";
 import {EnhancementsDialog} from "./macros/enhancements/enhancementsDialog.js";
+import {globalActions} from "./lib/gobalActions.js";
 
 // Track open enhancement dialogs
 const openEnhancementDialogs = new Map();
 
 // initialize the macros
 Hooks.once('init', function() {
-    console.warn('VON JUNZT SWADE MACROS LOADED');
+    console.warn('VJP Macros: Initializing');
 });
 
 // Setup objects to be available directly in Foundry
@@ -20,6 +21,10 @@ Hooks.once('ready', async () => {
         animationData,
         sfxData
     };
+
+    // add global actions
+    game.brsw.add_actions(globalActions);
+    console.warn('VJP Macros: Global actions added');
 });
 
 // add a visual effect for the ducking effect
