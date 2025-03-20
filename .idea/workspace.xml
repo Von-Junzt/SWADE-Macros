@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="updated compendiums">
-      <change beforePath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" afterDir="false" />
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added underbarrel grenade launcher mod">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/gfx/icons/ducking.webp" beforeDir="false" afterPath="$PROJECT_DIR$/assets/gfx/icons/ducking.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/enhancementActionsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/enhancementActionsData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,15 +180,7 @@
       <workItem from="1742371564792" duration="3218000" />
       <workItem from="1742395829833" duration="106000" />
       <workItem from="1742395947076" duration="9140000" />
-      <workItem from="1742494541989" duration="10006000" />
-    </task>
-    <task id="LOCAL-00116" summary="added multiple weapons">
-      <option name="closed" value="true" />
-      <created>1741447526021</created>
-      <option name="number" value="00116" />
-      <option name="presentableId" value="LOCAL-00116" />
-      <option name="project" value="LOCAL" />
-      <updated>1741447526023</updated>
+      <workItem from="1742494541989" duration="11146000" />
     </task>
     <task id="LOCAL-00117" summary="added multiple weapons">
       <option name="closed" value="true" />
@@ -572,14 +566,21 @@
       <option name="project" value="LOCAL" />
       <updated>1742505938856</updated>
     </task>
-    <option name="localTasksCounter" value="165" />
+    <task id="LOCAL-00165" summary="added underbarrel grenade launcher mod">
+      <option name="closed" value="true" />
+      <created>1742506564110</created>
+      <option name="number" value="00165" />
+      <option name="presentableId" value="LOCAL-00165" />
+      <option name="project" value="LOCAL" />
+      <updated>1742506564110</updated>
+    </task>
+    <option name="localTasksCounter" value="166" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated compendium files" />
     <MESSAGE value="fixed typo" />
     <MESSAGE value="changed ultamax hmg sound" />
     <MESSAGE value="changed weapon imgs" />
@@ -604,7 +605,8 @@
     <MESSAGE value="added bipod" />
     <MESSAGE value="tried to make shure bipod actions are unaffected by a gas vent system" />
     <MESSAGE value="updated compendiums" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated compendiums" />
+    <MESSAGE value="added underbarrel grenade launcher mod" />
+    <option name="LAST_COMMIT_MESSAGE" value="added underbarrel grenade launcher mod" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
