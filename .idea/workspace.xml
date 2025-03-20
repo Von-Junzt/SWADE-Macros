@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="tried to make shure bipod actions are unaffected by a gas vent system">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/enhancementActionsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/enhancementActionsData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -179,15 +180,7 @@
       <workItem from="1742371564792" duration="3218000" />
       <workItem from="1742395829833" duration="106000" />
       <workItem from="1742395947076" duration="9140000" />
-      <workItem from="1742494541989" duration="8185000" />
-    </task>
-    <task id="LOCAL-00114" summary="added multiple weapons">
-      <option name="closed" value="true" />
-      <created>1741384151474</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
-      <option name="project" value="LOCAL" />
-      <updated>1741384151474</updated>
+      <workItem from="1742494541989" duration="9627000" />
     </task>
     <task id="LOCAL-00115" summary="added multiple weapons">
       <option name="closed" value="true" />
@@ -573,7 +566,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742503281109</updated>
     </task>
-    <option name="localTasksCounter" value="163" />
+    <task id="LOCAL-00163" summary="tried to make shure bipod actions are unaffected by a gas vent system">
+      <option name="closed" value="true" />
+      <created>1742504181303</created>
+      <option name="number" value="00163" />
+      <option name="presentableId" value="LOCAL-00163" />
+      <option name="project" value="LOCAL" />
+      <updated>1742504181303</updated>
+    </task>
+    <option name="localTasksCounter" value="164" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
