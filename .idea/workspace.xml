@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added global actions for smartgun, added bipod">
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="tried to make shure bipod actions are unaffected by a gas vent system">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/enhancementActionsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/enhancementActionsData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/gobalActionsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/gobalActionsData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -181,23 +179,7 @@
       <workItem from="1742371564792" duration="3218000" />
       <workItem from="1742395829833" duration="106000" />
       <workItem from="1742395947076" duration="9140000" />
-      <workItem from="1742494541989" duration="5778000" />
-    </task>
-    <task id="LOCAL-00112" summary="added multiple weapons">
-      <option name="closed" value="true" />
-      <created>1741296507497</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1741296507497</updated>
-    </task>
-    <task id="LOCAL-00113" summary="added multiple weapons">
-      <option name="closed" value="true" />
-      <created>1741383536169</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1741383536169</updated>
+      <workItem from="1742494541989" duration="8185000" />
     </task>
     <task id="LOCAL-00114" summary="added multiple weapons">
       <option name="closed" value="true" />
@@ -575,15 +557,29 @@
       <option name="project" value="LOCAL" />
       <updated>1742420533437</updated>
     </task>
-    <option name="localTasksCounter" value="161" />
+    <task id="LOCAL-00161" summary="added bipod">
+      <option name="closed" value="true" />
+      <created>1742500732053</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1742500732053</updated>
+    </task>
+    <task id="LOCAL-00162" summary="tried to make shure bipod actions are unaffected by a gas vent system">
+      <option name="closed" value="true" />
+      <created>1742503281109</created>
+      <option name="number" value="00162" />
+      <option name="presentableId" value="LOCAL-00162" />
+      <option name="project" value="LOCAL" />
+      <updated>1742503281109</updated>
+    </task>
+    <option name="localTasksCounter" value="163" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added guns" />
-    <MESSAGE value="added small percentage (25%) for ricochet sounds if miss" />
     <MESSAGE value="added new weapons" />
     <MESSAGE value="updated compendium files" />
     <MESSAGE value="fixed typo" />
@@ -607,7 +603,9 @@
     <MESSAGE value="added notice roll to item.notes" />
     <MESSAGE value="added global actions to overwrite standard brsw cover actions so that they are added automatically when the effect is on the actor" />
     <MESSAGE value="added global actions for smartgun, added bipod" />
-    <option name="LAST_COMMIT_MESSAGE" value="added global actions for smartgun, added bipod" />
+    <MESSAGE value="added bipod" />
+    <MESSAGE value="tried to make shure bipod actions are unaffected by a gas vent system" />
+    <option name="LAST_COMMIT_MESSAGE" value="tried to make shure bipod actions are unaffected by a gas vent system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
