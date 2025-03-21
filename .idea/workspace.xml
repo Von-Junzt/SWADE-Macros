@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added auto delete for explosive weapon templates" />
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added auto delete for explosive weapon templates">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -177,15 +180,7 @@
       <workItem from="1742395829833" duration="106000" />
       <workItem from="1742395947076" duration="9140000" />
       <workItem from="1742494541989" duration="11812000" />
-      <workItem from="1742543888371" duration="3355000" />
-    </task>
-    <task id="LOCAL-00120" summary="added multiple weapons">
-      <option name="closed" value="true" />
-      <created>1741532424373</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1741532424373</updated>
+      <workItem from="1742543888371" duration="5030000" />
     </task>
     <task id="LOCAL-00121" summary="changed grenade model">
       <option name="closed" value="true" />
@@ -571,7 +566,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742549618156</updated>
     </task>
-    <option name="localTasksCounter" value="169" />
+    <task id="LOCAL-00169" summary="added auto delete for explosive weapon templates">
+      <option name="closed" value="true" />
+      <created>1742550198684</created>
+      <option name="number" value="00169" />
+      <option name="presentableId" value="LOCAL-00169" />
+      <option name="project" value="LOCAL" />
+      <updated>1742550198684</updated>
+    </task>
+    <option name="localTasksCounter" value="170" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
