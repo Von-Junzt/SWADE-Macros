@@ -48,4 +48,4 @@ setTimeout(async () => {
         await canvas.scene.deleteEmbeddedDocuments("MeasuredTemplate", [game.vjpmacros.lastTemplate.id]);
         console.log('VJP Macros: Template deleted');
     }
-}, 3000);
+}, 1000);

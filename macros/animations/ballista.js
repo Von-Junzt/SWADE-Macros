@@ -40,4 +40,4 @@ setTimeout(async () => {
         delete game.vjpmacros.lastTemplate;
         console.log('VJP Macros: Template deleted');
     }
-}, 3000);
+}, 1000);
