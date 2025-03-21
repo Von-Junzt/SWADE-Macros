@@ -27,3 +27,17 @@ await new Sequence()
     .scale(0.6)
     .zIndex(2)
     .play()
+
+// Save the last template in a global property so it persists
+game.vjpmacros.lastTemplate = lastTemplate;
+
+// Schedule deletion after 3 seconds, while allowing the macro to finish
+setTimeout(async () => {
+    if (game.vjpmacros.lastTemplate) {
+        // delete Template
+        game.vjpmacros.lastTemplate.document.delete();
+        // Optionally clear the reference afterwards
+        delete game.vjpmacros.lastTemplate;
+        console.log('VJP Macros: Template deleted');
+    }
+}, 3000);

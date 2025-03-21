@@ -35,3 +35,17 @@ if (!game.modules.get('succ')?.active) {
 for (const token of lastTemplate.targets) {
     game.succ.addCondition('stunned', [token]);
 }
+
+
+// Save the last template in a global property so it persists
+game.vjpmacros.lastTemplate = lastTemplate;
+
+// Schedule deletion after 3 seconds, while allowing the macro to finish
+setTimeout(async () => {
+    if (game.vjpmacros.lastTemplate) {
+        game.vjpmacros.lastTemplate.document.delete();
+        // Optionally clear the reference afterwards
+        await canvas.scene.deleteEmbeddedDocuments("MeasuredTemplate", [game.vjpmacros.lastTemplate.id]);
+        console.log('VJP Macros: Template deleted');
+    }
+}, 3000);
