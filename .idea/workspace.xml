@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added underbarrel grenade launcher mod">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/animations/ballista.js" beforeDir="false" afterPath="$PROJECT_DIR$/macros/animations/ballista.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/animations/fragGrenade.js" beforeDir="false" afterPath="$PROJECT_DIR$/macros/animations/fragGrenade.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/animations/rpg.js" beforeDir="false" afterPath="$PROJECT_DIR$/macros/animations/rpg.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/animations/shockGrenade.js" beforeDir="false" afterPath="$PROJECT_DIR$/macros/animations/shockGrenade.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/animations/ubgl.js" beforeDir="false" afterPath="$PROJECT_DIR$/macros/animations/ubgl.js" afterDir="false" />
-    </list>
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added auto delete for explosive weapon templates" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -185,23 +177,7 @@
       <workItem from="1742395829833" duration="106000" />
       <workItem from="1742395947076" duration="9140000" />
       <workItem from="1742494541989" duration="11812000" />
-      <workItem from="1742543888371" duration="2891000" />
-    </task>
-    <task id="LOCAL-00118" summary="added multiple weapons">
-      <option name="closed" value="true" />
-      <created>1741529597738</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1741529597740</updated>
-    </task>
-    <task id="LOCAL-00119" summary="added multiple weapons">
-      <option name="closed" value="true" />
-      <created>1741531494232</created>
-      <option name="number" value="00119" />
-      <option name="presentableId" value="LOCAL-00119" />
-      <option name="project" value="LOCAL" />
-      <updated>1741531494232</updated>
+      <workItem from="1742543888371" duration="3355000" />
     </task>
     <task id="LOCAL-00120" summary="added multiple weapons">
       <option name="closed" value="true" />
@@ -579,14 +555,29 @@
       <option name="project" value="LOCAL" />
       <updated>1742508086381</updated>
     </task>
-    <option name="localTasksCounter" value="167" />
+    <task id="LOCAL-00167" summary="added auto delete for explosive weapon templates">
+      <option name="closed" value="true" />
+      <created>1742549324416</created>
+      <option name="number" value="00167" />
+      <option name="presentableId" value="LOCAL-00167" />
+      <option name="project" value="LOCAL" />
+      <updated>1742549324417</updated>
+    </task>
+    <task id="LOCAL-00168" summary="added auto delete for explosive weapon templates">
+      <option name="closed" value="true" />
+      <created>1742549618156</created>
+      <option name="number" value="00168" />
+      <option name="presentableId" value="LOCAL-00168" />
+      <option name="project" value="LOCAL" />
+      <updated>1742549618156</updated>
+    </task>
+    <option name="localTasksCounter" value="169" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed typo" />
     <MESSAGE value="changed ultamax hmg sound" />
     <MESSAGE value="changed weapon imgs" />
     <MESSAGE value="added multiple weapons" />
@@ -611,7 +602,8 @@
     <MESSAGE value="tried to make shure bipod actions are unaffected by a gas vent system" />
     <MESSAGE value="updated compendiums" />
     <MESSAGE value="added underbarrel grenade launcher mod" />
-    <option name="LAST_COMMIT_MESSAGE" value="added underbarrel grenade launcher mod" />
+    <MESSAGE value="added auto delete for explosive weapon templates" />
+    <option name="LAST_COMMIT_MESSAGE" value="added auto delete for explosive weapon templates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
