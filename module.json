@@ -41,6 +41,18 @@
       "flags": {}
     },
     {
+      "name": "von-junzt-premade-cyberware",
+      "label": "Cyberware",
+      "path": "packs/von-junzt-premade-cyberware",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "swade",
+      "flags": {}
+    },
+    {
       "name": "von-junzt-premade-macros",
       "label": "Macros",
 
@@ -62,6 +74,7 @@
       "packs": [
         "von-junzt-premade-weapons",
         "von-junzt-premade-weapon-enhancements",
+        "von-junzt-premade-cyberware",
         "von-junzt-premade-macros"
       ]
     }

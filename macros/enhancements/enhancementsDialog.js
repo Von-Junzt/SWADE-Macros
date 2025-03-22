@@ -252,7 +252,6 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
             // Update the items notes with the adjusted notice roll mod
             // Use the updated notes that already have the enhancement text removed
-            console.warn(updatedData);
             const originalUpdate = updatedData["system.notes"] || "";
             updatedData["system.notes"] = EnhancementsDialog.updateNoticeModNotes(
                 originalUpdate,
