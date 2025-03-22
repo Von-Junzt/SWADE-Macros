@@ -180,15 +180,9 @@
       <workItem from="1742395829833" duration="106000" />
       <workItem from="1742395947076" duration="9140000" />
       <workItem from="1742494541989" duration="11812000" />
-      <workItem from="1742543888371" duration="5030000" />
-    </task>
-    <task id="LOCAL-00121" summary="changed grenade model">
-      <option name="closed" value="true" />
-      <created>1741535188157</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1741535188157</updated>
+      <workItem from="1742543888371" duration="7854000" />
+      <workItem from="1742638668014" duration="56000" />
+      <workItem from="1742639510710" duration="1388000" />
     </task>
     <task id="LOCAL-00122" summary="changed grenade model">
       <option name="closed" value="true" />
@@ -574,7 +568,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742550198684</updated>
     </task>
-    <option name="localTasksCounter" value="170" />
+    <task id="LOCAL-00170" summary="added auto delete for explosive weapon templates">
+      <option name="closed" value="true" />
+      <created>1742578157746</created>
+      <option name="number" value="00170" />
+      <option name="presentableId" value="LOCAL-00170" />
+      <option name="project" value="LOCAL" />
+      <updated>1742578157746</updated>
+    </task>
+    <option name="localTasksCounter" value="171" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
