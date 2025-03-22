@@ -252,7 +252,8 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
             // Update the items notes with the adjusted notice roll mod
             // Use the updated notes that already have the enhancement text removed
-            const originalUpdate = updatedData["system.notes"] || item.system?.notes || "";
+            console.warn(updatedData);
+            const originalUpdate = updatedData["system.notes"] || "";
             updatedData["system.notes"] = EnhancementsDialog.updateNoticeModNotes(
                 originalUpdate,
                 adjustedNoticeRollMod
@@ -282,11 +283,16 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         const msgText = `<strong>${enhancement.name}</strong> has been removed from <strong>${item.actor.name}'s</strong> <strong>${item.name}</strong>`;
         createChatMessage(msgText);
 
-        return item.setFlag('vjpmacros', 'enhancements', enhancements);
+        return await item.setFlag('vjpmacros', 'enhancements', enhancements);
     }
 
     // Update the notice roll mod notes in the item's system.additionalStats.notes
     static updateNoticeModNotes(currentNotes, totalMod) {
+        // If there are no notes, return an empty string
+        if (!currentNotes || currentNotes.trim() === "") {
+            return "";
+        }
+
         // Remove any existing notice mod entries using regex
         let updatedNotes = currentNotes.replace(/,?\s*Notice:\s*[-+]?\d+/g, '');
         // Clean up any potential double commas or starting/ending commas

@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added auto delete for explosive weapon templates">
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added drum mag as a mod">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/macros/enhancements/enhancementsDialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/macros/enhancements/enhancementsDialog.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,23 +183,9 @@
       <workItem from="1742494541989" duration="11812000" />
       <workItem from="1742543888371" duration="7854000" />
       <workItem from="1742638668014" duration="56000" />
-      <workItem from="1742639510710" duration="1388000" />
-    </task>
-    <task id="LOCAL-00122" summary="changed grenade model">
-      <option name="closed" value="true" />
-      <created>1741535210300</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1741535210300</updated>
-    </task>
-    <task id="LOCAL-00123" summary="updated weapon and macro compendiums">
-      <option name="closed" value="true" />
-      <created>1741535358838</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1741535358838</updated>
+      <workItem from="1742639510710" duration="8233000" />
+      <workItem from="1742680243178" duration="2227000" />
+      <workItem from="1742682494498" duration="2505000" />
     </task>
     <task id="LOCAL-00124" summary="updated weapon and macro compendiums">
       <option name="closed" value="true" />
@@ -576,14 +563,29 @@
       <option name="project" value="LOCAL" />
       <updated>1742578157746</updated>
     </task>
-    <option name="localTasksCounter" value="171" />
+    <task id="LOCAL-00171" summary="added drum mag as a mod">
+      <option name="closed" value="true" />
+      <created>1742654117678</created>
+      <option name="number" value="00171" />
+      <option name="presentableId" value="LOCAL-00171" />
+      <option name="project" value="LOCAL" />
+      <updated>1742654117678</updated>
+    </task>
+    <task id="LOCAL-00172" summary="added drum mag as a mod">
+      <option name="closed" value="true" />
+      <created>1742654130490</created>
+      <option name="number" value="00172" />
+      <option name="presentableId" value="LOCAL-00172" />
+      <option name="project" value="LOCAL" />
+      <updated>1742654130490</updated>
+    </task>
+    <option name="localTasksCounter" value="173" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed ultamax hmg sound" />
     <MESSAGE value="changed weapon imgs" />
     <MESSAGE value="added multiple weapons" />
     <MESSAGE value="changed grenade model" />
@@ -608,7 +610,8 @@
     <MESSAGE value="updated compendiums" />
     <MESSAGE value="added underbarrel grenade launcher mod" />
     <MESSAGE value="added auto delete for explosive weapon templates" />
-    <option name="LAST_COMMIT_MESSAGE" value="added auto delete for explosive weapon templates" />
+    <MESSAGE value="added drum mag as a mod" />
+    <option name="LAST_COMMIT_MESSAGE" value="added drum mag as a mod" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
