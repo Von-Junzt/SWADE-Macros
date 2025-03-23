@@ -101,13 +101,15 @@ Hooks.on('getItemSheetHeaderButtons', (sheet, buttons) => {
     }
 });
 
-Hooks.on("BRSW-CreateItemCardNoRoll", async (br_message, html) => {
+Hooks.on("BRSW-CardRendered", async (br_message, html) => {
+
     // make sure we have a token to shoot at
     const targetToken = game.user.targets.first();
     if(!targetToken) return;
 
     // check if the item is a weapon
     const item = br_message.item;
+
     if(item.type === "weapon") {
         // make shure the cached rangeCategory flag on the actor is cleared before we start
         await br_message.actor.unsetFlag('vjpmacros', 'rangeCategory');
@@ -128,8 +130,7 @@ Hooks.on("BRSW-CreateItemCardNoRoll", async (br_message, html) => {
 });
 
 // initiate weapon animation and check for backlash
-Hooks.on('preCreateChatMessage', async (br_message, document, data, options, userId) => {
-    console.warn(`VJP Macros: Pre create chat `, br_message, document, data, options, userId);
+Hooks.on('BRSW-RollItem', async (br_message, html) => {
     const item = br_message.item;
     // check if item is a weapon and if it's included in the animationData
     if (item.type === 'weapon') {

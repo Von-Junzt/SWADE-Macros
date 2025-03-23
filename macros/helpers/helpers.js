@@ -38,7 +38,7 @@ export function calculateRangeCategory(shooterToken, targetToken, weaponRangeStr
 
     // Measure the distance between shooter and target in the same units as the weapon range. Foundry’s
     // canvas.grid.measureDistance returns the distance between two tokens.
-    const distance = canvas.grid.measureDistance(shooterToken, targetToken);
+    const distance = canvas.grid.measureDistance(shooterToken, targetToken); // TODO: measureDistance is deprecated
 
     // Compare the distance against each threshold. This assumes that if the weapon only has three thresholds, distances
     // greater than the third threshold are considered extreme (4).
