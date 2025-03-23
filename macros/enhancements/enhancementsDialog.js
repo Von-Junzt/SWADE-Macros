@@ -301,6 +301,7 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
         // Remove any existing notice mod entries using regex
         let updatedNotes = currentNotes.replace(/,?\s*Notice:\s*[-+]?\d+/g, '');
+
         // Clean up any potential double commas or starting/ending commas
         updatedNotes = updatedNotes.replace(/,\s*,/g, ',').replace(/^,\s*/, '').replace(/,\s*$/, '');
 

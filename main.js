@@ -6,6 +6,7 @@ import {toggleDuckingEffect} from "./macros/effects/toggleDuckingEffect.js";
 import {EnhancementsDialog} from "./macros/enhancements/enhancementsDialog.js";
 import {globalActions} from "./lib/gobalActionsData.js";
 import {enhancementActions} from "./lib/enhancementActionsData.js";
+import {calculateRangeCategory} from "./macros/helpers/helpers.js";
 
 // Track open enhancement dialogs
 const openEnhancementDialogs = new Map();
@@ -100,6 +101,28 @@ Hooks.on('getItemSheetHeaderButtons', (sheet, buttons) => {
     }
 });
 
+Hooks.on("BRSW-CardRendered", async (br_message, html) => {
+    // make sure we have a token to shoot at
+    const targetToken = game.user.targets.first();
+    if(!targetToken) return;
+
+    // check if the item is a weapon
+    const item = br_message.item;
+    if(item.type === "weapon") {
+        // get additional data
+        const shooterToken = br_message.token;
+        const weaponRangeStr = item.system.range;
+
+        // check if the shooter token and weapon range are valid
+        if(!shooterToken || weaponRangeStr) return;
+
+        // Calculate the range category using your helper function
+        const rangeCategory = calculateRangeCategory(shooterToken, targetToken, weaponRangeStr);
+        // Save the range category as a flag on the actor so it can be used later
+        await shooterToken.actor.setFlag('vjpmacros', 'rangeCategory', rangeCategory);
+    }
+});
+
 // initiate weapon animation and check for backlash
 Hooks.on('BRSW-RollItem', async (br_message, html) => {
     const item = br_message.item;
@@ -118,9 +141,11 @@ Hooks.on('BRSW-RollItem', async (br_message, html) => {
     }
     // check if the player has rolled a natural 1, when using a power (sprawlrunners specific rule)
     if(item.type === 'power') {
-        console.log(br_message);
         await backlashCheck(br_message.trait_roll?.current_roll?.dice, br_message.actor, br_message.trait_roll?.current_roll?.is_fumble);
     }
+
+    // make shure the cached rangeCategory flag on the actor is cleared
+    await br_message.actor.unsetFlag('vjpmacros', 'rangeCategory');
 });
 
 // Play the reload animation for the given item
