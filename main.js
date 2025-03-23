@@ -109,12 +109,15 @@ Hooks.on("BRSW-CardRendered", async (br_message, html) => {
     // check if the item is a weapon
     const item = br_message.item;
     if(item.type === "weapon") {
+        // make shure the cached rangeCategory flag on the actor is cleared before we start
+        await br_message.actor.unsetFlag('vjpmacros', 'rangeCategory');
+
         // get additional data
         const shooterToken = br_message.token;
         const weaponRangeStr = item.system.range;
 
         // check if the shooter token and weapon range are valid
-        if(!shooterToken || weaponRangeStr) return;
+        if(!shooterToken || !weaponRangeStr) return;
 
         // Calculate the range category using your helper function
         const rangeCategory = calculateRangeCategory(shooterToken, targetToken, weaponRangeStr);
@@ -143,9 +146,6 @@ Hooks.on('BRSW-RollItem', async (br_message, html) => {
     if(item.type === 'power') {
         await backlashCheck(br_message.trait_roll?.current_roll?.dice, br_message.actor, br_message.trait_roll?.current_roll?.is_fumble);
     }
-
-    // make shure the cached rangeCategory flag on the actor is cleared
-    await br_message.actor.unsetFlag('vjpmacros', 'rangeCategory');
 });
 
 // Play the reload animation for the given item
