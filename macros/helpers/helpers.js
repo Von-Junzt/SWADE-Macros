@@ -19,3 +19,12 @@ export async function createChatMessage(msgText) {
         blind: false // Ensure the message is visible to all
     });
 }
+
+// Add this function somewhere in the file, perhaps near the helper functions
+export function checkGMPermission() {
+    if (!game.user.isGM) {
+        console.warn("No GM permission");
+        return false;
+    }
+    return true;
+}

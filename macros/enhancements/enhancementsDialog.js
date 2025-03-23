@@ -1,5 +1,5 @@
 import {weaponEnhancementsData, isEnhancementCompatible, calculateNoticeRollModAdjustment, addToNotes, removeFromNotes} from "../../lib/weaponEnhancementsData.js";
-import {createChatMessage} from "../helpers/helpers.js";
+import {createChatMessage, checkGMPermission} from "../helpers/helpers.js";
 
 export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
     constructor(item) {
@@ -229,12 +229,19 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
     // Remove an enhancement by its index.
     static async removeEnhancement(item, index) {
+        // Get the enhancements array from the item's flags
         const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
 
+        // Check if the index is valid
         if (index < 0 || index >= enhancements.length) return;
 
         // Get the enhancement being removed before we remove it
         const enhancement = enhancements[index];
+
+        if (enhancement.name.toLowerCase().includes('built-in') && !checkGMPermission()) {
+            ui.notifications.warn("You don't have permission to remove built-in enhancements.");
+            return false; // Exit early if it's a built-in enhancement and user is not GM
+        }
 
         // Remove the enhancement from the array
         enhancements.splice(index, 1);
