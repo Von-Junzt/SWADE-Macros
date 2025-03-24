@@ -3,6 +3,20 @@
   "title": "Von Junzt's SWADE Macros",
   "version": "1.0.0",
   "url": "https://github.com/Von-Junzt/critical-hits-revisited",
+  "dependencies": [
+    {
+      "id": "lib-wrapper",
+      "manifest": "https://raw.githubusercontent.com/league-of-foundry-developers/lib-wrapper/master/module.json",
+      "minimum": "1.8.0",
+      "verified": "1.8.0"
+    },
+    {
+      "id": "betterrolls-swade2",
+      "manifest": "https://raw.githubusercontent.com/javierriveracastro/betteroll-swade/version_2/module.json",
+      "minimum": "2.0.0",
+      "verified": "2.0.0"
+    }
+  ],
   "compatibility": {
     "minimum": "12",
     "verified": "12"
@@ -55,7 +69,6 @@
     {
       "name": "von-junzt-premade-macros",
       "label": "Macros",
-
       "path": "packs/von-junzt-premade-macros",
       "type": "Macro",
       "ownership": {
@@ -79,7 +92,7 @@
       ]
     }
   ],
-  "socket" : true,
+  "socket": true,
   "styles": [
     "vjpmacros.css"
   ],

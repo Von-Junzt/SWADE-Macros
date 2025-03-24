@@ -101,34 +101,6 @@ Hooks.on('getItemSheetHeaderButtons', (sheet, buttons) => {
     }
 });
 
-Hooks.on("BRSW-CardRendered", async (br_message, html) => {
-
-    // make sure we have a token to shoot at
-    const targetToken = game.user.targets.first();
-    if(!targetToken) return;
-
-    // check if the item is a weapon
-    const item = br_message.item;
-
-    if(item.type === "weapon") {
-        // make shure the cached rangeCategory flag on the actor is cleared before we start
-        await br_message.actor.unsetFlag('vjpmacros', 'rangeCategory');
-
-        // get additional data
-        const shooterToken = br_message.token;
-        const weaponRangeStr = item.system.range;
-
-        // check if the shooter token and weapon range are valid
-        if(!shooterToken || !weaponRangeStr) return;
-
-        // Calculate the range category using your helper function
-        const rangeCategory = calculateRangeCategory(shooterToken, targetToken, weaponRangeStr);
-
-        // Save the range category as a flag on the actor so it can be used later
-        await shooterToken.actor.setFlag('vjpmacros', 'rangeCategory', rangeCategory);
-    }
-});
-
 // initiate weapon animation and check for backlash
 Hooks.on('BRSW-RollItem', async (br_message, html) => {
     const item = br_message.item;
@@ -158,6 +130,7 @@ Hooks.on('swadeReloadWeapon', async (item, reloaded) => {
     }
 });
 
+// check and return the weapon type of the given item
 function getWeaponType(item) {
     const weaponCategory = item.system?.category?.toLowerCase() || "";
     const weaponType = Object.keys(animationData)
@@ -165,3 +138,53 @@ function getWeaponType(item) {
         .find(type => weaponCategory.includes(type)) || undefined;
     return weaponType;
 }
+
+// Run libWrapper's register function to wrap brsw's createItemCard function
+Hooks.once("ready", () => {
+    if (game.brsw && typeof game.brsw.create_item_card === "function") {
+        // in here we want to wrap the create_item_card function to calculate a rangeCategory, in order to make weapon
+        // enhancements modify the trait roll, depending on the range category (short = 1, medium = 2, long = 3, extreme = 4)
+        libWrapper.register("vjpmacros", "game.brsw.create_item_card", async function (wrapped, ...args) {
+            // Log the arguments to understand their structure
+            console.log("create_item_card args:", args);
+
+            // Determine which arg is the actor and which is the item
+            let actor, item;
+
+            if (args[0]?.constructor?.name === "SwadeActor") {
+                actor = args[0];
+                // Get the item based on what's passed
+                if (args[1] && typeof args[1] === "string") {
+                    item = actor.items.get(args[1]);
+                } else if (args[1]?.type === "weapon") {
+                    item = args[1];
+                }
+            }
+
+            // If we have both actor and weapon item, proceed with range calculation
+            if (actor && item?.type === "weapon") {
+                const weaponRangeStr = item.system.range;
+                const shooterToken = canvas.tokens.placeables.find(t => t.actor === actor);
+                const targetToken = game.user.targets.first();
+
+                if (shooterToken && targetToken && weaponRangeStr) {
+                    const rangeCategory = calculateRangeCategory(shooterToken, targetToken, weaponRangeStr);
+                    // Await the flag setting to ensure it completes before continuing
+                    await actor.setFlag("vjpmacros", "rangeCategory", rangeCategory);
+                    console.log(`Range Category set to: ${rangeCategory}`);
+                }
+            }
+
+            // Now that our calculations are complete, call the original function
+            // Check if the original is async (returns a Promise)
+            const result = wrapped(...args);
+            if (result instanceof Promise) {
+                return await result;
+            }
+            return result;
+        }, "WRAPPER");
+    } else {
+        console.error("game.brsw.create_item_card not found; cannot register wrapper.");
+    }
+});
+
