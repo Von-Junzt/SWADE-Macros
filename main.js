@@ -6,7 +6,7 @@ import {toggleDuckingEffect} from "./macros/effects/toggleDuckingEffect.js";
 import {EnhancementsDialog} from "./macros/enhancements/enhancementsDialog.js";
 import {globalActions} from "./lib/gobalActionsData.js";
 import {enhancementActions} from "./lib/enhancementActionsData.js";
-import {checkForActiveSmartLink, calculateAndSetRangeCategory} from "./lib/weaponEnhancementsData.js";
+import {checkForActiveSmartLink, setRangeCategory} from "./lib/weaponEnhancementsData.js";
 
 // Track open enhancement dialogs
 const openEnhancementDialogs = new Map();
@@ -162,7 +162,7 @@ Hooks.once("ready", () => {
             }
 
             // Calculate and set range category if applicable
-            await calculateAndSetRangeCategory(actor, item);
+            await setRangeCategory(actor, item);
             await checkForActiveSmartLink(actor, item);
 
             // Now that our calculations are complete, call the original function
