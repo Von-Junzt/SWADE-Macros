@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added scope and refactored scripts and functions">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" afterDir="false" />
-    </list>
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="updated weapon enhancements" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -191,15 +188,7 @@
       <workItem from="1742829254840" duration="3807000" />
       <workItem from="1742926844879" duration="616000" />
       <workItem from="1742941121849" duration="42000" />
-      <workItem from="1743001733495" duration="4396000" />
-    </task>
-    <task id="LOCAL-00136" summary="renamed silenced to suppressed">
-      <option name="closed" value="true" />
-      <created>1741769700827</created>
-      <option name="number" value="00136" />
-      <option name="presentableId" value="LOCAL-00136" />
-      <option name="project" value="LOCAL" />
-      <updated>1741769700827</updated>
+      <workItem from="1743001733495" duration="5211000" />
     </task>
     <task id="LOCAL-00137" summary="added shotgun slugs">
       <option name="closed" value="true" />
@@ -585,14 +574,21 @@
       <option name="project" value="LOCAL" />
       <updated>1743014003052</updated>
     </task>
-    <option name="localTasksCounter" value="185" />
+    <task id="LOCAL-00185" summary="updated weapon enhancements">
+      <option name="closed" value="true" />
+      <created>1743022865538</created>
+      <option name="number" value="00185" />
+      <option name="presentableId" value="LOCAL-00185" />
+      <option name="project" value="LOCAL" />
+      <updated>1743022865538</updated>
+    </task>
+    <option name="localTasksCounter" value="186" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="weapon enhancement sheet now renders automatically" />
     <MESSAGE value="made logic more sturdy, added check for mounting points" />
     <MESSAGE value="added several enhancements" />
     <MESSAGE value="added gas vent system" />
@@ -617,7 +613,8 @@
     <MESSAGE value="finally implemented rangeCategory calculation without racing condition. added libWrapper as a dependency" />
     <MESSAGE value="added scope" />
     <MESSAGE value="added scope and refactored scripts and functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="added scope and refactored scripts and functions" />
+    <MESSAGE value="updated weapon enhancements" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated weapon enhancements" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
