@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="have to redo range check. this commit is just to save the actual process.">
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="added scope">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/enhancementActionsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/enhancementActionsData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/gobalActionsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/gobalActionsData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/macros/helpers/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/macros/helpers/helpers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/module.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,31 +192,10 @@
       <workItem from="1742719554022" duration="18485000" />
       <workItem from="1742828197676" duration="663000" />
       <workItem from="1742828873729" duration="336000" />
-      <workItem from="1742829254840" duration="989000" />
-    </task>
-    <task id="LOCAL-00131" summary="added weapon modification system">
-      <option name="closed" value="true" />
-      <created>1741731005739</created>
-      <option name="number" value="00131" />
-      <option name="presentableId" value="LOCAL-00131" />
-      <option name="project" value="LOCAL" />
-      <updated>1741731005739</updated>
-    </task>
-    <task id="LOCAL-00132" summary="added weapon modification system">
-      <option name="closed" value="true" />
-      <created>1741733233932</created>
-      <option name="number" value="00132" />
-      <option name="presentableId" value="LOCAL-00132" />
-      <option name="project" value="LOCAL" />
-      <updated>1741733233932</updated>
-    </task>
-    <task id="LOCAL-00133" summary="added weapon modification system">
-      <option name="closed" value="true" />
-      <created>1741737068506</created>
-      <option name="number" value="00133" />
-      <option name="presentableId" value="LOCAL-00133" />
-      <option name="project" value="LOCAL" />
-      <updated>1741737068506</updated>
+      <workItem from="1742829254840" duration="3807000" />
+      <workItem from="1742926844879" duration="616000" />
+      <workItem from="1742941121849" duration="42000" />
+      <workItem from="1743001733495" duration="1654000" />
     </task>
     <task id="LOCAL-00134" summary="added weapon modification system">
       <option name="closed" value="true" />
@@ -584,15 +565,37 @@
       <option name="project" value="LOCAL" />
       <updated>1742766432893</updated>
     </task>
-    <option name="localTasksCounter" value="180" />
+    <task id="LOCAL-00180" summary="finally implemented rangeCategory calculation without racing condition. added libWrapper as a dependency">
+      <option name="closed" value="true" />
+      <created>1742830533646</created>
+      <option name="number" value="00180" />
+      <option name="presentableId" value="LOCAL-00180" />
+      <option name="project" value="LOCAL" />
+      <updated>1742830533646</updated>
+    </task>
+    <task id="LOCAL-00181" summary="added scope">
+      <option name="closed" value="true" />
+      <created>1742834250792</created>
+      <option name="number" value="00181" />
+      <option name="presentableId" value="LOCAL-00181" />
+      <option name="project" value="LOCAL" />
+      <updated>1742834250792</updated>
+    </task>
+    <task id="LOCAL-00182" summary="added scope">
+      <option name="closed" value="true" />
+      <created>1742941137996</created>
+      <option name="number" value="00182" />
+      <option name="presentableId" value="LOCAL-00182" />
+      <option name="project" value="LOCAL" />
+      <updated>1742941137996</updated>
+    </task>
+    <option name="localTasksCounter" value="183" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="renamed silenced to suppressed" />
-    <MESSAGE value="added shotgun slugs" />
     <MESSAGE value="added enhancement istallation sounds" />
     <MESSAGE value="weapon enhancement sheet now renders automatically" />
     <MESSAGE value="made logic more sturdy, added check for mounting points" />
@@ -616,7 +619,9 @@
     <MESSAGE value="added range check for cqb optic" />
     <MESSAGE value="added range check for cqb optic and cqb optic enhancement" />
     <MESSAGE value="have to redo range check. this commit is just to save the actual process." />
-    <option name="LAST_COMMIT_MESSAGE" value="have to redo range check. this commit is just to save the actual process." />
+    <MESSAGE value="finally implemented rangeCategory calculation without racing condition. added libWrapper as a dependency" />
+    <MESSAGE value="added scope" />
+    <option name="LAST_COMMIT_MESSAGE" value="added scope" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

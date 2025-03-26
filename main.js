@@ -6,7 +6,7 @@ import {toggleDuckingEffect} from "./macros/effects/toggleDuckingEffect.js";
 import {EnhancementsDialog} from "./macros/enhancements/enhancementsDialog.js";
 import {globalActions} from "./lib/gobalActionsData.js";
 import {enhancementActions} from "./lib/enhancementActionsData.js";
-import {calculateRangeCategory} from "./macros/helpers/helpers.js";
+import {checkForActiveSmartLink, calculateAndSetRangeCategory} from "./lib/weaponEnhancementsData.js";
 
 // Track open enhancement dialogs
 const openEnhancementDialogs = new Map();
@@ -161,19 +161,9 @@ Hooks.once("ready", () => {
                 }
             }
 
-            // If we have both actor and weapon item, proceed with range calculation
-            if (actor && item?.type === "weapon") {
-                const weaponRangeStr = item.system.range;
-                const shooterToken = canvas.tokens.placeables.find(t => t.actor === actor);
-                const targetToken = game.user.targets.first();
-
-                if (shooterToken && targetToken && weaponRangeStr) {
-                    const rangeCategory = calculateRangeCategory(shooterToken, targetToken, weaponRangeStr);
-                    // Await the flag setting to ensure it completes before continuing
-                    await actor.setFlag("vjpmacros", "rangeCategory", rangeCategory);
-                    console.log(`Range Category set to: ${rangeCategory}`);
-                }
-            }
+            // Calculate and set range category if applicable
+            await calculateAndSetRangeCategory(actor, item);
+            await checkForActiveSmartLink(actor, item);
 
             // Now that our calculations are complete, call the original function
             // Check if the original is async (returns a Promise)
@@ -187,4 +177,3 @@ Hooks.once("ready", () => {
         console.error("game.brsw.create_item_card not found; cannot register wrapper.");
     }
 });
-
