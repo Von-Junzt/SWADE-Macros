@@ -1,5 +1,5 @@
 import {weaponEnhancementsData, isEnhancementCompatible, calculateNoticeRollModAdjustment, addToNotes, removeFromNotes} from "../../lib/weaponEnhancementsData.js";
-import {createChatMessage, checkGMPermission} from "../helpers/helpers.js";
+import {createChatMessage, checkGMPermission, playSoundForAllUsers} from "../helpers/helpers.js";
 
 export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
     constructor(item) {
@@ -70,7 +70,6 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         });
     }
 
-
     // Update the dialog's dynamic content by replacing the content container in the DOM.
     _updateContent() {
         const newContent = EnhancementsDialog._getContent(this.item);
@@ -85,7 +84,6 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         // Re-bind events after updating the DOM by calling _onRender manually
         this._onRender();
     }
-
 
     // Generate the HTML content for the dialog based on current enhancements.
     static _getContent(item) {
@@ -116,63 +114,39 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
     </div>`;
     }
 
-
     // Add a new enhancement to the item
-    static async addEnhancement(item, enhancementItem) {
-        // Determine the mounting point from the enhancement item.
-        const mountingPoint = enhancementItem.system.category;
-
-        // Check if mounting point is set.
-        if (!mountingPoint || mountingPoint === "") {
-            console.error("Unable to add enhancement, mounting point is not set.");
-            return;
-        }
-
+    static async addEnhancement(item, enhancement) {
         // Get the existing enhancements.
-        const enhancements = item.getFlag('vjpmacros', 'enhancements') || [];
+        const enhancementsArray = item.getFlag('vjpmacros', 'enhancements') || [];
 
-        // Determine the enhancement type using the matcher.
-        const enhancementType = Object.keys(weaponEnhancementsData).find(key => {
-            const enhancementData = weaponEnhancementsData[key];
-            return typeof enhancementData.matcher === "function" && enhancementData.matcher(enhancementItem);
-        });
+        const validationResult = this.validateEnhancement(enhancement, item, enhancementsArray);
 
-        // If no valid enhancement type is found, warn and exit.
-        if (!enhancementType) {
-            ui.notifications.warn(`${enhancementItem.name} is not a recognized enhancement.`);
-            return;
-        }
-
-        // Check if this enhancement already exists in the enhancements list.
-        if (enhancements.some(e => e.uuid === enhancementItem.uuid)) return;
-
-        // Check if the enhancement is compatible with the weapon.
-        if (!isEnhancementCompatible(enhancementItem, item)) {
-            ui.notifications.warn(`${enhancementItem.name} is not compatible with ${item.name} or no valid enhancement.`);
-            return;
-        }
-
-        // Prevent adding another enhancement if the mounting point is already in use.
-        if (enhancements.some(e => e.mountingPoint === mountingPoint)) {
-            ui.notifications.warn(`An enhancement for mounting point "${mountingPoint}" is already attached to this weapon.`);
+        if (!validationResult.isValid) {
+            ui.notifications.warn(validationResult.message);
             return;
         }
 
         // Create the enhancement entry, storing both the computed enhancement type and mounting point.
-        const enhancement = {
-            name: enhancementItem.name,
-            img: enhancementItem.img,
-            id: enhancementItem.id,
-            uuid: enhancementItem.uuid,
-            enhancementType: enhancementType,
-            mountingPoint: mountingPoint
+        const enhancementEntry = {
+            name: enhancement.name,
+            img: enhancement.img,
+            id: enhancement.id,
+            uuid: enhancement.uuid,
+            enhancementType: validationResult.enhancementType,
+            mountingPoint: validationResult.mountingPoint
         };
 
-        enhancements.push(enhancement);
+        const enhancementType = validationResult.enhancementType;
+        enhancementsArray.push(enhancementEntry);
 
         // Apply the enhancement effect using the enhancementType.
         if (weaponEnhancementsData[enhancementType]) {
-            const updatedData = weaponEnhancementsData[enhancementType].apply(item, enhancementItem);
+            let updatedData = weaponEnhancementsData[enhancementType].apply(item, enhancement);
+
+            // add enhancement to notes
+            if (!updatedData) updatedData = {};
+            const currentNotes = item.system?.notes || "";
+            updatedData["system.notes"] = addToNotes(currentNotes, weaponEnhancementsData[enhancementType].name);
 
             // Apply notice roll mod adjustment
             let noticeRollMod = weaponEnhancementsData[enhancementType].noticeRollMod;
@@ -210,21 +184,19 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
         // Play sound effect.
         let sfxToPlay = weaponEnhancementsData[enhancementType]?.sfxToPlay || "modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg";
+
+        // if sfxToPlay is a function, call it to get the actual sound file path
         if (typeof sfxToPlay === "function") {
             sfxToPlay = await sfxToPlay(item);
         }
-        console.log(sfxToPlay);
-        new Sequence()
-            .sound()
-            .file(sfxToPlay)
-            .volume(0.8)
-            .play();
+
+        await playSoundForAllUsers(sfxToPlay);
 
         // Create a chat message.
-        const msgText = `<strong>${enhancementItem.name}</strong> has been added to <strong>${item.actor.name}'s</strong> <strong>${item.name}</strong>`;
+        const msgText = `<strong>${enhancement.name}</strong> has been added to <strong>${item.actor.name}'s</strong> <strong>${item.name}</strong>`;
         createChatMessage(msgText);
 
-        return item.setFlag('vjpmacros', 'enhancements', enhancements);
+        return item.setFlag('vjpmacros', 'enhancements', enhancementsArray);
     }
 
     // Remove an enhancement by its index.
@@ -238,9 +210,10 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         // Get the enhancement being removed before we remove it
         const enhancement = enhancements[index];
 
+        // Exit early if it's a built-in enhancement and user is not GM
         if (enhancement.name.toLowerCase().includes('built-in') && !checkGMPermission()) {
             ui.notifications.warn("You don't have permission to remove built-in enhancements.");
-            return false; // Exit early if it's a built-in enhancement and user is not GM
+            return false;
         }
 
         // Remove the enhancement from the array
@@ -248,7 +221,12 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
         // Revert the enhancement effect if it's a recognized type
         if (enhancement.enhancementType && weaponEnhancementsData[enhancement.enhancementType]) {
-            const updatedData = weaponEnhancementsData[enhancement.enhancementType].remove(item, enhancement);
+            let updatedData = weaponEnhancementsData[enhancement.enhancementType].remove(item, enhancement);
+
+            // Remove the enhancement from the item's notes
+            if (!updatedData) updatedData = {};
+            const currentNotes = item.system?.notes || "";
+            updatedData["system.notes"] = removeFromNotes(currentNotes, weaponEnhancementsData[enhancement.enhancementType].name);
 
             // Apply notice roll mod adjustment
             const noticeRollMod = weaponEnhancementsData[enhancement.enhancementType].noticeRollMod;
@@ -257,8 +235,8 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
                 updatedData["system.additionalStats.noticeRollMod.value"] = adjustedNoticeRollMod;
             }
 
-            // Update the items notes with the adjusted notice roll mod
-            // Use the updated notes that already have the enhancement text removed
+            // Update the items notes with the adjusted notice roll mod. Use the updated notes that already have the
+            // enhancement text removed
             const originalUpdate = updatedData["system.notes"] || "";
             updatedData["system.notes"] = EnhancementsDialog.updateNoticeModNotes(
                 originalUpdate,
@@ -278,12 +256,7 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
             sfxToPlay = await sfxToPlay(item);
         }
 
-        console.log(sfxToPlay);
-        new Sequence()
-            .sound()
-            .file(sfxToPlay)
-            .volume(0.8)
-            .play();
+        await playSoundForAllUsers(sfxToPlay);
 
         // Create a chat message
         const msgText = `<strong>${enhancement.name}</strong> has been removed from <strong>${item.actor.name}'s</strong> <strong>${item.name}</strong>`;
@@ -320,6 +293,64 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
 
         // Place the notice mod at the beginning, followed by the rest of the notes
         return `${noticeText}, ${updatedNotes}`;
+    }
+
+    // Validate if the enhancement can be added to the target item
+    static validateEnhancement(enhancementItem, targetItem, existingEnhancements = []) {
+        // Check if mounting point is set
+        const mountingPoint = enhancementItem.system.category;
+        if (!mountingPoint || mountingPoint === "") {
+            return {
+                isValid: false,
+                message: "Unable to add enhancement, mounting point is not set."
+            };
+        }
+
+        // Determine the enhancement type using the matcher
+        const enhancementType = Object.keys(weaponEnhancementsData).find(key => {
+            const enhancementData = weaponEnhancementsData[key];
+            return typeof enhancementData.matcher === "function" && enhancementData.matcher(enhancementItem);
+        });
+
+        // If no valid enhancement type is found
+        if (!enhancementType) {
+            return {
+                isValid: false,
+                message: `${enhancementItem.name} is not a recognized enhancement.`
+            };
+        }
+
+        // Check if this enhancement already exists in the enhancements list
+        if (existingEnhancements.some(e => e.uuid === enhancementItem.uuid)) {
+            return {
+                isValid: false,
+                message: `${enhancementItem.name} is already attached to this weapon.`
+            };
+        }
+
+        // Check if the enhancement is compatible with the weapon
+        if (!isEnhancementCompatible(enhancementItem, targetItem)) {
+            return {
+                isValid: false,
+                message: `${enhancementItem.name} is not compatible with ${targetItem.name} or no valid enhancement.`
+            };
+        }
+
+        // Prevent adding another enhancement if the mounting point is already in use
+        if (existingEnhancements.some(e => e.mountingPoint === mountingPoint)) {
+            return {
+                isValid: false,
+                message: `An enhancement for mounting point "${mountingPoint}" is already attached to this weapon.`
+            };
+        }
+
+        // All checks passed
+        return {
+            isValid: true,
+            message: "Enhancement is valid",
+            enhancementType,
+            mountingPoint
+        };
     }
 }
 
