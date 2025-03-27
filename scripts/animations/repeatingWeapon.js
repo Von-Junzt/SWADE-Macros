@@ -1,6 +1,6 @@
 import {ANIMATION_DATA} from "../../lib/animation_data.js";
 import {SFX_DATA} from "../../lib/sfx_data.js";
-import {createChatMessage,playSoundForAllUsers} from "../utils/generalUtils.js";
+import {createChatMessage, playSoundForAllUsers} from "../utils/generalUtils.js";
 
 
 // Play firing sound and animation for the given weapon
@@ -99,7 +99,8 @@ export async function repeatingWeapon(br_message, weaponType) {
     // to simulate mechanics like pump action, assault cannons that take significantly more time between shots, etc.
     const fireRateDelay = sfxConfig.fireRateDelay; // the delay between shots
     const shotAnimation = ANIMATION_DATA[weaponType].animation; // the animation file to play
-    const projectileVelocity = ANIMATION_DATA[weaponType].projectileVelocity;
+    const baseProjectileVelocity = ANIMATION_DATA[weaponType].projectileVelocity;
+    const projectileVelocity = baseProjectileVelocity * (canvas.grid.size / 64); // Scale projectile velocity based on grid size (optimized for 64px grid)
     const projectileSize = ANIMATION_DATA[weaponType].projectileSize; // the size of the projectile. bigger gun, bigger projectile
     const casingAnimationDelay = ANIMATION_DATA[weaponType].casingAnimationDelay; // the delay before the casing is ejected, e.g. pump action
     const casingImage = ANIMATION_DATA[weaponType].casingImage; // the image of the casing

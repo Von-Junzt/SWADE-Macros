@@ -23,8 +23,8 @@ Hooks.once('init', function() {
 Hooks.once('ready', async () => {
     // Add the animationData and sfxData to the game object
     game.vjpmacros = {
-        animationData: ANIMATION_DATA,
-        sfxData: SFX_DATA
+        ANIMATION_DATA: ANIMATION_DATA,
+        SFX_DATA: SFX_DATA
     };
 
     // add global actions
