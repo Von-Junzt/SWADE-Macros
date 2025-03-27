@@ -1,5 +1,15 @@
-import {weaponEnhancementsData} from "../../lib/weaponEnhancementsData.js";
-import {animationData} from "../../lib/animationData.js";
+import {WEAPON_ENHANCEMENTS} from "../../lib/weapon_enhancements.js";
+import {ANIMATION_DATA} from "../../lib/animation_data.js";
+
+// check and return the weapon type of the given item
+export function getWeaponType(item) {
+    const weaponCategory = item.system?.category?.toLowerCase() || "";
+    const weaponType = Object.keys(ANIMATION_DATA)
+        .sort((a, b) => b.length - a.length)
+        .find(type => weaponCategory.includes(type)) || undefined;
+    return weaponType;
+}
+
 
 // Validate if the enhancement can be added to the target item
 export function validateEnhancement(enhancementItem, targetItem, existingEnhancements = []) {
@@ -13,8 +23,8 @@ export function validateEnhancement(enhancementItem, targetItem, existingEnhance
     }
 
     // Determine the enhancement type using the matcher
-    const enhancementType = Object.keys(weaponEnhancementsData).find(key => {
-        const enhancementData = weaponEnhancementsData[key];
+    const enhancementType = Object.keys(WEAPON_ENHANCEMENTS).find(key => {
+        const enhancementData = WEAPON_ENHANCEMENTS[key];
         return typeof enhancementData.matcher === "function" && enhancementData.matcher(enhancementItem);
     });
 
@@ -62,8 +72,8 @@ export function validateEnhancement(enhancementItem, targetItem, existingEnhance
 // Checks if an item is a valid enhancement and returns its type key if so. Returns undefined if the item doesn't match any enhancement.
 export function isEnhancementCompatible(enhancementItem, item) {
     // Determine the enhancement type using the matcher function for each enhancement type.
-    const enhancementType = Object.keys(weaponEnhancementsData).find(key => {
-        const enhancementData = weaponEnhancementsData[key];
+    const enhancementType = Object.keys(WEAPON_ENHANCEMENTS).find(key => {
+        const enhancementData = WEAPON_ENHANCEMENTS[key];
         return typeof enhancementData.matcher === "function" && enhancementData.matcher(enhancementItem);
     });
 
@@ -73,11 +83,11 @@ export function isEnhancementCompatible(enhancementItem, item) {
     }
 
     // Retrieve the list of compatible weapon types for this enhancement.
-    const compatList = weaponEnhancementsData[enhancementType].compatibleWeapons || [];
+    const compatList = WEAPON_ENHANCEMENTS[enhancementType].compatibleWeapons || [];
 
     // Get the weapon's category (which is now decoupled from this compatibility logic).
     const weaponName = item.system?.category?.toLowerCase() || "";
-    const weaponType = Object.keys(animationData)
+    const weaponType = Object.keys(ANIMATION_DATA)
         .sort((a, b) => b.length - a.length)
         .find(type => weaponName.includes(type)) || undefined;
 

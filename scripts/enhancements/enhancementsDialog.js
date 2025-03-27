@@ -1,4 +1,4 @@
-import {weaponEnhancementsData} from "../../lib/weaponEnhancementsData.js";
+import {WEAPON_ENHANCEMENTS} from "../../lib/weapon_enhancements.js";
 import {createChatMessage, checkGMPermission, playSoundForAllUsers} from "../utils/generalUtils.js";
 import {addToNotes, removeFromNotes, updateNoticeModNotes} from "../utils/noteManipulation.js";
 import {validateEnhancement} from "../utils/compatibilityUtils.js";
@@ -94,8 +94,8 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         const listItems = enhancements.map((e, i) => {
             // Try to get the enhancement description if available
             let description = "No description available";
-            if (e.enhancementType && weaponEnhancementsData[e.enhancementType]) {
-                description = weaponEnhancementsData[e.enhancementType].description;
+            if (e.enhancementType && WEAPON_ENHANCEMENTS[e.enhancementType]) {
+                description = WEAPON_ENHANCEMENTS[e.enhancementType].description;
             }
 
             return `
@@ -143,16 +143,16 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         enhancementsArray.push(enhancementEntry);
 
         // Apply the enhancement effect using the enhancementType.
-        if (weaponEnhancementsData[enhancementType]) {
-            let updatedData = weaponEnhancementsData[enhancementType].apply(item, enhancement);
+        if (WEAPON_ENHANCEMENTS[enhancementType]) {
+            let updatedData = WEAPON_ENHANCEMENTS[enhancementType].apply(item, enhancement);
 
             // add enhancement to notes
             if (!updatedData) updatedData = {};
             const currentNotes = item.system?.notes || "";
-            updatedData["system.notes"] = addToNotes(currentNotes, weaponEnhancementsData[enhancementType].name);
+            updatedData["system.notes"] = addToNotes(currentNotes, WEAPON_ENHANCEMENTS[enhancementType].name);
 
             // Apply notice roll mod adjustment
-            let noticeRollMod = weaponEnhancementsData[enhancementType].noticeRollMod;
+            let noticeRollMod = WEAPON_ENHANCEMENTS[enhancementType].noticeRollMod;
 
             // make shure noticeRollMod programmatically enabled if not already present
             if (!item.system.additionalStats.noticeRollMod) {
@@ -186,7 +186,7 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         }
 
         // Play sound effect.
-        let sfxToPlay = weaponEnhancementsData[enhancementType]?.sfxToPlay || "modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg";
+        let sfxToPlay = WEAPON_ENHANCEMENTS[enhancementType]?.sfxToPlay || "modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg";
 
         // if sfxToPlay is a function, call it to get the actual sound file path
         if (typeof sfxToPlay === "function") {
@@ -223,16 +223,16 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         enhancements.splice(index, 1);
 
         // Revert the enhancement effect if it's a recognized type
-        if (enhancement.enhancementType && weaponEnhancementsData[enhancement.enhancementType]) {
-            let updatedData = weaponEnhancementsData[enhancement.enhancementType].remove(item, enhancement);
+        if (enhancement.enhancementType && WEAPON_ENHANCEMENTS[enhancement.enhancementType]) {
+            let updatedData = WEAPON_ENHANCEMENTS[enhancement.enhancementType].remove(item, enhancement);
 
             // Remove the enhancement from the item's notes
             if (!updatedData) updatedData = {};
             const currentNotes = item.system?.notes || "";
-            updatedData["system.notes"] = removeFromNotes(currentNotes, weaponEnhancementsData[enhancement.enhancementType].name);
+            updatedData["system.notes"] = removeFromNotes(currentNotes, WEAPON_ENHANCEMENTS[enhancement.enhancementType].name);
 
             // Apply notice roll mod adjustment
-            const noticeRollMod = weaponEnhancementsData[enhancement.enhancementType].noticeRollMod;
+            const noticeRollMod = WEAPON_ENHANCEMENTS[enhancement.enhancementType].noticeRollMod;
             const adjustedNoticeRollMod = calculateNoticeRollModAdjustment(item, noticeRollMod, true);
             if (adjustedNoticeRollMod !== null) {
                 updatedData["system.additionalStats.noticeRollMod.value"] = adjustedNoticeRollMod;
@@ -252,7 +252,7 @@ export class EnhancementsDialog extends foundry.applications.api.DialogV2 {
         }
 
         // play a sound
-        let sfxToPlay = weaponEnhancementsData[enhancement.enhancementType]?.sfxToPlay || "modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg";
+        let sfxToPlay = WEAPON_ENHANCEMENTS[enhancement.enhancementType]?.sfxToPlay || "modules/vjpmacros/assets/sfx/equipment/enhancement_change.ogg";
 
         // If sfxToPlay is a function, call it with the stored enhancement data.
         if (typeof sfxToPlay === "function") {

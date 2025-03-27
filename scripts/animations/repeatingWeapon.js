@@ -1,5 +1,5 @@
-import {animationData} from "../../lib/animationData.js";
-import {sfxData} from "../../lib/sfxData.js";
+import {ANIMATION_DATA} from "../../lib/animation_data.js";
+import {SFX_DATA} from "../../lib/sfx_data.js";
 import {createChatMessage,playSoundForAllUsers} from "../utils/generalUtils.js";
 
 
@@ -98,12 +98,12 @@ export async function repeatingWeapon(br_message, weaponType) {
     // let's get the correct rate of fire for the weapon to make it feel faster/slower and calculate the delay
     // to simulate mechanics like pump action, assault cannons that take significantly more time between shots, etc.
     const fireRateDelay = sfxConfig.fireRateDelay; // the delay between shots
-    const shotAnimation = animationData[weaponType].animation; // the animation file to play
-    const projectileVelocity = animationData[weaponType].projectileVelocity;
-    const projectileSize = animationData[weaponType].projectileSize; // the size of the projectile. bigger gun, bigger projectile
-    const casingAnimationDelay = animationData[weaponType].casingAnimationDelay; // the delay before the casing is ejected, e.g. pump action
-    const casingImage = animationData[weaponType].casingImage; // the image of the casing
-    const casingSize = animationData[weaponType].casingSize; // the size of the casing
+    const shotAnimation = ANIMATION_DATA[weaponType].animation; // the animation file to play
+    const projectileVelocity = ANIMATION_DATA[weaponType].projectileVelocity;
+    const projectileSize = ANIMATION_DATA[weaponType].projectileSize; // the size of the projectile. bigger gun, bigger projectile
+    const casingAnimationDelay = ANIMATION_DATA[weaponType].casingAnimationDelay; // the delay before the casing is ejected, e.g. pump action
+    const casingImage = ANIMATION_DATA[weaponType].casingImage; // the image of the casing
+    const casingSize = ANIMATION_DATA[weaponType].casingSize; // the size of the casing
 
     // If there are as many usedShots as the hitArray length, play the animation for each target and update the source
     // token rotation, if there are less dice, repeat it for usedShots
@@ -292,11 +292,11 @@ function calculateOffsetpoint(token, rayAngle, offsetDistance) {
 export async function getWeaponSfxConfig(item) {
     // Get the weapon name in lowercase and find a matching key in sfxData if it exists, otherwise use the full weapon name
     const weaponName = item.name.toLowerCase();
-    const matchingKey = Object.keys(sfxData).find(key => weaponName.includes(key));
+    const matchingKey = Object.keys(SFX_DATA).find(key => weaponName.includes(key));
     const weaponSfxID = matchingKey || weaponName;
 
     // get the sfx data for the weapon
-    return sfxData[weaponSfxID];
+    return SFX_DATA[weaponSfxID];
 }
 
 

@@ -1,13 +1,14 @@
 import {EnhancementsDialog} from "./scripts/enhancements/enhancementsDialog.js";
-import {sfxData} from "./lib/sfxData.js";
-import {animationData} from "./lib/animationData.js";
-import {globalActions} from "./lib/gobalActionsData.js";
-import {enhancementActions} from "./lib/enhancementActionsData.js";
+import {SFX_DATA} from "./lib/sfx_data.js";
+import {ANIMATION_DATA} from "./lib/animation_data.js";
+import {GLOBAL_ACTIONS} from "./lib/global_actions.js";
+import {ENHANCEMENT_ACTIONS} from "./lib/enhancement_actions.js";
 import {repeatingWeapon, playWeaponReloadSfx} from "./scripts/animations/repeatingWeapon.js";
 import {backlashCheck} from "./scripts/setting_rules/backlash.js";
 import {toggleDuckingEffect} from "./scripts/effects/toggleDuckingEffect.js";
 import {setRangeCategory} from "./scripts/utils/rangeCalculation.js"
 import {checkForActiveSmartLink} from "./scripts/utils/enhancementUtils.js";
+import {getWeaponType} from "./scripts/utils/compatibilityUtils.js";
 
 
 // Track open enhancement dialogs
@@ -22,13 +23,13 @@ Hooks.once('init', function() {
 Hooks.once('ready', async () => {
     // Add the animationData and sfxData to the game object
     game.vjpmacros = {
-        animationData,
-        sfxData
+        animationData: ANIMATION_DATA,
+        sfxData: SFX_DATA
     };
 
     // add global actions
-    game.brsw.add_actions(globalActions);
-    game.brsw.add_actions(enhancementActions);
+    game.brsw.add_actions(GLOBAL_ACTIONS);
+    game.brsw.add_actions(ENHANCEMENT_ACTIONS);
     console.warn('VJP Macros: Global actions added');
 });
 
@@ -131,15 +132,6 @@ Hooks.on('swadeReloadWeapon', async (item, reloaded) => {
         await playWeaponReloadSfx(item);
     }
 });
-
-// check and return the weapon type of the given item
-function getWeaponType(item) {
-    const weaponCategory = item.system?.category?.toLowerCase() || "";
-    const weaponType = Object.keys(animationData)
-        .sort((a, b) => b.length - a.length)
-        .find(type => weaponCategory.includes(type)) || undefined;
-    return weaponType;
-}
 
 // Run libWrapper's register function to wrap brsw's createItemCard function
 Hooks.once("ready", () => {

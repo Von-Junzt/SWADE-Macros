@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="moved item's notes modification into the enhancement dialog">
-      <change afterPath="$PROJECT_DIR$/scripts/utils/compatibilityUtils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/utils/enhancementUtils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/utils/noteManipulation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/utils/rangeCalculation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/weaponEnhancementsData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/animations/ballista.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/animations/ballista.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/animations/fragGrenade.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/animations/fragGrenade.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/animations/repeatingWeapon.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/animations/repeatingWeapon.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/animations/rpg.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/animations/rpg.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/animations/shockGrenade.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/animations/shockGrenade.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/animations/smokeGrenade.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/animations/smokeGrenade.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/animations/ubgl.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/animations/ubgl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/effects/laserPointer.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/effects/laserPointer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/effects/toggleDuckingEffect.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/effects/toggleDuckingEffect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/enhancements/enhancementsDialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/enhancements/enhancementsDialog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/helpers/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/utils/generalUtils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macros/setting_rules/backlash.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/setting_rules/backlash.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-    </list>
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="big refactor, newly organized the file structure" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -211,15 +191,7 @@
       <workItem from="1743001733495" duration="5252000" />
       <workItem from="1743086238470" duration="4026000" />
       <workItem from="1743090731990" duration="770000" />
-      <workItem from="1743096417922" duration="1805000" />
-    </task>
-    <task id="LOCAL-00139" summary="added enhancement istallation sounds">
-      <option name="closed" value="true" />
-      <created>1741902999185</created>
-      <option name="number" value="00139" />
-      <option name="presentableId" value="LOCAL-00139" />
-      <option name="project" value="LOCAL" />
-      <updated>1741902999185</updated>
+      <workItem from="1743096417922" duration="2512000" />
     </task>
     <task id="LOCAL-00140" summary="added enhancement istallation sounds">
       <option name="closed" value="true" />
@@ -605,14 +577,21 @@
       <option name="project" value="LOCAL" />
       <updated>1743090239734</updated>
     </task>
-    <option name="localTasksCounter" value="188" />
+    <task id="LOCAL-00188" summary="big refactor, newly organized the file structure">
+      <option name="closed" value="true" />
+      <created>1743098947632</created>
+      <option name="number" value="00188" />
+      <option name="presentableId" value="LOCAL-00188" />
+      <option name="project" value="LOCAL" />
+      <updated>1743098947632</updated>
+    </task>
+    <option name="localTasksCounter" value="189" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added several enhancements" />
     <MESSAGE value="added gas vent system" />
     <MESSAGE value="comments" />
     <MESSAGE value="added noticeRollModifier to all enhancements" />
@@ -637,7 +616,8 @@
     <MESSAGE value="updated weapon enhancements" />
     <MESSAGE value="updated compendiums" />
     <MESSAGE value="moved item's notes modification into the enhancement dialog" />
-    <option name="LAST_COMMIT_MESSAGE" value="moved item's notes modification into the enhancement dialog" />
+    <MESSAGE value="big refactor, newly organized the file structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="big refactor, newly organized the file structure" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
