@@ -155,9 +155,25 @@ Hooks.once("ready", () => {
                 }
             }
 
-            // Calculate and set range category if applicable
-            await setRangeCategory(actor, item);
-            await checkForActiveSmartLink(actor, item);
+            // Only proceed with logic if actor and item are defined
+            if (actor && item) {
+                // Unset flags before recalculating to avoid stale values
+                if (actor.getFlag("vjpmacros", "rangeCategory") !== undefined) {
+                    await actor.unsetFlag("vjpmacros", "rangeCategory");
+                }
+
+                if (item.getFlag("vjpmacros", "smartlinkActive") !== undefined) {
+                    await item.unsetFlag("vjpmacros", "smartlinkActive");
+                }
+
+                // Calculate and set range category if applicable
+                await setRangeCategory(actor, item);
+
+                // Only check for smartlink if actor has items collection
+                if (actor.items) {
+                    await checkForActiveSmartLink(actor, item);
+                }
+            }
 
             // Now that our calculations are complete, call the original function
             // Check if the original is async (returns a Promise)

@@ -14,8 +14,24 @@ export function calculateNoticeRollModAdjustment(item, mod, isRemoval = false) {
 
 // check for active smartlink on actor and weapon
 export async function checkForActiveSmartLink(actor, item) {
+    // Early return if item is undefined
+    if (!item) {
+        console.warn("checkForActiveSmartLink: item is undefined");
+        return false;
+    }
+
+    // If actor is undefined or doesn't have items collection, unset the flag and return
+    if (!actor || !actor.items) {
+        console.warn("checkForActiveSmartLink: actor or actor.items is undefined");
+        // Clean up any existing flag
+        if (item.getFlag("vjpmacros", "smartlinkActive") !== undefined) {
+            await item.unsetFlag("vjpmacros", "smartlinkActive");
+        }
+        return false;
+    }
+
     // check if actor has a smartlink
-    const actorHasSmartlink = _token.actor.items.some(i => i.name.toLowerCase().includes('smartlink'));
+    const actorHasSmartlink = actor.items.some(i => i.name.toLowerCase().includes('smartlink'));
 
     // check if weapon has a smartgun
     // Check if weapon has smartgun enhancement

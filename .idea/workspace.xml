@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="big refactor, newly organized the file structure" />
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="big refactor, newly organized the file structure">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/weapon_enhancements.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/weapon_enhancements.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/utils/enhancementUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/utils/enhancementUtils.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -191,15 +196,7 @@
       <workItem from="1743001733495" duration="5252000" />
       <workItem from="1743086238470" duration="4026000" />
       <workItem from="1743090731990" duration="770000" />
-      <workItem from="1743096417922" duration="2512000" />
-    </task>
-    <task id="LOCAL-00140" summary="added enhancement istallation sounds">
-      <option name="closed" value="true" />
-      <created>1741960113880</created>
-      <option name="number" value="00140" />
-      <option name="presentableId" value="LOCAL-00140" />
-      <option name="project" value="LOCAL" />
-      <updated>1741960113880</updated>
+      <workItem from="1743096417922" duration="4560000" />
     </task>
     <task id="LOCAL-00141" summary="weapon enhancement sheet now renders automatically">
       <option name="closed" value="true" />
@@ -585,7 +582,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743098947632</updated>
     </task>
-    <option name="localTasksCounter" value="189" />
+    <task id="LOCAL-00189" summary="big refactor, newly organized the file structure">
+      <option name="closed" value="true" />
+      <created>1743100101611</created>
+      <option name="number" value="00189" />
+      <option name="presentableId" value="LOCAL-00189" />
+      <option name="project" value="LOCAL" />
+      <updated>1743100101611</updated>
+    </task>
+    <option name="localTasksCounter" value="190" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -623,7 +628,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/lib/sfxData.js</url>
+          <url>file://$PROJECT_DIR$/lib/sfx_data.js</url>
           <line>237</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
