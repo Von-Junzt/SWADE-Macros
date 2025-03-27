@@ -1,12 +1,14 @@
+import {EnhancementsDialog} from "./scripts/enhancements/enhancementsDialog.js";
 import {sfxData} from "./lib/sfxData.js";
 import {animationData} from "./lib/animationData.js";
-import {repeatingWeapon, playWeaponReloadSfx} from "./macros/animations/repeatingWeapon.js";
-import {backlashCheck} from "./macros/setting_rules/backlash.js";
-import {toggleDuckingEffect} from "./macros/effects/toggleDuckingEffect.js";
-import {EnhancementsDialog} from "./macros/enhancements/enhancementsDialog.js";
 import {globalActions} from "./lib/gobalActionsData.js";
 import {enhancementActions} from "./lib/enhancementActionsData.js";
-import {checkForActiveSmartLink, setRangeCategory} from "./lib/weaponEnhancementsData.js";
+import {repeatingWeapon, playWeaponReloadSfx} from "./scripts/animations/repeatingWeapon.js";
+import {backlashCheck} from "./scripts/setting_rules/backlash.js";
+import {toggleDuckingEffect} from "./scripts/effects/toggleDuckingEffect.js";
+import {setRangeCategory} from "./scripts/utils/rangeCalculation.js"
+import {checkForActiveSmartLink} from "./scripts/utils/enhancementUtils.js";
+
 
 // Track open enhancement dialogs
 const openEnhancementDialogs = new Map();

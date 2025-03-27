@@ -1,6 +1,6 @@
 import {animationData} from "../../lib/animationData.js";
 import {sfxData} from "../../lib/sfxData.js";
-import {createChatMessage,playSoundForAllUsers} from "../helpers/helpers.js";
+import {createChatMessage,playSoundForAllUsers} from "../utils/generalUtils.js";
 
 
 // Play firing sound and animation for the given weapon

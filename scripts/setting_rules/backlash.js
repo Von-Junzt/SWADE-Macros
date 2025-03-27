@@ -1,4 +1,4 @@
-import {createChatMessage, playSoundForAllUsers} from "../helpers/helpers.js";
+import {createChatMessage, playSoundForAllUsers} from "../utils/generalUtils.js";
 
 /**
  * Adds backlash for a natural 1 on a trait die, modifying the original SWADE backlash rule.
