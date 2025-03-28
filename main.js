@@ -3,12 +3,13 @@ import {SFX_DATA} from "./lib/sfx_data.js";
 import {ANIMATION_DATA} from "./lib/animation_data.js";
 import {GLOBAL_ACTIONS} from "./lib/global_actions.js";
 import {ENHANCEMENT_ACTIONS} from "./lib/enhancement_actions.js";
-import {repeatingWeapon, playWeaponReloadSfx} from "./scripts/animations/repeatingWeapon.js";
+import {repeatingWeapon} from "./scripts/animations/repeatingWeapon.js";
 import {backlashCheck} from "./scripts/setting_rules/backlash.js";
 import {toggleDuckingEffect} from "./scripts/effects/toggleDuckingEffect.js";
 import {setRangeCategory} from "./scripts/utils/rangeCalculation.js"
 import {checkForActiveSmartLink} from "./scripts/utils/enhancementUtils.js";
 import {getWeaponType} from "./scripts/utils/compatibilityUtils.js";
+import {playWeaponReloadSfx} from "./scripts/utils/sfxUtils.js";
 
 
 // Track open enhancement dialogs

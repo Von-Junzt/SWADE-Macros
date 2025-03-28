@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="big refactor, newly organized the file structure">
-      <change afterPath="$PROJECT_DIR$/scripts/utils/animationUtils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/utils/sfxUtils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/animations/repeatingWeapon.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/animations/repeatingWeapon.js" afterDir="false" />
     </list>
@@ -200,14 +198,7 @@
       <workItem from="1743096417922" duration="8644000" />
       <workItem from="1743111954494" duration="83000" />
       <workItem from="1743112042961" duration="31000" />
-    </task>
-    <task id="LOCAL-00143" summary="weapon enhancement sheet now renders automatically">
-      <option name="closed" value="true" />
-      <created>1741974434606</created>
-      <option name="number" value="00143" />
-      <option name="presentableId" value="LOCAL-00143" />
-      <option name="project" value="LOCAL" />
-      <updated>1741974434606</updated>
+      <workItem from="1743176057725" duration="710000" />
     </task>
     <task id="LOCAL-00144" summary="made logic more sturdy, added check for mounting points">
       <option name="closed" value="true" />
@@ -593,7 +584,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743110877167</updated>
     </task>
-    <option name="localTasksCounter" value="192" />
+    <task id="LOCAL-00192" summary="big refactor, newly organized the file structure">
+      <option name="closed" value="true" />
+      <created>1743176369042</created>
+      <option name="number" value="00192" />
+      <option name="presentableId" value="LOCAL-00192" />
+      <option name="project" value="LOCAL" />
+      <updated>1743176369043</updated>
+    </task>
+    <option name="localTasksCounter" value="193" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

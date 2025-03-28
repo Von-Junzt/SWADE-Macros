@@ -1,6 +1,7 @@
 import {ANIMATION_DATA} from "../../lib/animation_data.js";
-import {SFX_DATA} from "../../lib/sfx_data.js";
-import {createChatMessage, playSoundForAllUsers} from "../utils/generalUtils.js";
+import {playSoundForAllUsers} from "../utils/generalUtils.js";
+import {getWeaponSfxConfig, getRandomShellDropSound, getRandomFireSound, getRandomRicochetSound} from "../utils/sfxUtils.js";
+import {calculateOffsetPoint, validateTargetsAndShots} from "../utils/animationUtils.js";
 
 
 // Play firing sound and animation for the given weapon
@@ -124,17 +125,17 @@ export async function repeatingWeapon(br_message, weaponType) {
             const casingOffsetDistance = canvas.grid.size * 2;    // offset distance for shell casing ejection
 
             // Use ray.angle directly because token art faces right
-            const muzzleFlashPoint = calculateOffsetpoint(sourceToken, ray.angle, muzzleFlashOffsetDistance);
+            const muzzleFlashPoint = calculateOffsetPoint(sourceToken, ray.angle, muzzleFlashOffsetDistance);
 
             // We want to eject the casings perpendicular to the tokens pointing direction. For this we need to
             // calculate a perpendicular array angle (ray.angle + π/2)
             const perpRayAngle = ray.angle + Math.PI / 2;
 
             // Compute the casings ejection point based on the token's center
-            const casingEjectPoint = calculateOffsetpoint(sourceToken, ray.angle, casingEjectPointOffsetDistance);
+            const casingEjectPoint = calculateOffsetPoint(sourceToken, ray.angle, casingEjectPointOffsetDistance);
 
             // Compute the casings target point based on the token's center
-            const casingTargetPoint = calculateOffsetpoint(sourceToken, perpRayAngle, casingOffsetDistance);
+            const casingTargetPoint = calculateOffsetPoint(sourceToken, perpRayAngle, casingOffsetDistance);
 
             // get all the active user ids
             const activeUserIds = game.users.filter(user => user.active).map(user => user.id);
