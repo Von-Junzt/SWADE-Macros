@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="big refactor, newly organized the file structure">
+      <change afterPath="$PROJECT_DIR$/scripts/utils/animationUtils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/utils/sfxUtils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/animations/repeatingWeapon.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/animations/repeatingWeapon.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,6 +81,7 @@
       <recent name="D:\Coding\Von Junzt SWADE Macros" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Coding\vjpmacros\scripts\utils" />
       <recent name="D:\Coding\vjp-macros\macros" />
       <recent name="D:\Coding\vjp-macros" />
       <recent name="D:\Coding\Von Junzt SWADE Macros\animations" />
@@ -195,15 +197,9 @@
       <workItem from="1743001733495" duration="5252000" />
       <workItem from="1743086238470" duration="4026000" />
       <workItem from="1743090731990" duration="770000" />
-      <workItem from="1743096417922" duration="7105000" />
-    </task>
-    <task id="LOCAL-00142" summary="weapon enhancement sheet now renders automatically">
-      <option name="closed" value="true" />
-      <created>1741969343328</created>
-      <option name="number" value="00142" />
-      <option name="presentableId" value="LOCAL-00142" />
-      <option name="project" value="LOCAL" />
-      <updated>1741969343328</updated>
+      <workItem from="1743096417922" duration="8644000" />
+      <workItem from="1743111954494" duration="83000" />
+      <workItem from="1743112042961" duration="31000" />
     </task>
     <task id="LOCAL-00143" summary="weapon enhancement sheet now renders automatically">
       <option name="closed" value="true" />
@@ -589,7 +585,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743101200676</updated>
     </task>
-    <option name="localTasksCounter" value="191" />
+    <task id="LOCAL-00191" summary="big refactor, newly organized the file structure">
+      <option name="closed" value="true" />
+      <created>1743110877167</created>
+      <option name="number" value="00191" />
+      <option name="presentableId" value="LOCAL-00191" />
+      <option name="project" value="LOCAL" />
+      <updated>1743110877167</updated>
+    </task>
+    <option name="localTasksCounter" value="192" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
