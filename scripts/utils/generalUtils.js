@@ -28,3 +28,21 @@ export function checkGMPermission() {
     }
     return true;
 }
+
+// Helper function to update item flags consistently
+export function updateItemFlags(item, cacheData = {}, flagData = {}) {
+    // Create the vjpmacros flags structure with feature flags
+    const vjpFlags = {
+        vjpmacros: {
+            ...flagData
+        }
+    };
+
+    // Add cachedData if there's any to add
+    if (Object.keys(cacheData).length > 0) {
+        vjpFlags.vjpmacros.cachedData = cacheData;
+    }
+
+    // Merge with existing flags
+    return foundry.utils.mergeObject(item.flags || {}, vjpFlags);
+}

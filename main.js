@@ -7,7 +7,7 @@ import {repeatingWeapon} from "./scripts/animations/repeatingWeapon.js";
 import {backlashCheck} from "./scripts/setting_rules/backlash.js";
 import {toggleDuckingEffect} from "./scripts/effects/toggleDuckingEffect.js";
 import {setRangeCategory} from "./scripts/utils/rangeCalculation.js"
-import {checkForActiveSmartLink} from "./scripts/utils/enhancementUtils.js";
+import {checkBipodStatus, checkForActiveSmartLink} from "./scripts/utils/enhancementUtils.js";
 import {getWeaponType} from "./scripts/utils/compatibilityUtils.js";
 import {playWeaponReloadSfx} from "./scripts/utils/sfxUtils.js";
 
@@ -25,7 +25,12 @@ Hooks.once('ready', async () => {
     // Add the animationData and sfxData to the game object
     game.vjpmacros = {
         ANIMATION_DATA: ANIMATION_DATA,
-        SFX_DATA: SFX_DATA
+        SFX_DATA: SFX_DATA,
+        helpers: {
+            checkBipodStatus: checkBipodStatus,
+            checkForActiveSmartLink: checkForActiveSmartLink,
+            setRangeCategory: setRangeCategory
+        }
     };
 
     // add global actions
@@ -134,57 +139,78 @@ Hooks.on('swadeReloadWeapon', async (item, reloaded) => {
     }
 });
 
+Hooks.on("renderItemCard", (app, html, data) => {
+    // Select the element(s) you want to attach your handler to.
+    html.find(".brsw-roll-button").bindFirst("click", async (ev) => {
+        // This code will execute before any other click listeners attached to .brsw-roll-button
+        console.log("Custom bindFirst handler triggered before roll_item.");
+
+        // You can add your custom logic here.
+        // For example, if you want to conditionally prevent the default action:
+        if (/* some condition */ false) {
+            ev.stopImmediatePropagation();
+            return;
+        }
+
+        // Optionally, allow the original handlers to run afterwards.
+    });
+});
+
 // Run libWrapper's register function to wrap brsw's createItemCard function
 Hooks.once("ready", () => {
-    if (game.brsw && typeof game.brsw.create_item_card === "function") {
-        // in here we want to wrap the create_item_card function to calculate a rangeCategory, in order to make weapon
-        // enhancements modify the trait roll, depending on the range category (short = 1, medium = 2, long = 3, extreme = 4)
-        libWrapper.register("vjpmacros", "game.brsw.create_item_card", async function (wrapped, ...args) {
-            // Log the arguments to understand their structure
-            console.log("create_item_card args:", args);
+    if(game.brsw) {
 
-            // Determine which arg is the actor and which is the item
-            let actor, item;
+        console.warn('VJP Macros: LibWrapper is ready');
 
-            if (args[0]?.constructor?.name === "SwadeActor") {
-                actor = args[0];
-                // Get the item based on what's passed
-                if (args[1] && typeof args[1] === "string") {
-                    item = actor.items.get(args[1]);
-                } else if (args[1]?.type === "weapon") {
-                    item = args[1];
-                }
-            }
+        if (typeof game.brsw.create_item_card === "function") {
+            // in here we want to wrap the create_item_card function to calculate a rangeCategory, in order to make weapon
+            // enhancements modify the trait roll, depending on the range category (short = 1, medium = 2, long = 3, extreme = 4)
+            libWrapper.register("vjpmacros", "game.brsw.create_item_card", async function (wrapped, ...args) {
+                console.warn('VJPMacros: Wrapping create_item_card');
 
-            // Only proceed with logic if actor and item are defined
-            if (actor && item) {
-                // Unset flags before recalculating to avoid stale values
-                if (actor.getFlag("vjpmacros", "rangeCategory") !== undefined) {
-                    await actor.unsetFlag("vjpmacros", "rangeCategory");
+                // Determine which arg is the actor and which is the item
+                let actor, item;
+
+                if (args[0]?.constructor?.name === "SwadeActor") {
+                    actor = args[0];
+                    // Get the item based on what's passed
+                    if (args[1] && typeof args[1] === "string") {
+                        item = actor.items.get(args[1]);
+                    } else if (args[1]?.type === "weapon") {
+                        item = args[1];
+                    }
                 }
 
-                if (item.getFlag("vjpmacros", "smartlinkActive") !== undefined) {
-                    await item.unsetFlag("vjpmacros", "smartlinkActive");
+                // Only proceed with logic if actor and item are defined
+                if (actor && item) {
+                    // Unset flags before recalculating to avoid stale values
+                    if (actor.getFlag("vjpmacros", "rangeCategory") !== undefined) {
+                        await actor.unsetFlag("vjpmacros", "rangeCategory");
+                    }
+
+                    if (item.getFlag("vjpmacros", "smartlinkActive") !== undefined) {
+                        await item.unsetFlag("vjpmacros", "smartlinkActive");
+                    }
+
+                    // Calculate and set range category if applicable
+                    await setRangeCategory(actor, item);
+
+                    // Only check for smartlink if actor has items collection
+                    if (actor.items) {
+                        await checkForActiveSmartLink(actor, item);
+                    }
                 }
 
-                // Calculate and set range category if applicable
-                await setRangeCategory(actor, item);
-
-                // Only check for smartlink if actor has items collection
-                if (actor.items) {
-                    await checkForActiveSmartLink(actor, item);
+                // Now that our calculations are complete, call the original function
+                // Check if the original is async (returns a Promise)
+                const result = wrapped(...args);
+                if (result instanceof Promise) {
+                    return await result;
                 }
-            }
-
-            // Now that our calculations are complete, call the original function
-            // Check if the original is async (returns a Promise)
-            const result = wrapped(...args);
-            if (result instanceof Promise) {
-                return await result;
-            }
-            return result;
-        }, "WRAPPER");
-    } else {
-        console.error("game.brsw.create_item_card not found; cannot register wrapper.");
+                return result;
+            }, "WRAPPER");
+        } else {
+            console.error("game.brsw.create_item_card not found; cannot register wrapper.");
+        }
     }
 });

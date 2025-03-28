@@ -1,4 +1,6 @@
 // calculates the adjusted notice roll mod based on the given mod value and whether it's a removal
+import {updateItemFlags} from "./generalUtils.js";
+
 export function calculateNoticeRollModAdjustment(item, mod, isRemoval = false) {
     // If mod is 0, no adjustment is needed
     if (mod === 0) {
@@ -48,4 +50,22 @@ export async function checkForActiveSmartLink(actor, item) {
         await item.unsetFlag("vjpmacros", "smartlinkActive");
         return false;
     }
+}
+
+// check if actor has bipod enhancement unfolded
+export async function checkBipodStatus(item) {
+    // Check if item has a bipod flag
+    const itemHasBipod = item.flags?.vjpmacros?.bipod === 1;
+
+    // Get the actor that owns the item
+    const actor = item.parent;
+
+    // Check if actor exists before trying to access effects
+    if (!actor) return false;
+
+    // Check if there's a bipod effect on the actor
+    const bipodEffect = actor.effects.find(e => e.name.toLowerCase().includes("bipod"));
+
+    // Return true if the item has a bipod flag and the bipod effect is active
+    return itemHasBipod && bipodEffect;
 }
