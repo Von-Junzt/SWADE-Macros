@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="big refactor, newly organized the file structure">
-      <change afterPath="$PROJECT_DIR$/scripts/effects/toggleBipod.js" afterDir="false" />
+    <list default="true" id="239c2036-6cfc-4e83-80cb-a7555d832663" name="Changes" comment="implemented bipod correctly">
+      <change afterPath="$PROJECT_DIR$/assets/gfx/icons/bipod_transparent.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/gfx/icons/folding_stock_transparent.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/enhancements/bipod.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/enhancements/foldableStock.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/weapon_enhancements.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/weapon_enhancements.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/enhancement_actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/enhancement_actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/utils/enhancementUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/utils/enhancementUtils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/utils/generalUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/utils/generalUtils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/effects/laserPointer.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/enhancements/laserPointer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/effects/toggleBipod.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,11 +86,11 @@
       <recent name="D:\Coding\Von Junzt SWADE Macros" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Coding\vjpmacros\scripts\enhancements" />
       <recent name="D:\Coding\vjpmacros\scripts\utils" />
       <recent name="D:\Coding\vjp-macros\macros" />
       <recent name="D:\Coding\vjp-macros" />
       <recent name="D:\Coding\Von Junzt SWADE Macros\animations" />
-      <recent name="D:\Coding\Von Junzt SWADE Macros" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -204,15 +207,10 @@
       <workItem from="1743112042961" duration="31000" />
       <workItem from="1743176057725" duration="960000" />
       <workItem from="1743184781272" duration="4592000" />
-      <workItem from="1743196516562" duration="8125000" />
-    </task>
-    <task id="LOCAL-00145" summary="made logic more sturdy, added check for mounting points">
-      <option name="closed" value="true" />
-      <created>1741992763571</created>
-      <option name="number" value="00145" />
-      <option name="presentableId" value="LOCAL-00145" />
-      <option name="project" value="LOCAL" />
-      <updated>1741992763571</updated>
+      <workItem from="1743196516562" duration="8501000" />
+      <workItem from="1743205121864" duration="120000" />
+      <workItem from="1743205248492" duration="1613000" />
+      <workItem from="1743240858218" duration="7920000" />
     </task>
     <task id="LOCAL-00146" summary="made logic more sturdy, added check for mounting points">
       <option name="closed" value="true" />
@@ -598,14 +596,21 @@
       <option name="project" value="LOCAL" />
       <updated>1743177004063</updated>
     </task>
-    <option name="localTasksCounter" value="194" />
+    <task id="LOCAL-00194" summary="implemented bipod correctly">
+      <option name="closed" value="true" />
+      <created>1743205086135</created>
+      <option name="number" value="00194" />
+      <option name="presentableId" value="LOCAL-00194" />
+      <option name="project" value="LOCAL" />
+      <updated>1743205086135</updated>
+    </task>
+    <option name="localTasksCounter" value="195" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added gas vent system" />
     <MESSAGE value="comments" />
     <MESSAGE value="added noticeRollModifier to all enhancements" />
     <MESSAGE value="made shure noticeRollMod is programmatically enabled if undefined before calculating" />
@@ -630,7 +635,8 @@
     <MESSAGE value="updated compendiums" />
     <MESSAGE value="moved item's notes modification into the enhancement dialog" />
     <MESSAGE value="big refactor, newly organized the file structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="big refactor, newly organized the file structure" />
+    <MESSAGE value="implemented bipod correctly" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented bipod correctly" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -10,6 +10,8 @@ import {setRangeCategory} from "./scripts/utils/rangeCalculation.js"
 import {checkBipodStatus, checkForActiveSmartLink} from "./scripts/utils/enhancementUtils.js";
 import {getWeaponType} from "./scripts/utils/compatibilityUtils.js";
 import {playWeaponReloadSfx} from "./scripts/utils/sfxUtils.js";
+import {toggleBipod} from "./scripts/enhancements/bipod.js";
+import {toggleFoldableStock} from "./scripts/enhancements/foldableStock.js";
 
 
 // Track open enhancement dialogs
@@ -26,6 +28,10 @@ Hooks.once('ready', async () => {
     game.vjpmacros = {
         ANIMATION_DATA: ANIMATION_DATA,
         SFX_DATA: SFX_DATA,
+        enhancements: {
+            toggleBipod: toggleBipod,
+            toggleFoldableStock: toggleFoldableStock
+        },
         helpers: {
             checkBipodStatus: checkBipodStatus,
             checkForActiveSmartLink: checkForActiveSmartLink,
@@ -213,4 +219,49 @@ Hooks.once("ready", () => {
             console.error("game.brsw.create_item_card not found; cannot register wrapper.");
         }
     }
+});
+
+// Add a new context menu option for foldable stocks
+Hooks.on("getActorSheetEntryContext", (app, options) => {
+    // Existing bipod option
+    options.push({
+        name: "Toggle Bipod",
+        icon: '<i class="fas fa-dot-circle"></i>',
+        condition: li => {
+            const itemId = li.data("item-id");
+            const actor = app.actor;
+            const item = actor.items.get(itemId);
+            return !!(item && item.type === "weapon" && item.flags.vjpmacros?.bipod === 1);
+        },
+        callback: li => {
+            const itemId = li.data("item-id");
+            const actor = app.actor;
+            const item = actor.items.get(itemId);
+            if (!item) return;
+
+            // Call our toggle function
+            toggleBipod(actor, item);
+        }
+    });
+
+    // New foldable stock option
+    options.push({
+        name: "Toggle Foldable Stock",
+        icon: '<i class="fas fa-compress-arrows-alt"></i>',
+        condition: li => {
+            const itemId = li.data("item-id");
+            const actor = app.actor;
+            const item = actor.items.get(itemId);
+            return !!(item && item.type === "weapon" && item.flags.vjpmacros?.foldableStock === 1);
+        },
+        callback: li => {
+            const itemId = li.data("item-id");
+            const actor = app.actor;
+            const item = actor.items.get(itemId);
+            if (!item) return;
+
+            // Call our toggle function
+            toggleFoldableStock(actor, item);
+        }
+    });
 });
